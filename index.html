@@ -665,6 +665,79 @@ footer{
 </head>
 <body>
 
+<script>
+(function(){
+
+// 🔒 ANTI IFRAME (EMBED / NGAMBIL SCRIPT)
+if (window.top !== window.self) {
+  document.body.innerHTML = `
+  <div style="
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:linear-gradient(135deg,#020617,#0f172a);
+    color:#fff;
+    font-family:sans-serif;
+    text-align:center;
+  ">
+    <div style="
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 0 25px rgba(0,255,255,0.4);
+    ">
+      <h2>🚫 Tidak Di Izinkan</h2>
+      <p>Permission denied</p>
+    </div>
+  </div>`;
+  return;
+}
+
+// 🤖 ANTI BOT
+const ua = navigator.userAgent.toLowerCase();
+if(ua.includes("bot") || ua.includes("crawl") || ua.includes("spider")){
+  document.body.innerHTML = "Access Denied";
+  return;
+}
+
+// 🛑 DISABLE KLIK KANAN
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// 🛑 DISABLE SHORTCUT INSPECT
+document.onkeydown = function(e){
+  if(e.key === "F12") return false;
+  if(e.ctrlKey && e.shiftKey && e.key === "I") return false;
+  if(e.ctrlKey && e.key === "U") return false;
+};
+
+// 🔥 DETECT DEVTOOLS (AUTO BLOCK)
+let devtools = false;
+setInterval(() => {
+  if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
+    if(!devtools){
+      devtools = true;
+      document.body.innerHTML = `
+      <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:#020617;
+        color:#fff;
+        font-family:sans-serif;
+      ">
+        🚫 Developer Tools Terdeteksi
+      </div>`;
+    }
+  }
+}, 1000);
+
+// 🔐 SIMPLE OBFUSCATE (BIAR GAK TERLIHAT LANGSUNG)
+eval(atob("Y29uc29sZS5sb2coJ1Byb3RlY3RlZCBieSBGYWl6Q3JhZnRNQycpOw=="));
+
+})();
+</script>
+  
 <nav>
   <div class="logo">
     FaizCraftMC Marketplace
