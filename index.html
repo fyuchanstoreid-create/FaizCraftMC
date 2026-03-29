@@ -637,22 +637,25 @@ footer{
 
 #greetingBox{
   position: fixed;
-  top: 250px; /* atur sesuai posisi yang kamu mau */
-  left: 50%;
+
+  top: 18vh;              /* posisi vertikal konsisten di semua device */
+  left: 50%;              /* selalu di tengah */
   transform: translateX(-50%);
-  
-  background: #1e293b;
+
+  background: rgba(30, 41, 59, 0.9);
   color: #fff;
   padding: 10px 18px;
-  border-radius: 20px;
+
+  border-radius: 999px;
   font-size: 14px;
   font-weight: 500;
 
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  z-index: 9999;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  backdrop-filter: blur(8px);
 
+  z-index: 9999;
   white-space: nowrap;
-  }
+}
 
 #loader{
   position:fixed;
