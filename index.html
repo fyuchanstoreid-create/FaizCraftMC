@@ -636,30 +636,31 @@ footer{
 }
 
 #greetingBox{
-  position:fixed;
-  top:51%;
-  left:50%;
-  transform:translate(-50%, -50%);
+  position: absolute;
 
-  background:linear-gradient(
+  left: 50%;
+  transform: translateX(-50%);
+
+  top: 0; /* nanti diatur JS */
+
+  background: linear-gradient(
     135deg,
     rgba(2, 6, 23, 0.85),
     rgba(15, 23, 42, 0.85)
   );
 
-  color:#fff;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
 
-  padding:6px 12px;
-  border-radius:999px;
+  font-size: 12px;
+  font-weight: 500;
 
-  font-size:12px;
-  font-weight:500;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
 
-  backdrop-filter:blur(8px);
-  box-shadow:0 4px 15px rgba(0,0,0,0.4);
-
-  white-space:nowrap;
-  z-index:10;
+  white-space: nowrap;
+  z-index: 9999;
   }
 
 #loader{
@@ -9030,6 +9031,24 @@ window.addEventListener("load", () => {
     document.getElementById("loader").classList.add("hide");
   }, 700); // lebih cepat
 });
+</script>
+
+<script>
+const box = document.getElementById("greetingBox");
+
+function updatePosition() {
+  const scrollY = window.scrollY;
+
+  // posisi dasar (atur sesuai desain lu)
+  const baseOffset = window.innerHeight * 0.32;
+
+  box.style.top = (scrollY + baseOffset) + "px";
+}
+
+window.addEventListener("scroll", updatePosition);
+window.addEventListener("resize", updatePosition);
+
+updatePosition();
 </script>
   
 <script>
