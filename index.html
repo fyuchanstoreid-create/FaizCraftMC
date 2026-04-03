@@ -1256,28 +1256,6 @@ document.onkeydown = function(e){
   if(e.ctrlKey && e.key === "U") return false;
 };
 
-// 🔥 DETECT DEVTOOLS (AUTO BLOCK)
-let devtools = false;
-setInterval(() => {
-  if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
-    if(!devtools){
-      devtools = true;
-      document.body.innerHTML = `
-      <div style="
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        background:#020617;
-        color:#fff;
-        font-family:sans-serif;
-      ">
-        🚫 Developer Tools Terdeteksi
-      </div>`;
-    }
-  }
-}, 1000);
-
 // 🔐 SIMPLE OBFUSCATE (BIAR GAK TERLIHAT LANGSUNG)
 eval(atob("Y29uc29sZS5sb2coJ1Byb3RlY3RlZCBieSBGYWl6Q3JhZnRNQycpOw=="));
 
