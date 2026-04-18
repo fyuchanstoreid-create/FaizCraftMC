@@ -123,7 +123,12 @@ function getFileName(url){
 
 // 🔥 fungsi download (dipakai semua)
 function triggerDownload(){
-  window.location.href = FILE_URL;
+  const a = document.createElement("a");
+  a.href = FILE_URL;
+  a.download = "";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
   
 // 🔥 auto jalan
