@@ -109,42 +109,24 @@ const FILE_URL = params.get("file");
 
 let started = false;
 
-// 🔥 validasi link
 if(!FILE_URL){
   document.getElementById("title").innerText = "Link error";
   document.getElementById("status").innerText = "File tidak ditemukan";
   throw new Error("No file URL");
 }
 
-// 🔥 ambil nama file otomatis
-function getFileName(url){
-  return decodeURIComponent(url.split('/').pop());
+// 🔥 universal download (support semua file)
+function triggerDownload(){
+  window.location.href = FILE_URL;
 }
 
-// 🔥 fungsi download (dipakai semua)
-function triggerDownload(){
-  const a = document.createElement("a");
-  a.href = FILE_URL;
-  a.download = "";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
-  
-// 🔥 auto jalan
 window.onload = () => {
-  setTimeout(() => {
-    startDownload();
-  }, 1200);
+  setTimeout(startDownload, 1200);
 };
 
 function startDownload(){
   if(started) return;
   started = true;
-
-  // 🔥 update UI (lebih modern dikit)
-  document.getElementById("title").innerText = "Memulai download...";
-  document.getElementById("status").innerText = getFileName(FILE_URL);
 
   triggerDownload();
 
@@ -153,11 +135,10 @@ function startDownload(){
     document.getElementById("check").style.display = "block";
 
     document.getElementById("title").innerText = "Download dimulai";
-    document.getElementById("status").innerText = "Jika belum masuk, klik tombol manual";
+    document.getElementById("status").innerText = "Cek notifikasi atau folder download";
   }, 1200);
 }
 
-// 🔥 manual (sama persis)
 function manualDownload(){
   triggerDownload();
 }
