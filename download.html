@@ -104,52 +104,21 @@ button:hover{
 </div>
 
 <script>
-const fileName = location.pathname.split("/files/")[1];
+const params = new URLSearchParams(window.location.search);
+const file = params.get("file");
 
-const FILES = {
-  "SEASONS-Add-On-1.3.1-By-FaizCraftMC.mcaddon":
-  "https://raw.githubusercontent.com/fyuchanstoreid-create/FaizCraftMC/main/SEASONS-Add-On-1.3.1-By-FaizCraftMC.mcaddon",
-};
-
-let FILE_URL = FILES[fileName];
-
-let done = false;
-
-window.onload = () => {
-  setTimeout(() => {
-    startDownload();
-  }, 1200);
-};
-
-function startDownload(){
-  if(done) return;
-  done = true;
-
-  if(!FILE_URL){
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("title").innerText = "File tidak ditemukan 😢";
-    document.getElementById("status").innerText = "Cek nama file / link";
-    return;
-  }
-
+if(!file){
+  document.body.innerHTML = "File tidak ditemukan 😢";
+} else {
+  // langsung download dari link yang kamu taruh di ?file=
   const a = document.createElement("a");
-  a.href = FILE_URL;
-  a.download = "";
+  a.href = file;
+  a.download = file.split("/").pop();
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
 
-  setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("check").style.display = "block";
-
-    document.getElementById("title").innerText = "Download dimulai";
-    document.getElementById("status").innerText = "Cek folder download kamu";
-  }, 1200);
-}
-
-function manualDownload(){
-  startDownload();
+  document.body.innerHTML = "<h2>Download dimulai...</h2>";
 }
 </script>
   
