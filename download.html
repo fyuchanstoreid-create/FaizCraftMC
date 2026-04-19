@@ -107,10 +107,27 @@ button:hover{
 const params = new URLSearchParams(window.location.search);
 const file = params.get("file");
 
-if(!file){
-  document.body.innerHTML = "File tidak ditemukan 😢";
-} else {
-  // langsung download dari link yang kamu taruh di ?file=
+let done = false;
+
+// auto start
+window.onload = () => {
+  setTimeout(() => {
+    startDownload();
+  }, 1200);
+};
+
+function startDownload(){
+  if(done) return;
+  done = true;
+
+  if(!file){
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("title").innerText = "File tidak ditemukan 😢";
+    document.getElementById("status").innerText = "Cek link download";
+    return;
+  }
+
+  // download file
   const a = document.createElement("a");
   a.href = file;
   a.download = file.split("/").pop();
@@ -118,7 +135,19 @@ if(!file){
   a.click();
   document.body.removeChild(a);
 
-  document.body.innerHTML = "<h2>Download dimulai...</h2>";
+  // UI update
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("check").style.display = "block";
+
+    document.getElementById("title").innerText = "Download dimulai";
+    document.getElementById("status").innerText = "Cek folder download kamu";
+  }, 1200);
+}
+
+// tombol manual
+function manualDownload(){
+  startDownload();
 }
 </script>
   
