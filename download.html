@@ -105,43 +105,16 @@ button:hover{
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const FILE_URL = params.get("file");
+const file = params.get("file");
 
-let started = false;
-
-if(!FILE_URL){
-  document.getElementById("title").innerText = "Link error";
-  document.getElementById("status").innerText = "File tidak ditemukan";
-  throw new Error("No file URL");
-}
-
-// 🔥 universal download (support semua file)
-function triggerDownload(){
-  window.location.href = FILE_URL;
-}
-
-window.onload = () => {
-  setTimeout(startDownload, 1200);
-};
-
-function startDownload(){
-  if(started) return;
-  started = true;
-
-  triggerDownload();
-
-  setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("check").style.display = "block";
-
-    document.getElementById("title").innerText = "Download dimulai";
-    document.getElementById("status").innerText = "Cek notifikasi atau folder download";
-  }, 1200);
-}
-
-function manualDownload(){
-  triggerDownload();
-}
+fetch("/files/" + file)
+  .then(res => {
+    if(res.ok){
+      window.location.href = "/files/" + file;
+    } else {
+      document.body.innerHTML = "File tidak ditemukan 😢";
+    }
+  });
 </script>
 </body>
 </html>
