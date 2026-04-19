@@ -104,19 +104,54 @@ button:hover{
 </div>
 
 <script>
-const file = location.pathname.split("/files/")[1];
+const fileName = location.pathname.split("/files/")[1];
 
-const links = {
-  "HORROR-By-FaizCraftMC.mcpack":
-  "https://raw.githubusercontent.com/fyuchanstoreid-create/FaizCraftMC/main/All/HORROR.mcpack"
+const FILES = {
+  "SEASONS-Add-On-1.3.1-By-FaizCraftMC.mcaddon":
+  "https://raw.githubusercontent.com/fyuchanstoreid-create/FaizCraftMC/main/SEASONS-Add-On-1.3.1-By-FaizCraftMC.mcaddon",
 };
 
-if (links[file]) {
-  window.location.href = links[file];
-} else {
-  document.body.innerHTML = "File tidak ditemukan 😢";
+let FILE_URL = FILES[fileName];
+
+let done = false;
+
+window.onload = () => {
+  setTimeout(() => {
+    startDownload();
+  }, 1200);
+};
+
+function startDownload(){
+  if(done) return;
+  done = true;
+
+  if(!FILE_URL){
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("title").innerText = "File tidak ditemukan 😢";
+    document.getElementById("status").innerText = "Cek nama file / link";
+    return;
+  }
+
+  const a = document.createElement("a");
+  a.href = FILE_URL;
+  a.download = "";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("check").style.display = "block";
+
+    document.getElementById("title").innerText = "Download dimulai";
+    document.getElementById("status").innerText = "Cek folder download kamu";
+  }, 1200);
+}
+
+function manualDownload(){
+  startDownload();
 }
 </script>
-
+  
 </body>
 </html>
