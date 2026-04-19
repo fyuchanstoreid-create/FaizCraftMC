@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Download</title>
+<title> FaizCraftMC Download</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
@@ -11,10 +11,19 @@
 body{
   height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   background:radial-gradient(circle at top,#0f172a,#020617);
   color:white;
+}
+
+/* BRAND DI ATAS BOX */
+.brand{
+  font-size:28px;
+  font-weight:800;
+  margin-bottom:15px;
+  letter-spacing:1px;
 }
 
 /* card */
@@ -93,6 +102,9 @@ button:hover{
 
 <body>
 
+<!-- BRAND DI LUAR KOTAK -->
+<div class="brand">FaizCraftMC</div>
+
 <div class="box">
   <div class="loader" id="loader"></div>
   <div class="check" id="check">✔</div>
@@ -100,7 +112,7 @@ button:hover{
   <h2 id="title">Menyiapkan download...</h2>
   <p id="status">File akan otomatis terunduh</p>
 
-  <button onclick="manualDownload()">Download Manual</button>
+  <button onclick="manualDownload()">Download</button>
 </div>
 
 <script>
@@ -109,7 +121,6 @@ const file = params.get("file");
 
 let done = false;
 
-// auto start
 window.onload = () => {
   setTimeout(() => {
     startDownload();
@@ -122,12 +133,11 @@ function startDownload(){
 
   if(!file){
     document.getElementById("loader").style.display = "none";
-    document.getElementById("title").innerText = "File tidak ditemukan 😢";
+    document.getElementById("title").innerText = "File tidak ditemukan";
     document.getElementById("status").innerText = "Cek link download";
     return;
   }
 
-  // download file
   const a = document.createElement("a");
   a.href = file;
   a.download = file.split("/").pop();
@@ -135,7 +145,6 @@ function startDownload(){
   a.click();
   document.body.removeChild(a);
 
-  // UI update
   setTimeout(() => {
     document.getElementById("loader").style.display = "none";
     document.getElementById("check").style.display = "block";
@@ -145,11 +154,10 @@ function startDownload(){
   }, 1200);
 }
 
-// tombol manual
 function manualDownload(){
   startDownload();
 }
 </script>
-  
+
 </body>
 </html>
