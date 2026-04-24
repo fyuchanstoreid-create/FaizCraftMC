@@ -30,6 +30,7 @@
             background: #0a0c15;
             color: #ffffff;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         /* Animated Background */
@@ -180,31 +181,73 @@
             box-shadow: 0 8px 20px rgba(46, 213, 115, 0.4);
         }
 
-        /* Floating Maintenance Badge */
-        .maintenance-badge {
+        /* Maintenance Overlay - FULL LAYAR */
+        .maintenance-overlay {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #ffa502, #ff4757);
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0c15, #1a0b1a);
+            z-index: 9999;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-weight: 600;
-            font-size: 0.8rem;
-            z-index: 999;
-            box-shadow: 0 3px 12px rgba(255, 71, 87, 0.3);
-            cursor: grab;
-            user-select: none;
-            transition: box-shadow 0.2s;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
             backdrop-filter: blur(10px);
         }
+        .maintenance-overlay.hidden {
+            display: none;
+        }
+        .maintenance-overlay .maintenance-icon {
+            font-size: 4rem;
+            color: rgba(255, 165, 2, 0.7);
+            margin-bottom: 1.2rem;
+            animation: pulse 2s ease infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .maintenance-overlay h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.9);
+        }
+        .maintenance-overlay h2 .m-letter {
+            cursor: pointer;
+            display: inline-block;
+            color: rgba(255,255,255,0.6);
+            transition: none;
+        }
+        .maintenance-overlay p {
+            color: rgba(255,255,255,0.5);
+            max-width: 400px;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .maintenance-overlay .small-text {
+            font-size: 0.7rem;
+            opacity: 0.3;
+        }
 
-        .maintenance-badge:active { cursor: grabbing; }
-        .maintenance-badge i { font-size: 0.9rem; animation: pulseIcon 1.5s ease infinite; }
-        @keyframes pulseIcon { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .maintenance-badge.hidden { display: none; }
+        .bypass-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(46, 213, 115, 0.15);
+            border: 1px solid rgba(46, 213, 115, 0.3);
+            border-radius: 20px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.6rem;
+            z-index: 10000;
+            color: #2ed573;
+            pointer-events: none;
+        }
 
         /* Categories */
         .categories-wrapper {
@@ -716,7 +759,6 @@
         }
         .detail-download-count i { margin-right: 8px; color: #ff4757; }
         
-        /* Link Status Badge */
         .link-status {
             display: inline-block;
             padding: 0.3rem 0.8rem;
@@ -1018,7 +1060,6 @@
             .stat-card { padding: 0.5rem 1rem; min-width: 110px; }
             .stat-number { font-size: 1.6rem; }
             .stat-label { font-size: 0.65rem; }
-            .maintenance-badge { font-size: 0.65rem; padding: 0.4rem 1rem; }
             .hero { padding: 0.5rem 1rem 0.8rem; }
             .search-wrapper-center { max-width: 100%; }
             .search-section { padding: 0 1rem; margin-bottom: 0.8rem; }
@@ -1027,6 +1068,9 @@
             .detail-body { padding: 1.2rem; }
             .detail-image { max-height: 220px; }
             .detail-info h3 { font-size: 1.2rem; }
+            .maintenance-overlay .maintenance-icon { font-size: 3rem; }
+            .maintenance-overlay h2 { font-size: 1.4rem; }
+            .maintenance-overlay p { font-size: 0.8rem; max-width: 280px; }
         }
     </style>
 </head>
@@ -1206,14 +1250,16 @@
     </div>
 </div>
 
+<!-- Maintenance Overlay FULL LAYAR -->
+<div id="maintenanceOverlay" class="maintenance-overlay hidden">
+    <div class="maintenance-icon"><i class="fas fa-tools"></i></div>
+    <h2>Sedang Dalam <span class="m-letter" id="mLetter">M</span>aintenance</h2>
+    <p>Marketplace sedang dalam proses perawatan.<br>Silakan kembali lagi nanti.</p>
+    <p class="small-text">FaizCraftMC Team</p>
+</div>
+
 <button class="fab" id="fabBtn"><i class="fas fa-comment-dots"></i></button>
 <button class="admin-trigger" id="adminTriggerBtn"><i class="fas fa-crown"></i></button>
-
-<div id="maintenanceBadge" class="maintenance-badge hidden">
-    <i class="fas fa-tools"></i>
-    <span>🔧 Mode Maintenance Aktif</span>
-    <i class="fas fa-grip-vertical" style="opacity: 0.5; margin-left: 5px;"></i>
-</div>
 
 <div class="footer"><p>© 2025 FaizCraftMC Marketplace</p></div>
 
@@ -1245,11 +1291,15 @@
         { id: "mashup", name: "Mashups", icon: "fas fa-code-branch" }
     ];
 
-    let allItems = [], activeCategory = "all", searchKeyword = "", selectedRating = 0, db = null, isAdminLoggedIn = false, clickCount = 0;
+    let allItems = [], activeCategory = "all", searchKeyword = "", selectedRating = 0, db = null, isAdminLoggedIn = false, clickCountAdmin = 0;
     let isMaintenanceMode = false, currentDetailItem = null;
     let isDragging = false, dragOffsetX = 0, dragOffsetY = 0;
+    
+    // Bypass maintenance (klik huruf M 20x) - DIAM TANPA EFEK
+    let mClickCount = 0;
+    let isBypassActive = false;
+    let bypassTimeout = null;
 
-    // Fungsi untuk mengecek apakah link valid (bukan "#" atau kosong)
     function isLinkValid(url) {
         return url && url !== "#" && url !== "" && url !== "https://#" && url !== "http://#";
     }
@@ -1283,6 +1333,7 @@
     }
 
     function shakeElement(element) { element.classList.add('shake'); setTimeout(() => element.classList.remove('shake'), 400); }
+    
     function showToast(msg, isErr = false) {
         const toast = document.createElement("div");
         toast.className = `toast ${isErr ? "error" : ""}`;
@@ -1290,9 +1341,20 @@
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
     }
+    
     function formatNumber(n) { return n?.toLocaleString() || "0"; }
     function escapeHtml(str) { if (!str) return ""; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
     function getCategoryIcon(cat) { const icons = { addon: "🧩", texture: "🎨", world: "🌍", skin: "👤", mashup: "⚡" }; return icons[cat] || "📦"; }
+
+    function updateMaintenanceOverlay() {
+        const overlay = document.getElementById("maintenanceOverlay");
+        if (!overlay) return;
+        if (isMaintenanceMode && !isBypassActive) {
+            overlay.classList.remove("hidden");
+        } else {
+            overlay.classList.add("hidden");
+        }
+    }
 
     async function loadMaintenanceStatus() {
         if (!db) return;
@@ -1300,9 +1362,7 @@
             const doc = await db.collection("settings").doc("maintenance").get();
             isMaintenanceMode = doc.exists ? (doc.data().enabled || false) : false;
             if (!doc.exists) await db.collection("settings").doc("maintenance").set({ enabled: false });
-            const badge = document.getElementById("maintenanceBadge");
-            if (isMaintenanceMode) badge.classList.remove("hidden");
-            else badge.classList.add("hidden");
+            updateMaintenanceOverlay();
         } catch(e) { console.warn(e); }
     }
 
@@ -1311,11 +1371,46 @@
         try {
             await db.collection("settings").doc("maintenance").set({ enabled: enabled });
             isMaintenanceMode = enabled;
-            const badge = document.getElementById("maintenanceBadge");
-            if (enabled) badge.classList.remove("hidden");
-            else badge.classList.add("hidden");
+            if (!enabled) {
+                isBypassActive = false;
+                if (bypassTimeout) clearTimeout(bypassTimeout);
+            }
+            updateMaintenanceOverlay();
             showToast(enabled ? "🔧 Mode Maintenance Aktif" : "✅ Mode Maintenance Nonaktif");
         } catch(e) { showToast("Gagal mengubah mode maintenance!", true); }
+    }
+
+    // Event klik huruf M pada overlay - DIAM TANPA EFEK
+    function setupMClickHandler() {
+        const mLetter = document.getElementById("mLetter");
+        if (!mLetter) return;
+        
+        mLetter.addEventListener("click", () => {
+            mClickCount++;
+            // TIDAK ADA ANIMASI APAPUN - DIAM TANPA EFEK
+            
+            if (mClickCount >= 20 && !isBypassActive) {
+                isBypassActive = true;
+                if (bypassTimeout) clearTimeout(bypassTimeout);
+                bypassTimeout = setTimeout(() => {
+                    isBypassActive = false;
+                    updateMaintenanceOverlay();
+                }, 30 * 60 * 1000); // 30 menit
+                updateMaintenanceOverlay();
+                mClickCount = 0;
+            } else if (mClickCount >= 20) {
+                mClickCount = 0;
+            }
+        });
+        
+        // Reset counter setelah beberapa saat jika tidak mencapai 20 (biar tidak numpuk)
+        let resetTimeout = null;
+        mLetter.addEventListener("click", () => {
+            if (resetTimeout) clearTimeout(resetTimeout);
+            resetTimeout = setTimeout(() => {
+                mClickCount = 0;
+            }, 5000);
+        });
     }
 
     async function updateStats() {
@@ -1508,7 +1603,6 @@
                         target.downloads++;
                         updateStats();
                         renderItems();
-                        // Update tampilan detail modal
                         openDetailModal(target);
                     } catch(e) {}
                 } else if (target && isLinkValid(target.downloadUrl)) {
@@ -1646,7 +1740,7 @@
 
     const logo = document.getElementById("secretLogo");
     const adminTriggerBtn = document.getElementById("adminTriggerBtn");
-    logo.addEventListener("click", () => { clickCount++; if (clickCount >= 20) { adminTriggerBtn.classList.add("show"); showToast("🔓 Admin mode unlocked!", false); clickCount = 0; } });
+    logo.addEventListener("click", () => { clickCountAdmin++; if (clickCountAdmin >= 20) { adminTriggerBtn.classList.add("show"); showToast("🔓 Admin mode unlocked!", false); clickCountAdmin = 0; } });
 
     const adminModal = document.getElementById("adminModal");
     const adminTrigger = document.getElementById("adminTriggerBtn");
@@ -1672,7 +1766,13 @@
         } else { showToast("❌ Password salah!", true); }
     });
 
-    maintenanceToggle.addEventListener("change", async (e) => { await setMaintenanceMode(e.target.checked); });
+    maintenanceToggle.addEventListener("change", async (e) => { 
+        await setMaintenanceMode(e.target.checked);
+        if (!e.target.checked) {
+            isBypassActive = false;
+            if (bypassTimeout) clearTimeout(bypassTimeout);
+        }
+    });
 
     document.getElementById("addItemForm").addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -1723,7 +1823,7 @@
         if (ok) {
             showToast("✅ Feedback terkirim!");
         } else {
-            showToast("⚠️ Gagal kirim feedback!", true);
+            showToast("⚠️ Gagal kirim FeedBack!", true);
         }
         
         if (db) {
@@ -1764,7 +1864,9 @@
     }
 
     try { firebase.initializeApp(firebaseConfig); db = firebase.firestore(); console.log("🔥 Firebase connected!"); } catch(e) { console.error(e); db = null; }
+    
     initDraggable();
+    setupMClickHandler();
     loadMaintenanceStatus();
     loadItems();
 </script>
