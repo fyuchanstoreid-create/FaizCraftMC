@@ -18,13 +18,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XY6DZNWBK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0XY6DZNWBK');
-</script>
     <style>
         * {
             margin: 0;
@@ -722,6 +715,27 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
         .detail-download-count i { margin-right: 8px; color: #ff4757; }
+        
+        /* Link Status Badge */
+        .link-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .link-status.available {
+            background: rgba(46, 213, 115, 0.2);
+            color: #2ed573;
+            border: 1px solid rgba(46, 213, 115, 0.3);
+        }
+        .link-status.unavailable {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+        }
+        
         .detail-btn-download {
             background: linear-gradient(135deg, #ff4757, #e84118);
             border: none;
@@ -734,6 +748,15 @@
             font-size: 1rem;
             width: 100%;
             font-family: 'Poppins', sans-serif;
+        }
+        .detail-btn-download.disabled {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .detail-btn-download.disabled:hover {
+            transform: none;
+            box-shadow: none;
         }
         .detail-btn-download:hover { 
             transform: scale(1.01); 
@@ -1226,6 +1249,11 @@
     let isMaintenanceMode = false, currentDetailItem = null;
     let isDragging = false, dragOffsetX = 0, dragOffsetY = 0;
 
+    // Fungsi untuk mengecek apakah link valid (bukan "#" atau kosong)
+    function isLinkValid(url) {
+        return url && url !== "#" && url !== "" && url !== "https://#" && url !== "http://#";
+    }
+
     function initDraggable() {
         const badge = document.getElementById("maintenanceBadge");
         if (!badge) return;
@@ -1332,7 +1360,6 @@
         } catch(e) { showToast("Gagal menyimpan rating!", true); }
     }
 
-    // Fungsi Edit Item
     async function editItem(itemId) {
         const item = allItems.find(i => i.id === itemId);
         if (!item) return;
@@ -1414,13 +1441,18 @@
         const fullStars = Math.floor(rating);
         const emptyStars = 5 - fullStars;
         const starsHtml = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+        const linkValid = isLinkValid(item.downloadUrl);
         
         body.innerHTML = `
             <div class="detail-image-wrapper">
                 <img class="detail-image" src="${item.imageUrl || 'https://picsum.photos/id/20/800/400'}" alt="${escapeHtml(item.title)}">
             </div>
             <div class="detail-info">
-                <h3>${escapeHtml(item.title)}</h3>
+                <h3>${escapeHtml(item.title)} 
+                    ${linkValid ? 
+                        '<span class="link-status available"><i class="fas fa-link"></i> Link Tersedia</span>' : 
+                        '<span class="link-status unavailable"><i class="fas fa-exclamation-triangle"></i> Link Belum Tersedia</span>'}
+                </h3>
                 <div class="detail-category">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
                 <div class="detail-description">${escapeHtml(item.description)}</div>
                 <div class="detail-rating-section">
@@ -1436,8 +1468,8 @@
                     </div>
                 </div>
                 <div class="detail-download-count"><i class="fas fa-download"></i> ${formatNumber(item.downloads)} downloads</div>
-                <button class="detail-btn-download" data-url="${item.downloadUrl}" data-id="${item.id}">
-                    <i class="fas fa-download"></i> Download Now
+                <button class="detail-btn-download ${!linkValid ? 'disabled' : ''}" data-url="${item.downloadUrl}" data-id="${item.id}" ${!linkValid ? 'disabled' : ''}>
+                    <i class="fas fa-download"></i> ${linkValid ? 'Download Now' : 'Link Tidak Tersedia'}
                 </button>
             </div>
         `;
@@ -1464,22 +1496,29 @@
         });
         
         const detailBtn = body.querySelector(".detail-btn-download");
-        if (detailBtn) {
+        if (detailBtn && linkValid) {
             detailBtn.addEventListener("click", async (e) => {
                 e.stopPropagation();
                 const url = detailBtn.dataset.url;
                 const id = detailBtn.dataset.id;
                 let target = allItems.find(i => i.id === id);
-                if (target && db) {
+                if (target && db && isLinkValid(url)) {
                     try {
                         await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 });
                         target.downloads++;
                         updateStats();
                         renderItems();
+                        // Update tampilan detail modal
+                        openDetailModal(target);
                     } catch(e) {}
-                } else if (target) { target.downloads++; updateStats(); renderItems(); }
+                } else if (target && isLinkValid(target.downloadUrl)) {
+                    target.downloads++;
+                    updateStats();
+                    renderItems();
+                    openDetailModal(target);
+                }
                 if (url && url !== "#") window.open(url, "_blank");
-                else showToast("✅ Link download akan segera tersedia!");
+                else showToast("⚠️ Link download belum tersedia!", true);
             });
         }
     }
@@ -1520,10 +1559,20 @@
             e.stopPropagation();
             const id = btn.dataset.id, url = btn.dataset.url;
             let target = allItems.find(i => i.id === id);
-            if (target && db) try { await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 }); target.downloads++; updateStats(); renderItems(); } catch(e) {}
-            else if (target) { target.downloads++; updateStats(); renderItems(); }
+            if (target && db && isLinkValid(url)) {
+                try {
+                    await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 });
+                    target.downloads++;
+                    updateStats();
+                    renderItems();
+                } catch(e) {}
+            } else if (target && isLinkValid(target.downloadUrl)) {
+                target.downloads++;
+                updateStats();
+                renderItems();
+            }
             if (url && url !== "#") window.open(url, "_blank");
-            else showToast("✅ Link download akan segera tersedia!");
+            else showToast("⚠️ Link download belum tersedia!", true);
         }));
     }
 
@@ -1538,8 +1587,9 @@
             <div class="admin-item" data-index="${idx}">
                 <i class="fas fa-grip-vertical drag-icon"></i>
                 <div class="admin-item-content">
-                    <strong>${escapeHtml(item.title)}</strong><br>
-                    <small>${item.category} | ${formatNumber(item.downloads)} downloads | Rating: ${item.rating || 5}/5</small>
+                    <strong>${escapeHtml(item.title)}</strong>
+                    ${!isLinkValid(item.downloadUrl) ? '<span style="color:#ffa502; font-size:0.7rem; margin-left:0.5rem;"><i class="fas fa-exclamation-triangle"></i> Link tidak valid</span>' : ''}
+                    <br><small>${item.category} | ${formatNumber(item.downloads)} downloads | Rating: ${item.rating || 5}/5</small>
                 </div>
                 <div class="admin-item-actions">
                     <button class="move-up-btn" onclick="window.moveItemUp(${idx})" title="Pindah ke atas"><i class="fas fa-arrow-up"></i></button>
@@ -1643,16 +1693,13 @@
         loadItems();
     });
 
-    // Edit form submit
     document.getElementById("editItemForm").addEventListener("submit", saveEditItem);
 
-    // Edit modal close
     const editModal = document.getElementById("editItemModal");
     const closeEditModal = document.getElementById("closeEditModal");
     closeEditModal.addEventListener("click", () => editModal.classList.remove("show"));
     window.addEventListener("click", (e) => { if (e.target === editModal) editModal.classList.remove("show"); });
 
-    // Feedback Modal
     const feedbackModal = document.getElementById("feedbackModal");
     const fabBtn = document.getElementById("fabBtn");
     const closeFeedback = document.getElementById("closeFeedbackModal");
@@ -1674,9 +1721,9 @@
         
         const ok = await sendToTelegram(name, selectedRating, msg);
         if (ok) {
-            showToast("✅ Feedback terkirim ke Telegram!");
+            showToast("✅ Feedback terkirim!");
         } else {
-            showToast("⚠️ Gagal kirim ke Telegram!", true);
+            showToast("⚠️ Gagal kirim feedback!", true);
         }
         
         if (db) {
