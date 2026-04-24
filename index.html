@@ -33,6 +33,14 @@
             min-height: 100vh;
         }
 
+        /* Lock scroll ketika maintenance aktif */
+        body.maintenance-lock {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
         /* Animated Background */
         .bg-animation {
             position: fixed;
@@ -220,7 +228,7 @@
         .maintenance-overlay h2 .m-letter {
             cursor: pointer;
             display: inline-block;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.9);
             transition: none;
         }
         .maintenance-overlay p {
@@ -233,20 +241,6 @@
         .maintenance-overlay .small-text {
             font-size: 0.7rem;
             opacity: 0.3;
-        }
-
-        .bypass-badge {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(46, 213, 115, 0.15);
-            border: 1px solid rgba(46, 213, 115, 0.3);
-            border-radius: 20px;
-            padding: 0.2rem 0.6rem;
-            font-size: 0.6rem;
-            z-index: 10000;
-            color: #2ed573;
-            pointer-events: none;
         }
 
         /* Categories */
@@ -1304,6 +1298,15 @@
         return url && url !== "#" && url !== "" && url !== "https://#" && url !== "http://#";
     }
 
+    // Fungsi untuk mengunci/membuka scroll body
+    function lockBodyScroll(lock) {
+        if (lock) {
+            document.body.classList.add("maintenance-lock");
+        } else {
+            document.body.classList.remove("maintenance-lock");
+        }
+    }
+
     function initDraggable() {
         const badge = document.getElementById("maintenanceBadge");
         if (!badge) return;
@@ -1349,10 +1352,13 @@
     function updateMaintenanceOverlay() {
         const overlay = document.getElementById("maintenanceOverlay");
         if (!overlay) return;
+        
         if (isMaintenanceMode && !isBypassActive) {
             overlay.classList.remove("hidden");
+            lockBodyScroll(true);
         } else {
             overlay.classList.add("hidden");
+            lockBodyScroll(false);
         }
     }
 
@@ -1823,7 +1829,7 @@
         if (ok) {
             showToast("✅ Feedback terkirim!");
         } else {
-            showToast("⚠️ Gagal kirim FeedBack!", true);
+            showToast("⚠️ Gagal mengirim FeedBack!", true);
         }
         
         if (db) {
