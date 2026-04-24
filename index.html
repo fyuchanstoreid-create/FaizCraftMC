@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>FaizCraftMC Marketplace - Download Addon, Texture Pack, World, Skin & Mashups</title>
+    <meta name="author" content="FaizCraftMC">
+    <meta name="copyright" content="FaizCraftMC 2026">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta property="og:title" content="FaizCraftMC Marketplace">
+    <meta property="og:description" content="Download addon Minecraft gratis & terbaru.">
+    <meta property="og:image" content="https://faizcraftmc.vercel.app/thumbnail.png">
+    <meta property="og:site_name" content="FaizCraftMC Marketplace">
+    <title>FaizCraftMC Marketplace</title>
+    <meta name="description" content="Download addon, texture pack, world, skin, dan mashups terbaru di FaizCraftMC Marketplace.">
+    <link rel="icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XY6DZNWBK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0XY6DZNWBK');
+</script>
     <style>
         * {
             margin: 0;
@@ -43,13 +62,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 40%, rgba(255, 71, 87, 0.08), transparent 60%);
-            animation: pulseGlow 8s ease infinite;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            background: radial-gradient(circle at 20% 40%, rgba(255, 71, 87, 0.05), transparent 60%);
         }
 
         /* Floating Particles */
@@ -65,17 +78,17 @@
 
         .particle {
             position: absolute;
-            background: rgba(255, 71, 87, 0.3);
+            background: rgba(255, 71, 87, 0.2);
             border-radius: 50%;
             animation: floatParticle linear infinite;
         }
 
         @keyframes floatParticle {
             from { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            to { transform: translateY(-100vh) rotate(360deg); opacity: 0.5; }
+            to { transform: translateY(-100vh) rotate(360deg); opacity: 0.4; }
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #1a1d2e; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #ff4757, #ff6b81); border-radius: 10px; }
 
@@ -83,13 +96,13 @@
         .navbar {
             background: rgba(10, 12, 21, 0.95);
             backdrop-filter: blur(20px);
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 71, 87, 0.3);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 71, 87, 0.2);
+            box-shadow: none;
         }
 
         .nav-container {
@@ -102,7 +115,7 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -111,23 +124,23 @@
         }
 
         .logo-icon {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(135deg, #ff4757, #ff6b81);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
+            box-shadow: 0 0 8px rgba(255, 71, 87, 0.2);
         }
 
         .logo:hover .logo-icon {
             transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 0 25px rgba(255, 71, 87, 0.5);
+            box-shadow: 0 0 12px rgba(255, 71, 87, 0.3);
         }
 
-        .logo-icon i { font-size: 1.3rem; color: white; }
+        .logo-icon i { font-size: 1.1rem; color: white; }
         .logo .brand-name { 
             background: linear-gradient(135deg, #ffffff, #ff4757); 
             -webkit-background-clip: text; 
@@ -161,7 +174,7 @@
             opacity: 0;
             transform: scale(0);
             transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 5px 20px rgba(46, 213, 115, 0.3);
+            box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3);
         }
 
         .admin-trigger.show {
@@ -171,7 +184,7 @@
 
         .admin-trigger:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(46, 213, 115, 0.5);
+            box-shadow: 0 8px 20px rgba(46, 213, 115, 0.4);
         }
 
         /* Floating Maintenance Badge */
@@ -180,15 +193,15 @@
             bottom: 20px;
             left: 20px;
             background: linear-gradient(135deg, #ffa502, #ff4757);
-            padding: 0.7rem 1.3rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 50px;
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: 0.6rem;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             z-index: 999;
-            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
+            box-shadow: 0 3px 12px rgba(255, 71, 87, 0.3);
             cursor: grab;
             user-select: none;
             transition: box-shadow 0.2s;
@@ -196,14 +209,14 @@
         }
 
         .maintenance-badge:active { cursor: grabbing; }
-        .maintenance-badge i { font-size: 1rem; animation: pulseIcon 1.5s ease infinite; }
+        .maintenance-badge i { font-size: 0.9rem; animation: pulseIcon 1.5s ease infinite; }
         @keyframes pulseIcon { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         .maintenance-badge.hidden { display: none; }
 
         /* Categories */
         .categories-wrapper {
-            margin-top: 80px;
-            padding: 0.7rem 2rem;
+            margin-top: 70px;
+            padding: 0.6rem 2rem;
             background: rgba(10, 12, 21, 0.7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 71, 87, 0.1);
@@ -261,7 +274,7 @@
         .category-chip.active {
             background: linear-gradient(135deg, #ff4757, #ff6b81);
             border-color: transparent;
-            box-shadow: 0 5px 15px rgba(255,71,87,0.3);
+            box-shadow: 0 4px 12px rgba(255,71,87,0.3);
         }
 
         .category-name {
@@ -282,7 +295,7 @@
             width: 100%;
             overflow: hidden;
             padding: 0 2rem;
-            margin: 0.8rem 0 0.6rem 0;
+            margin: 0.8rem 0 0.5rem 0;
             display: flex;
             justify-content: center;
         }
@@ -294,18 +307,18 @@
             display: block;
             border-radius: 20px;
             object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
         /* Hero Section */
         .hero { 
-            padding: 0.8rem 2rem 1.2rem; 
+            padding: 0.8rem 2rem 1rem; 
             text-align: center; 
         }
         
         .hero-content h1 { 
-            font-size: 3.5rem; 
-            margin-bottom: 0.3rem; 
+            font-size: 3.2rem; 
+            margin-bottom: 0.2rem; 
             font-weight: 900; 
             letter-spacing: 3px;
             line-height: 1.2;
@@ -326,11 +339,11 @@
             color: transparent;
             animation: textShift 5s ease infinite;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
         
         .subtitle-text {
-            font-size: 2rem;
+            font-size: 1.9rem;
             font-weight: 800;
             letter-spacing: 8px;
             opacity: 0.9;
@@ -343,7 +356,7 @@
         }
         
         .hero-description {
-            font-size: 1rem;
+            font-size: 0.95rem;
             opacity: 0.7;
             margin-top: 0.5rem;
             letter-spacing: 0.5px;
@@ -362,12 +375,12 @@
         .search-wrapper-center {
             position: relative;
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
         }
 
         .search-box-center {
             width: 100%;
-            padding: 0.9rem 1.2rem 0.9rem 3.5rem;
+            padding: 0.85rem 1.2rem 0.85rem 3.5rem;
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 60px;
             background: rgba(255, 255, 255, 0.05);
@@ -381,7 +394,7 @@
             outline: none;
             border-color: #ff4757;
             background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 25px rgba(255, 71, 87, 0.2);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.15);
         }
 
         .search-wrapper-center i {
@@ -401,7 +414,7 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 0.2rem 0.6rem;
             border-radius: 8px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.5);
         }
 
@@ -420,46 +433,46 @@
         }
         .stat-card {
             background: rgba(255,255,255,0.04);
-            padding: 0.8rem 2rem;
+            padding: 0.7rem 1.8rem;
             border-radius: 28px;
             border: 1px solid rgba(255,255,255,0.08);
             transition: all 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 160px;
+            min-width: 150px;
         }
         .stat-card:hover { 
-            transform: translateY(-5px); 
+            transform: translateY(-4px); 
             border-color: rgba(255,71,87,0.3); 
             background: rgba(255,71,87,0.05); 
         }
         .stat-number { 
-            font-size: 2.5rem; 
+            font-size: 2.3rem; 
             font-weight: 900; 
             background: linear-gradient(135deg, #ff4757, #ffa502); 
             -webkit-background-clip: text; 
             background-clip: text; 
             color: transparent;
             line-height: 1.2;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
         .stat-label { 
-            font-size: 0.85rem; 
+            font-size: 0.8rem; 
             opacity: 0.7;
             font-weight: 500;
             letter-spacing: 1px;
         }
 
         /* Content Grid */
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem 3rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem 2.5rem; }
         .content-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem; }
         .result-info { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
         .result-info strong { color: #ff4757; }
 
-        .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
         
-        /* Card - Gambar menyesuaikan */
+        /* Card */
         .card {
             background: rgba(18, 20, 35, 0.7);
             backdrop-filter: blur(12px);
@@ -495,7 +508,7 @@
         .card-image { 
             width: 100%;
             height: auto;
-            max-height: 220px;
+            max-height: 200px;
             object-fit: contain;
             display: block;
         }
@@ -503,7 +516,7 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            padding: 0.35rem 1rem;
+            padding: 0.3rem 1rem;
             background: rgba(0,0,0,0.7);
             backdrop-filter: blur(8px);
             border-radius: 40px;
@@ -532,7 +545,7 @@
         .btn-download {
             background: linear-gradient(135deg, #ff4757, #e84118);
             border: none;
-            padding: 0.6rem 1.4rem;
+            padding: 0.55rem 1.3rem;
             border-radius: 40px;
             color: white;
             font-weight: 700;
@@ -541,9 +554,9 @@
             font-size: 0.85rem;
             font-family: 'Poppins', sans-serif;
         }
-        .btn-download:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(255,71,87,0.4); }
+        .btn-download:hover { transform: scale(1.03); box-shadow: 0 4px 12px rgba(255,71,87,0.4); }
 
-        /* Detail Modal - Gambar menyesuaikan */
+        /* Detail Modal */
         .detail-modal {
             display: none;
             position: fixed;
@@ -567,6 +580,7 @@
             animation: modalSlideIn 0.3s ease;
             max-height: 90vh;
             overflow-y: auto;
+            box-shadow: none;
         }
         .detail-modal-header {
             display: flex;
@@ -583,8 +597,8 @@
             color: transparent;
         }
         .close-detail {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -599,7 +613,7 @@
             display: flex;
             flex-direction: column;
             gap: 1.2rem;
-            padding: 1.8rem;
+            padding: 1.5rem;
         }
         .detail-image-wrapper {
             width: 100%;
@@ -613,7 +627,7 @@
         .detail-image {
             width: 100%;
             height: auto;
-            max-height: 450px;
+            max-height: 400px;
             object-fit: contain;
             display: block;
         }
@@ -623,7 +637,7 @@
             gap: 0.8rem;
         }
         .detail-info h3 { 
-            font-size: 1.6rem; 
+            font-size: 1.5rem; 
             margin-bottom: 0.2rem;
             background: linear-gradient(135deg, #ffffff, #ff4757);
             -webkit-background-clip: text;
@@ -697,8 +711,8 @@
         .rating-stars-input i:hover,
         .rating-stars-input i.active {
             color: #ffa502;
-            text-shadow: 0 0 8px rgba(255,165,2,0.5);
-            transform: scale(1.05);
+            text-shadow: 0 0 6px rgba(255,165,2,0.4);
+            transform: scale(1.03);
         }
         .detail-download-count {
             background: rgba(255,255,255,0.03);
@@ -711,7 +725,7 @@
         .detail-btn-download {
             background: linear-gradient(135deg, #ff4757, #e84118);
             border: none;
-            padding: 0.9rem 1.8rem;
+            padding: 0.85rem 1.8rem;
             border-radius: 50px;
             color: white;
             font-weight: 700;
@@ -723,20 +737,20 @@
         }
         .detail-btn-download:hover { 
             transform: scale(1.01); 
-            box-shadow: 0 5px 20px rgba(255,71,87,0.4);
+            box-shadow: 0 4px 15px rgba(255,71,87,0.4);
         }
 
         .empty-state {
             text-align: center;
-            padding: 3rem;
+            padding: 2.5rem;
             background: rgba(255,255,255,0.03);
             border-radius: 32px;
         }
-        .empty-state i { font-size: 3.5rem; margin-bottom: 0.8rem; opacity: 0.4; }
-        .empty-state h3 { margin-bottom: 0.3rem; font-size: 1.3rem; }
-        .empty-state p { opacity: 0.5; font-size: 0.9rem; }
+        .empty-state i { font-size: 3rem; margin-bottom: 0.8rem; opacity: 0.4; }
+        .empty-state h3 { margin-bottom: 0.3rem; font-size: 1.2rem; }
+        .empty-state p { opacity: 0.5; font-size: 0.85rem; }
 
-        /* Modal lainnya */
+        /* Modal Admin & Feedback */
         .modal {
             display: none;
             position: fixed;
@@ -761,6 +775,7 @@
             animation: modalSlideIn 0.3s ease;
             max-height: 85vh;
             overflow-y: auto;
+            box-shadow: none;
         }
         @keyframes modalSlideIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
@@ -771,7 +786,7 @@
         .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.85rem; }
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 0.8rem 0.9rem;
+            padding: 0.75rem 0.9rem;
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 18px;
             background: rgba(0,0,0,0.3);
@@ -797,7 +812,7 @@
             font-family: 'Poppins', sans-serif;
         }
         .btn-primary { background: linear-gradient(135deg, #2ed573, #00a8ff); margin-top: 0.8rem; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46,213,115,0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(46,213,115,0.3); }
 
         .toggle-switch {
             display: flex;
@@ -812,8 +827,8 @@
         .toggle-label {
             position: relative;
             display: inline-block;
-            width: 55px;
-            height: 28px;
+            width: 52px;
+            height: 26px;
         }
         .toggle-label input { opacity: 0; width: 0; height: 0; }
         .toggle-slider {
@@ -830,8 +845,8 @@
         .toggle-slider:before {
             position: absolute;
             content: "";
-            height: 22px;
-            width: 22px;
+            height: 20px;
+            width: 20px;
             left: 3px;
             bottom: 3px;
             background-color: white;
@@ -839,13 +854,65 @@
             border-radius: 50%;
         }
         input:checked + .toggle-slider { background: linear-gradient(135deg, #ff4757, #ffa502); }
-        input:checked + .toggle-slider:before { transform: translateX(27px); }
+        input:checked + .toggle-slider:before { transform: translateX(26px); }
 
-        .admin-item-list { max-height: 250px; overflow-y: auto; margin-top: 0.8rem; }
-        .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem; background: rgba(255,255,255,0.05); border-radius: 14px; margin-bottom: 0.4rem; }
-        .admin-item-actions button { background: none; border: none; color: white; cursor: pointer; margin-left: 0.4rem; padding: 0.2rem; border-radius: 6px; }
-        .admin-item-actions button:hover { background: rgba(255,255,255,0.1); }
+        /* Admin Item List */
+        .admin-item-list { 
+            max-height: 400px; 
+            overflow-y: auto; 
+            margin-top: 0.8rem;
+        }
+        .admin-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.7rem; 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 14px; 
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+        }
+        .admin-item:hover {
+            background: rgba(255,71,87,0.1);
+            border: 1px solid rgba(255,71,87,0.3);
+        }
+        .admin-item-content {
+            flex: 1;
+            margin-left: 0.5rem;
+        }
+        .admin-item-actions {
+            display: flex;
+            gap: 0.3rem;
+        }
+        .admin-item-actions button { 
+            background: none; 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .admin-item-actions button:hover { 
+            background: rgba(255,255,255,0.15); 
+        }
+        .move-up-btn, .move-down-btn {
+            color: #2ed573;
+        }
+        .move-up-btn:hover, .move-down-btn:hover {
+            background: rgba(46,213,115,0.2);
+        }
+        .edit-btn { color: #ffa502; }
+        .edit-btn:hover { background: rgba(255,165,2,0.2); }
         .delete-btn { color: #ff4757; }
+        .delete-btn:hover { background: rgba(255,71,87,0.2); }
+        .drag-icon {
+            color: rgba(255,255,255,0.3);
+            cursor: grab;
+        }
+        .drag-icon:active { cursor: grabbing; }
 
         .db-status {
             background: rgba(46, 213, 115, 0.1);
@@ -874,7 +941,7 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255,71,87,0.4);
+            box-shadow: 0 5px 15px rgba(255,71,87,0.4);
             transition: all 0.25s;
             z-index: 1000;
             display: flex;
@@ -895,59 +962,48 @@
             animation: slideInRight 0.3s ease;
             border-left: 4px solid #2ed573;
             font-size: 0.85rem;
+            box-shadow: none;
         }
         .toast.error { border-left-color: #ff4757; }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         .loader { text-align: center; padding: 2.5rem; }
-        .loader i { font-size: 1.8rem; animation: spin 1s linear infinite; color: #ff4757; }
+        .loader i { font-size: 1.6rem; animation: spin 1s linear infinite; color: #ff4757; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .footer { text-align: center; padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.5; }
+        .footer { text-align: center; padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 1.5rem; font-size: 0.8rem; opacity: 0.5; }
 
         .rating {
             display: flex;
-            gap: 0.6rem;
-            font-size: 1.8rem;
+            gap: 0.5rem;
+            font-size: 1.6rem;
             cursor: pointer;
         }
         .rating i { transition: 0.15s; }
-        .rating i:hover, .rating i.active { color: #ffa502; text-shadow: 0 0 8px rgba(255,165,2,0.5); }
+        .rating i:hover, .rating i.active { color: #ffa502; text-shadow: 0 0 6px rgba(255,165,2,0.4); }
 
         @media (max-width: 768px) {
             .nav-container { justify-content: center; }
-            .logo { gap: 0.2rem; font-size: 1.1rem; }
-            .logo-icon { width: 32px; height: 32px; }
-            .logo-icon i { font-size: 0.9rem; }
-            .hero-content h1 { font-size: 2rem; letter-spacing: 2px; }
-            .subtitle-text { font-size: 1.3rem; letter-spacing: 5px; }
-            .hero-description { font-size: 0.85rem; }
-            .category-chip { padding: 0.35rem 0.9rem; font-size: 0.75rem; gap: 0.3rem; }
-            .category-chip i { font-size: 0.75rem; }
-            .categories-wrapper { margin-top: 72px; padding: 0.5rem 1rem; }
-            .content-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .logo { gap: 0.2rem; font-size: 1rem; }
+            .logo-icon { width: 30px; height: 30px; }
+            .logo-icon i { font-size: 0.85rem; }
+            .hero-content h1 { font-size: 1.8rem; letter-spacing: 2px; }
+            .subtitle-text { font-size: 1.2rem; letter-spacing: 5px; }
+            .hero-description { font-size: 0.8rem; }
+            .category-chip { padding: 0.35rem 0.9rem; font-size: 0.7rem; gap: 0.3rem; }
+            .categories-wrapper { margin-top: 62px; padding: 0.5rem 1rem; }
+            .content-grid { grid-template-columns: 1fr; gap: 1rem; }
             .stats { gap: 1rem; }
-            .stat-card { padding: 0.5rem 1rem; min-width: 120px; }
-            .stat-number { font-size: 1.8rem; }
-            .stat-label { font-size: 0.7rem; }
-            .maintenance-badge { font-size: 0.7rem; padding: 0.45rem 1rem; }
+            .stat-card { padding: 0.5rem 1rem; min-width: 110px; }
+            .stat-number { font-size: 1.6rem; }
+            .stat-label { font-size: 0.65rem; }
+            .maintenance-badge { font-size: 0.65rem; padding: 0.4rem 1rem; }
             .hero { padding: 0.5rem 1rem 0.8rem; }
             .search-wrapper-center { max-width: 100%; }
             .search-section { padding: 0 1rem; margin-bottom: 0.8rem; }
             .top-banner { padding: 0 1rem; margin: 0.5rem 0; }
             .container { padding: 0 1rem 1.5rem; }
-            .search-box-center { padding: 0.7rem 1rem 0.7rem 3rem; font-size: 0.85rem; }
-            .category-grid { gap: 0.5rem; }
             .detail-body { padding: 1.2rem; }
-            .detail-image { max-height: 250px; }
-            .detail-info h3 { font-size: 1.3rem; }
-            .detail-rating-section { flex-direction: column; align-items: flex-start; }
-            .detail-image-wrapper { border-radius: 18px; }
-            .card-image { max-height: 180px; }
-        }
-        
-        @media (max-width: 480px) {
-            .category-chip { padding: 0.3rem 0.7rem; font-size: 0.7rem; }
-            .category-chip i { font-size: 0.7rem; }
-            .categories-wrapper { padding: 0.4rem 0.8rem; }
+            .detail-image { max-height: 220px; }
+            .detail-info h3 { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -1073,9 +1129,36 @@
                 <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Tambah Item</button>
             </form>
             <hr style="margin: 1rem 0; border-color: rgba(255,255,255,0.1);">
-            <h3><i class="fas fa-list"></i> Kelola Item</h3>
+            <h3><i class="fas fa-list"></i> Kelola Item <span style="font-size:0.7rem; opacity:0.6;">(↑↓ urutkan | ✏️ edit | 🗑️ hapus)</span></h3>
             <div id="adminItemList" class="admin-item-list"></div>
         </div>
+    </div>
+</div>
+
+<!-- Edit Item Modal -->
+<div id="editItemModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-edit"></i> Edit Item</h2>
+            <div class="close-modal" id="closeEditModal">&times;</div>
+        </div>
+        <form id="editItemForm">
+            <input type="hidden" id="editItemId">
+            <div class="form-group"><label>Judul</label><input type="text" id="editTitle" required></div>
+            <div class="form-group"><label>Kategori</label>
+                <select id="editCategory">
+                    <option value="addon">Addon</option>
+                    <option value="texture">Texture Pack</option>
+                    <option value="world">World</option>
+                    <option value="skin">Skin</option>
+                    <option value="mashup">Mashup</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Deskripsi</label><textarea id="editDescription" rows="4" required></textarea></div>
+            <div class="form-group"><label>Link Download</label><input type="url" id="editDownloadUrl" placeholder="https://..."></div>
+            <div class="form-group"><label>URL Gambar</label><input type="url" id="editImageUrl" placeholder="https://..."></div>
+            <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Simpan Perubahan</button>
+        </form>
     </div>
 </div>
 
@@ -1125,6 +1208,7 @@
         appId: "1:486094594414:web:181b2d433a4fb9759be17f"
     };
 
+    // ========== TELEGRAM CONFIG ==========
     const TELEGRAM_BOT_TOKEN = "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE";
     const TELEGRAM_CHAT_ID = "8367322295";
     const ADMIN_PASSWORD = "faizcraftmc2025";
@@ -1248,6 +1332,80 @@
         } catch(e) { showToast("Gagal menyimpan rating!", true); }
     }
 
+    // Fungsi Edit Item
+    async function editItem(itemId) {
+        const item = allItems.find(i => i.id === itemId);
+        if (!item) return;
+        
+        document.getElementById("editItemId").value = item.id;
+        document.getElementById("editTitle").value = item.title;
+        document.getElementById("editCategory").value = item.category;
+        document.getElementById("editDescription").value = item.description;
+        document.getElementById("editDownloadUrl").value = item.downloadUrl || "";
+        document.getElementById("editImageUrl").value = item.imageUrl || "";
+        
+        const editModal = document.getElementById("editItemModal");
+        editModal.classList.add("show");
+    }
+
+    window.editItem = editItem;
+
+    async function saveEditItem(e) {
+        e.preventDefault();
+        const id = document.getElementById("editItemId").value;
+        const updatedData = {
+            title: document.getElementById("editTitle").value,
+            category: document.getElementById("editCategory").value,
+            description: document.getElementById("editDescription").value,
+            downloadUrl: document.getElementById("editDownloadUrl").value || "#",
+            imageUrl: document.getElementById("editImageUrl").value || "https://picsum.photos/id/20/400/200"
+        };
+        
+        try {
+            await db.collection("items").doc(id).update(updatedData);
+            const index = allItems.findIndex(i => i.id === id);
+            if (index !== -1) {
+                allItems[index] = { ...allItems[index], ...updatedData };
+            }
+            showToast("✅ Item berhasil diupdate!");
+            renderItems();
+            renderAdminItems();
+            const editModal = document.getElementById("editItemModal");
+            editModal.classList.remove("show");
+        } catch(e) {
+            showToast("❌ Gagal mengupdate item!", true);
+        }
+    }
+
+    async function moveItemUp(index) {
+        if (index === 0) return;
+        const newItems = [...allItems];
+        [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
+        allItems = newItems;
+        await reorderItemsInFirebase();
+        renderItems();
+        renderAdminItems();
+        showToast("✅ Urutan item berhasil diubah!");
+    }
+
+    async function moveItemDown(index) {
+        if (index === allItems.length - 1) return;
+        const newItems = [...allItems];
+        [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+        allItems = newItems;
+        await reorderItemsInFirebase();
+        renderItems();
+        renderAdminItems();
+        showToast("✅ Urutan item berhasil diubah!");
+    }
+
+    async function reorderItemsInFirebase() {
+        if (!db) return;
+        for (let i = 0; i < allItems.length; i++) {
+            await db.collection("items").doc(allItems[i].id).update({ order: i });
+        }
+    }
+
     function openDetailModal(item) {
         currentDetailItem = item;
         const modal = document.getElementById("detailModal");
@@ -1369,25 +1527,71 @@
         }));
     }
 
+    function renderAdminItems() {
+        const container = document.getElementById("adminItemList");
+        if (!container) return;
+        if (allItems.length === 0) {
+            container.innerHTML = '<div style="text-align:center; padding:0.8rem; opacity:0.5;">Belum ada item, tambahkan yang pertama!</div>';
+            return;
+        }
+        container.innerHTML = allItems.map((item, idx) => `
+            <div class="admin-item" data-index="${idx}">
+                <i class="fas fa-grip-vertical drag-icon"></i>
+                <div class="admin-item-content">
+                    <strong>${escapeHtml(item.title)}</strong><br>
+                    <small>${item.category} | ${formatNumber(item.downloads)} downloads | Rating: ${item.rating || 5}/5</small>
+                </div>
+                <div class="admin-item-actions">
+                    <button class="move-up-btn" onclick="window.moveItemUp(${idx})" title="Pindah ke atas"><i class="fas fa-arrow-up"></i></button>
+                    <button class="move-down-btn" onclick="window.moveItemDown(${idx})" title="Pindah ke bawah"><i class="fas fa-arrow-down"></i></button>
+                    <button class="edit-btn" onclick="window.editItem('${item.id}')" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" onclick="window.deleteItem('${item.id}')" title="Hapus"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        `).join("");
+    }
+
+    window.moveItemUp = moveItemUp;
+    window.moveItemDown = moveItemDown;
+
     async function loadItems() {
-        if (!db) { allItems = []; renderCategories(); renderItems(); updateStats(); return; }
+        if (!db) { allItems = []; renderCategories(); renderItems(); updateStats(); renderAdminItems(); return; }
         try {
             const snap = await db.collection("items").get();
             allItems = [];
             snap.forEach(doc => allItems.push({ id: doc.id, ...doc.data() }));
+            allItems.sort((a, b) => (a.order || 0) - (b.order || 0));
         } catch(e) { allItems = []; }
-        renderCategories(); renderItems(); updateStats();
+        renderCategories();
+        renderItems();
+        updateStats();
+        renderAdminItems();
         const dbStatusDiv = document.getElementById("dbStatus");
         if (dbStatusDiv) { dbStatusDiv.innerHTML = `<i class="fas fa-check-circle"></i> <span>✅ Database terhubung</span>`; dbStatusDiv.classList.remove("error"); }
     }
 
-    async function sendToTelegram(name, rating, msg) {
+    window.deleteItem = async (id) => { 
+        if (confirm("Hapus item ini?")) { 
+            await db.collection("items").doc(id).delete(); 
+            showToast("✅ Item dihapus!"); 
+            loadItems(); 
+        } 
+    };
+
+    async function sendToTelegram(name, rating, message) {
         const stars = "★".repeat(rating) + "☆".repeat(5-rating);
-        const text = `📢 *FEEDBACK FaizCraftMC* 📢\n\n👤 *Nama:* ${name}\n⭐ *Rating:* ${stars} (${rating}/5)\n💬 *Pesan:* ${msg}\n🕐 *Waktu:* ${new Date().toLocaleString('id-ID')}`;
+        const text = `📢 *FEEDBACK FaizCraftMC* 📢\n\n👤 *Nama:* ${name}\n⭐ *Rating:* ${stars} (${rating}/5)\n💬 *Pesan:* ${message}\n🕐 *Waktu:* ${new Date().toLocaleString('id-ID')}`;
         try {
-            const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" }) });
+            const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" })
+            });
             return res.ok;
-        } catch(e) { return false; }
+        } catch(e) {
+            console.error("Telegram error:", e);
+            return false;
+        }
     }
 
     const logo = document.getElementById("secretLogo");
@@ -1412,7 +1616,6 @@
             isAdminLoggedIn = true;
             loginForm.style.display = "none";
             adminPanelDiv.style.display = "block";
-            await loadAdminItems();
             await loadMaintenanceStatus();
             maintenanceToggle.checked = isMaintenanceMode;
             showToast("✅ Login admin berhasil!");
@@ -1420,19 +1623,6 @@
     });
 
     maintenanceToggle.addEventListener("change", async (e) => { await setMaintenanceMode(e.target.checked); });
-
-    async function loadAdminItems() {
-        if (!db) return;
-        const snap = await db.collection("items").get();
-        const items = []; snap.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
-        if (items.length === 0) { document.getElementById("adminItemList").innerHTML = '<div style="text-align:center; padding:0.8rem; opacity:0.5;">Belum ada item, tambahkan yang pertama!</div>'; return; }
-        document.getElementById("adminItemList").innerHTML = items.map(item => `
-            <div class="admin-item"><div><strong>${escapeHtml(item.title)}</strong><br><small>${item.category} | ${formatNumber(item.downloads)} downloads</small></div>
-            <div class="admin-item-actions"><button onclick="deleteItem('${item.id}')" class="delete-btn"><i class="fas fa-trash"></i></button></div></div>
-        `).join("");
-    }
-
-    window.deleteItem = async (id) => { if (confirm("Hapus item ini?")) { await db.collection("items").doc(id).delete(); showToast("✅ Item dihapus!"); loadAdminItems(); loadItems(); } };
 
     document.getElementById("addItemForm").addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -1443,16 +1633,26 @@
             downloadUrl: document.getElementById("itemUrl").value || "#",
             imageUrl: document.getElementById("itemImage").value || "https://picsum.photos/id/20/400/200",
             downloads: 0,
-            rating: 5
+            rating: 5,
+            order: allItems.length
         };
         const newId = Date.now().toString();
         await db.collection("items").doc(newId).set(newItem);
         showToast("✅ Item berhasil ditambahkan!");
         document.getElementById("addItemForm").reset();
-        loadAdminItems();
         loadItems();
     });
 
+    // Edit form submit
+    document.getElementById("editItemForm").addEventListener("submit", saveEditItem);
+
+    // Edit modal close
+    const editModal = document.getElementById("editItemModal");
+    const closeEditModal = document.getElementById("closeEditModal");
+    closeEditModal.addEventListener("click", () => editModal.classList.remove("show"));
+    window.addEventListener("click", (e) => { if (e.target === editModal) editModal.classList.remove("show"); });
+
+    // Feedback Modal
     const feedbackModal = document.getElementById("feedbackModal");
     const fabBtn = document.getElementById("fabBtn");
     const closeFeedback = document.getElementById("closeFeedbackModal");
@@ -1471,9 +1671,25 @@
         const msg = document.getElementById("feedbackMessage").value.trim();
         if (!name || !msg) { showToast("Isi nama dan pesan!", true); return; }
         if (selectedRating === 0) { showToast("Klik rating bintangnya!", true); return; }
+        
         const ok = await sendToTelegram(name, selectedRating, msg);
-        if (ok) showToast("✅ Feedback terkirim ke Telegram!");
-        else showToast("⚠️ Gagal kirim ke Telegram! Cek token bot!", true);
+        if (ok) {
+            showToast("✅ Feedback terkirim ke Telegram!");
+        } else {
+            showToast("⚠️ Gagal kirim ke Telegram!", true);
+        }
+        
+        if (db) {
+            try {
+                await db.collection("feedbacks").add({
+                    name: name,
+                    rating: selectedRating,
+                    message: msg,
+                    timestamp: new Date().toISOString()
+                });
+            } catch(e) {}
+        }
+        
         document.getElementById("feedbackName").value = "";
         document.getElementById("feedbackMessage").value = "";
         stars.forEach(s => s.className = "far fa-star");
@@ -1484,10 +1700,10 @@
     document.getElementById("searchInput").addEventListener("input", (e) => { searchKeyword = e.target.value; renderItems(); });
     document.addEventListener("keydown", (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); document.getElementById("searchInput").focus(); } });
 
-    const detailModal = document.getElementById("detailModal");
+    const detailModalEl = document.getElementById("detailModal");
     const closeDetail = document.getElementById("closeDetailModal");
-    closeDetail.addEventListener("click", () => detailModal.classList.remove("show"));
-    window.addEventListener("click", (e) => { if (e.target === detailModal) detailModal.classList.remove("show"); });
+    closeDetail.addEventListener("click", () => detailModalEl.classList.remove("show"));
+    window.addEventListener("click", (e) => { if (e.target === detailModalEl) detailModalEl.classList.remove("show"); });
 
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement("div");
