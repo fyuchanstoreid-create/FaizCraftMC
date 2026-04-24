@@ -3,28 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="author" content="FaizCraftMC">
-    <meta name="copyright" content="FaizCraftMC 2026">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta property="og:title" content="FaizCraftMC Marketplace">
-    <meta property="og:description" content="Download addon Minecraft gratis & terbaru.">
-    <meta property="og:image" content="https://faizcraftmc.vercel.app/thumbnail.png">
-    <meta property="og:site_name" content="FaizCraftMC Marketplace">
-    <title>FaizCraftMC Marketplace</title>
-    <meta name="description" content="Download addon, texture pack, world, skin, dan mashups terbaru di FaizCraftMC Marketplace.">
-    <link rel="icon" href="/favicon.png">
-    <link rel="shortcut icon" href="/favicon.png">
+    <title>FaizCraftMC Marketplace - Download Addon, Texture Pack, World, Skin & Mashups</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XY6DZNWBK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0XY6DZNWBK');
-</script>
     <style>
         * {
             margin: 0;
@@ -94,7 +75,7 @@
             to { transform: translateY(-100vh) rotate(360deg); opacity: 0.5; }
         }
 
-        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #1a1d2e; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #ff4757, #ff6b81); border-radius: 10px; }
 
@@ -168,13 +149,13 @@
             position: fixed;
             bottom: 100px;
             right: 30px;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             background: linear-gradient(135deg, #2ed573, #00a8ff);
             border: none;
             color: white;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             cursor: pointer;
             z-index: 1001;
             opacity: 0;
@@ -199,13 +180,13 @@
             bottom: 20px;
             left: 20px;
             background: linear-gradient(135deg, #ffa502, #ff4757);
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.3rem;
             border-radius: 50px;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.7rem;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             z-index: 999;
             box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
             cursor: grab;
@@ -215,14 +196,14 @@
         }
 
         .maintenance-badge:active { cursor: grabbing; }
-        .maintenance-badge i { font-size: 1.1rem; animation: pulseIcon 1.5s ease infinite; }
+        .maintenance-badge i { font-size: 1rem; animation: pulseIcon 1.5s ease infinite; }
         @keyframes pulseIcon { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         .maintenance-badge.hidden { display: none; }
 
-        /* Categories - Diperbaiki agar semua kategori keliatan */
+        /* Categories */
         .categories-wrapper {
             margin-top: 80px;
-            padding: 0.8rem 2rem;
+            padding: 0.7rem 2rem;
             background: rgba(10, 12, 21, 0.7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 71, 87, 0.1);
@@ -235,12 +216,7 @@
             width: 100%;
             margin: 0 auto;
         }
-        
-        .categories-title { 
-            display: none;
-        }
 
-        /* Category Grid - Menggunakan wrap agar semua kategori keliatan */
         .category-grid {
             display: flex;
             flex-wrap: wrap;
@@ -250,7 +226,7 @@
         }
 
         .category-chip {
-            padding: 0.5rem 1.2rem;
+            padding: 0.45rem 1.2rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -277,7 +253,7 @@
         }
 
         .category-chip:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             background: rgba(255, 71, 87, 0.15);
             border-color: rgba(255, 71, 87, 0.4);
         }
@@ -285,7 +261,7 @@
         .category-chip.active {
             background: linear-gradient(135deg, #ff4757, #ff6b81);
             border-color: transparent;
-            box-shadow: 0 5px 20px rgba(255,71,87,0.3);
+            box-shadow: 0 5px 15px rgba(255,71,87,0.3);
         }
 
         .category-name {
@@ -306,7 +282,7 @@
             width: 100%;
             overflow: hidden;
             padding: 0 2rem;
-            margin: 1rem 0 0.8rem 0;
+            margin: 0.8rem 0 0.6rem 0;
             display: flex;
             justify-content: center;
         }
@@ -316,22 +292,22 @@
             max-width: 1200px;
             height: auto;
             display: block;
-            border-radius: 24px;
+            border-radius: 20px;
             object-fit: cover;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         /* Hero Section */
         .hero { 
-            padding: 1rem 2rem 1.5rem; 
+            padding: 0.8rem 2rem 1.2rem; 
             text-align: center; 
         }
         
         .hero-content h1 { 
-            font-size: 4rem; 
+            font-size: 3.5rem; 
             margin-bottom: 0.3rem; 
             font-weight: 900; 
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             line-height: 1.2;
         }
         
@@ -354,9 +330,9 @@
         }
         
         .subtitle-text {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
-            letter-spacing: 10px;
+            letter-spacing: 8px;
             opacity: 0.9;
             margin-top: 0rem;
         }
@@ -367,11 +343,11 @@
         }
         
         .hero-description {
-            font-size: 1.15rem;
+            font-size: 1rem;
             opacity: 0.7;
-            margin-top: 0.8rem;
-            letter-spacing: 1px;
-            max-width: 650px;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -380,23 +356,23 @@
         .search-section {
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .search-wrapper-center {
             position: relative;
             width: 100%;
-            max-width: 550px;
+            max-width: 500px;
         }
 
         .search-box-center {
             width: 100%;
-            padding: 1rem 1.2rem 1rem 3.5rem;
+            padding: 0.9rem 1.2rem 0.9rem 3.5rem;
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 60px;
             background: rgba(255, 255, 255, 0.05);
             color: white;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
             font-family: 'Poppins', sans-serif;
         }
@@ -405,7 +381,7 @@
             outline: none;
             border-color: #ff4757;
             background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 30px rgba(255, 71, 87, 0.2);
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.2);
         }
 
         .search-wrapper-center i {
@@ -414,7 +390,7 @@
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255, 255, 255, 0.5);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .search-shortcut-center {
@@ -423,9 +399,9 @@
             top: 50%;
             transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.1);
-            padding: 0.2rem 0.7rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 8px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.5);
         }
 
@@ -433,25 +409,25 @@
         .stats-wrapper {
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .stats { 
             display: flex; 
             justify-content: center; 
-            gap: 2rem; 
+            gap: 1.5rem; 
             flex-wrap: wrap; 
         }
         .stat-card {
             background: rgba(255,255,255,0.04);
-            padding: 1rem 2.5rem;
-            border-radius: 32px;
+            padding: 0.8rem 2rem;
+            border-radius: 28px;
             border: 1px solid rgba(255,255,255,0.08);
             transition: all 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 180px;
+            min-width: 160px;
         }
         .stat-card:hover { 
             transform: translateY(-5px); 
@@ -459,7 +435,7 @@
             background: rgba(255,71,87,0.05); 
         }
         .stat-number { 
-            font-size: 2.8rem; 
+            font-size: 2.5rem; 
             font-weight: 900; 
             background: linear-gradient(135deg, #ff4757, #ffa502); 
             -webkit-background-clip: text; 
@@ -469,27 +445,30 @@
             margin-bottom: 0.3rem;
         }
         .stat-label { 
-            font-size: 0.9rem; 
+            font-size: 0.85rem; 
             opacity: 0.7;
             font-weight: 500;
             letter-spacing: 1px;
         }
 
-        /* Content */
+        /* Content Grid */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem 3rem; }
-        .content-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
-        .result-info { font-size: 0.95rem; color: rgba(255,255,255,0.5); }
+        .content-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem; }
+        .result-info { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
         .result-info strong { color: #ff4757; }
 
-        .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; }
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
+        
+        /* Card - Gambar menyesuaikan */
         .card {
             background: rgba(18, 20, 35, 0.7);
             backdrop-filter: blur(12px);
-            border-radius: 30px;
+            border-radius: 28px;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             border: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
+            cursor: pointer;
         }
         .card::before {
             content: '';
@@ -497,24 +476,40 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, #ff4757, #ffa502, #ff4757);
             transform: scaleX(0);
             transition: transform 0.5s;
+            z-index: 1;
         }
         .card:hover::before { transform: scaleX(1); }
-        .card:hover { transform: translateY(-10px); border-color: rgba(255,71,87,0.3); box-shadow: 0 25px 40px rgba(0,0,0,0.5); }
-        .card-image { height: 210px; background-size: cover; background-position: center; position: relative; }
+        .card:hover { transform: translateY(-8px); border-color: rgba(255,71,87,0.3); box-shadow: 0 20px 35px rgba(0,0,0,0.4); }
+        
+        .card-image-wrapper {
+            width: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card-image { 
+            width: 100%;
+            height: auto;
+            max-height: 220px;
+            object-fit: contain;
+            display: block;
+        }
         .card-category-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 0.4rem 1.2rem;
+            top: 12px;
+            right: 12px;
+            padding: 0.35rem 1rem;
             background: rgba(0,0,0,0.7);
             backdrop-filter: blur(8px);
             border-radius: 40px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
+            z-index: 2;
         }
         .download-overlay {
             position: absolute;
@@ -522,42 +517,226 @@
             left: 0;
             right: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 1.5rem;
+            padding: 1.2rem;
             opacity: 0;
             transition: opacity 0.3s;
+            z-index: 2;
         }
         .card:hover .download-overlay { opacity: 1; }
-        .card-content { padding: 1.5rem; }
-        .card-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .card-desc { font-size: 0.9rem; opacity: 0.6; margin-bottom: 1rem; line-height: 1.5; }
+        .card-content { padding: 1.2rem; }
+        .card-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem; }
+        .card-desc { font-size: 0.85rem; opacity: 0.6; margin-bottom: 0.8rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-footer { display: flex; justify-content: space-between; align-items: center; }
-        .download-count { font-size: 0.85rem; opacity: 0.5; }
+        .download-count { font-size: 0.8rem; opacity: 0.5; }
         .download-count i { margin-right: 5px; color: #ff4757; }
         .btn-download {
             background: linear-gradient(135deg, #ff4757, #e84118);
             border: none;
-            padding: 0.7rem 1.6rem;
+            padding: 0.6rem 1.4rem;
             border-radius: 40px;
             color: white;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-family: 'Poppins', sans-serif;
         }
-        .btn-download:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,71,87,0.4); }
+        .btn-download:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(255,71,87,0.4); }
+
+        /* Detail Modal - Gambar menyesuaikan */
+        .detail-modal {
+            display: none;
+            position: fixed;
+            z-index: 2002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            align-items: center;
+            justify-content: center;
+        }
+        .detail-modal.show { display: flex; }
+        .detail-modal-content {
+            background: linear-gradient(145deg, #1a1d2e, #121420);
+            width: 90%;
+            max-width: 900px;
+            border-radius: 32px;
+            border: 1px solid rgba(255,71,87,0.3);
+            animation: modalSlideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .detail-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .detail-modal-header h2 { 
+            font-size: 1.3rem; 
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .close-detail {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.3rem;
+        }
+        .close-detail:hover { background: #ff4757; transform: rotate(90deg); }
+        .detail-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            padding: 1.8rem;
+        }
+        .detail-image-wrapper {
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .detail-image {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: contain;
+            display: block;
+        }
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .detail-info h3 { 
+            font-size: 1.6rem; 
+            margin-bottom: 0.2rem;
+            background: linear-gradient(135deg, #ffffff, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+        .detail-category {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: rgba(255,71,87,0.2);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            width: fit-content;
+            border: 1px solid rgba(255,71,87,0.3);
+        }
+        .detail-description { 
+            font-size: 0.95rem; 
+            line-height: 1.6; 
+            opacity: 0.85; 
+            background: rgba(255,255,255,0.03);
+            padding: 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .detail-rating-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            background: rgba(255,255,255,0.03);
+            padding: 0.8rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .detail-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .detail-rating .stars { 
+            color: #ffa502; 
+            font-size: 1.2rem; 
+            letter-spacing: 2px;
+        }
+        .detail-rating .rating-value { 
+            font-weight: 700; 
+            color: #ffa502;
+            font-size: 1rem;
+        }
+        .rating-input {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .rating-input span { 
+            font-size: 0.8rem; 
+            opacity: 0.8;
+        }
+        .rating-stars-input {
+            display: flex;
+            gap: 0.2rem;
+            cursor: pointer;
+        }
+        .rating-stars-input i {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+        .rating-stars-input i:hover,
+        .rating-stars-input i.active {
+            color: #ffa502;
+            text-shadow: 0 0 8px rgba(255,165,2,0.5);
+            transform: scale(1.05);
+        }
+        .detail-download-count {
+            background: rgba(255,255,255,0.03);
+            padding: 0.7rem 1rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .detail-download-count i { margin-right: 8px; color: #ff4757; }
+        .detail-btn-download {
+            background: linear-gradient(135deg, #ff4757, #e84118);
+            border: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+        .detail-btn-download:hover { 
+            transform: scale(1.01); 
+            box-shadow: 0 5px 20px rgba(255,71,87,0.4);
+        }
 
         .empty-state {
             text-align: center;
-            padding: 4rem;
+            padding: 3rem;
             background: rgba(255,255,255,0.03);
-            border-radius: 40px;
+            border-radius: 32px;
         }
-        .empty-state i { font-size: 4rem; margin-bottom: 1rem; opacity: 0.4; }
-        .empty-state h3 { margin-bottom: 0.5rem; font-size: 1.5rem; }
-        .empty-state p { opacity: 0.5; font-size: 1rem; }
+        .empty-state i { font-size: 3.5rem; margin-bottom: 0.8rem; opacity: 0.4; }
+        .empty-state h3 { margin-bottom: 0.3rem; font-size: 1.3rem; }
+        .empty-state p { opacity: 0.5; font-size: 0.9rem; }
 
-        /* Modal */
+        /* Modal lainnya */
         .modal {
             display: none;
             position: fixed;
@@ -574,30 +753,31 @@
         .modal.show { display: flex; }
         .modal-content {
             background: linear-gradient(145deg, #1a1d2e, #121420);
-            padding: 2rem;
+            padding: 1.5rem;
             width: 90%;
-            max-width: 600px;
-            border-radius: 36px;
+            max-width: 550px;
+            border-radius: 32px;
             border: 1px solid rgba(255,71,87,0.3);
             animation: modalSlideIn 0.3s ease;
             max-height: 85vh;
             overflow-y: auto;
         }
         @keyframes modalSlideIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .close-modal { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.05); cursor: pointer; transition: 0.2s; font-size: 1.5rem; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+        .close-modal { width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.05); cursor: pointer; transition: 0.2s; font-size: 1.3rem; }
         .close-modal:hover { background: #ff4757; }
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.85rem; }
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 0.9rem 1rem;
+            padding: 0.8rem 0.9rem;
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
+            border-radius: 18px;
             background: rgba(0,0,0,0.3);
             color: white;
             font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none;
@@ -605,7 +785,7 @@
         }
         .btn-submit, .btn-primary {
             width: 100%;
-            padding: 0.9rem;
+            padding: 0.8rem;
             background: linear-gradient(135deg, #ff4757, #e84118);
             border: none;
             border-radius: 40px;
@@ -613,27 +793,27 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: 'Poppins', sans-serif;
         }
-        .btn-primary { background: linear-gradient(135deg, #2ed573, #00a8ff); margin-top: 1rem; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46,213,115,0.3); }
+        .btn-primary { background: linear-gradient(135deg, #2ed573, #00a8ff); margin-top: 0.8rem; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46,213,115,0.3); }
 
         .toggle-switch {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: rgba(255,255,255,0.05);
-            padding: 1rem;
-            border-radius: 20px;
-            margin-bottom: 1.5rem;
+            padding: 0.8rem;
+            border-radius: 18px;
+            margin-bottom: 1.2rem;
         }
-        .toggle-switch span { font-weight: 600; font-size: 0.9rem; }
+        .toggle-switch span { font-weight: 600; font-size: 0.85rem; }
         .toggle-label {
             position: relative;
             display: inline-block;
-            width: 60px;
-            height: 30px;
+            width: 55px;
+            height: 28px;
         }
         .toggle-label input { opacity: 0; width: 0; height: 0; }
         .toggle-slider {
@@ -650,8 +830,8 @@
         .toggle-slider:before {
             position: absolute;
             content: "";
-            height: 24px;
-            width: 24px;
+            height: 22px;
+            width: 22px;
             left: 3px;
             bottom: 3px;
             background-color: white;
@@ -659,21 +839,21 @@
             border-radius: 50%;
         }
         input:checked + .toggle-slider { background: linear-gradient(135deg, #ff4757, #ffa502); }
-        input:checked + .toggle-slider:before { transform: translateX(30px); }
+        input:checked + .toggle-slider:before { transform: translateX(27px); }
 
-        .admin-item-list { max-height: 300px; overflow-y: auto; margin-top: 1rem; }
-        .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 0.5rem; }
-        .admin-item-actions button { background: none; border: none; color: white; cursor: pointer; margin-left: 0.5rem; padding: 0.3rem; border-radius: 8px; }
+        .admin-item-list { max-height: 250px; overflow-y: auto; margin-top: 0.8rem; }
+        .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem; background: rgba(255,255,255,0.05); border-radius: 14px; margin-bottom: 0.4rem; }
+        .admin-item-actions button { background: none; border: none; color: white; cursor: pointer; margin-left: 0.4rem; padding: 0.2rem; border-radius: 6px; }
         .admin-item-actions button:hover { background: rgba(255,255,255,0.1); }
         .delete-btn { color: #ff4757; }
 
         .db-status {
             background: rgba(46, 213, 115, 0.1);
             border: 1px solid rgba(46, 213, 115, 0.3);
-            border-radius: 20px;
-            padding: 0.7rem 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
+            border-radius: 16px;
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -684,87 +864,90 @@
 
         .fab {
             position: fixed;
-            bottom: 28px;
-            right: 28px;
-            width: 65px;
-            height: 65px;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff4757, #e84118);
             border: none;
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(255,71,87,0.4);
+            box-shadow: 0 5px 20px rgba(255,71,87,0.4);
             transition: all 0.25s;
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .fab:hover { transform: scale(1.08) rotate(5deg); }
+        .fab:hover { transform: scale(1.05) rotate(5deg); }
 
         .toast {
             position: fixed;
-            bottom: 100px;
-            right: 28px;
+            bottom: 90px;
+            right: 25px;
             background: #1e1f2e;
-            padding: 1rem 1.8rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 50px;
             color: white;
             z-index: 1500;
             animation: slideInRight 0.3s ease;
             border-left: 4px solid #2ed573;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
         .toast.error { border-left-color: #ff4757; }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        .loader { text-align: center; padding: 3rem; }
-        .loader i { font-size: 2rem; animation: spin 1s linear infinite; color: #ff4757; }
+        .loader { text-align: center; padding: 2.5rem; }
+        .loader i { font-size: 1.8rem; animation: spin 1s linear infinite; color: #ff4757; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; font-size: 0.9rem; opacity: 0.5; }
+        .footer { text-align: center; padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.5; }
 
-        /* Rating Stars */
         .rating {
             display: flex;
-            gap: 0.7rem;
-            font-size: 2rem;
+            gap: 0.6rem;
+            font-size: 1.8rem;
             cursor: pointer;
         }
         .rating i { transition: 0.15s; }
-        .rating i:hover, .rating i.active { color: #ffa502; text-shadow: 0 0 10px rgba(255,165,2,0.5); }
+        .rating i:hover, .rating i.active { color: #ffa502; text-shadow: 0 0 8px rgba(255,165,2,0.5); }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-container { justify-content: center; }
             .logo { gap: 0.2rem; font-size: 1.1rem; }
             .logo-icon { width: 32px; height: 32px; }
             .logo-icon i { font-size: 0.9rem; }
-            .hero-content h1 { font-size: 2.2rem; letter-spacing: 2px; }
-            .subtitle-text { font-size: 1.4rem; letter-spacing: 5px; }
-            .hero-description { font-size: 0.9rem; }
-            .category-chip { padding: 0.4rem 0.9rem; font-size: 0.75rem; gap: 0.3rem; }
+            .hero-content h1 { font-size: 2rem; letter-spacing: 2px; }
+            .subtitle-text { font-size: 1.3rem; letter-spacing: 5px; }
+            .hero-description { font-size: 0.85rem; }
+            .category-chip { padding: 0.35rem 0.9rem; font-size: 0.75rem; gap: 0.3rem; }
             .category-chip i { font-size: 0.75rem; }
-            .categories-wrapper { margin-top: 72px; padding: 0.6rem 1rem; }
-            .content-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .categories-wrapper { margin-top: 72px; padding: 0.5rem 1rem; }
+            .content-grid { grid-template-columns: 1fr; gap: 1.2rem; }
             .stats { gap: 1rem; }
-            .stat-card { padding: 0.6rem 1.2rem; min-width: 130px; }
+            .stat-card { padding: 0.5rem 1rem; min-width: 120px; }
             .stat-number { font-size: 1.8rem; }
-            .stat-label { font-size: 0.75rem; }
-            .maintenance-badge { font-size: 0.7rem; padding: 0.5rem 1rem; }
-            .hero { padding: 0.8rem 1rem 1rem; }
+            .stat-label { font-size: 0.7rem; }
+            .maintenance-badge { font-size: 0.7rem; padding: 0.45rem 1rem; }
+            .hero { padding: 0.5rem 1rem 0.8rem; }
             .search-wrapper-center { max-width: 100%; }
-            .search-section { padding: 0 1rem; margin-bottom: 1rem; }
+            .search-section { padding: 0 1rem; margin-bottom: 0.8rem; }
             .top-banner { padding: 0 1rem; margin: 0.5rem 0; }
-            .container { padding: 0 1rem 2rem; }
-            .search-box-center { padding: 0.8rem 1rem 0.8rem 3rem; font-size: 0.85rem; }
+            .container { padding: 0 1rem 1.5rem; }
+            .search-box-center { padding: 0.7rem 1rem 0.7rem 3rem; font-size: 0.85rem; }
             .category-grid { gap: 0.5rem; }
+            .detail-body { padding: 1.2rem; }
+            .detail-image { max-height: 250px; }
+            .detail-info h3 { font-size: 1.3rem; }
+            .detail-rating-section { flex-direction: column; align-items: flex-start; }
+            .detail-image-wrapper { border-radius: 18px; }
+            .card-image { max-height: 180px; }
         }
         
-        /* Untuk layar sangat kecil (480px ke bawah) */
         @media (max-width: 480px) {
-            .category-chip { padding: 0.35rem 0.8rem; font-size: 0.7rem; }
+            .category-chip { padding: 0.3rem 0.7rem; font-size: 0.7rem; }
             .category-chip i { font-size: 0.7rem; }
-            .categories-wrapper { padding: 0.5rem 0.8rem; }
+            .categories-wrapper { padding: 0.4rem 0.8rem; }
         }
     </style>
 </head>
@@ -838,6 +1021,18 @@
     </div>
 </div>
 
+<!-- Detail Modal -->
+<div id="detailModal" class="detail-modal">
+    <div class="detail-modal-content">
+        <div class="detail-modal-header">
+            <h2><i class="fas fa-crown"></i> Detail Konten</h2>
+            <div class="close-detail" id="closeDetailModal">&times;</div>
+        </div>
+        <div class="detail-body" id="detailBody"></div>
+    </div>
+</div>
+
+<!-- Admin Modal -->
 <div id="adminModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -859,7 +1054,7 @@
                     <span class="toggle-slider"></span>
                 </label>
             </div>
-            <hr style="margin: 1rem 0; border-color: rgba(255,255,255,0.1);">
+            <hr style="margin: 0.8rem 0; border-color: rgba(255,255,255,0.1);">
             <h3><i class="fas fa-plus-circle"></i> Tambah Item Baru</h3>
             <form id="addItemForm">
                 <div class="form-group"><label>Judul</label><input type="text" id="itemTitle" required placeholder="Ex: Origins Addon"></div>
@@ -877,13 +1072,14 @@
                 <div class="form-group"><label>URL Gambar</label><input type="url" id="itemImage" placeholder="https://... (isi dengan URL gambar)"></div>
                 <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Tambah Item</button>
             </form>
-            <hr style="margin: 1.5rem 0; border-color: rgba(255,255,255,0.1);">
+            <hr style="margin: 1rem 0; border-color: rgba(255,255,255,0.1);">
             <h3><i class="fas fa-list"></i> Kelola Item</h3>
             <div id="adminItemList" class="admin-item-list"></div>
         </div>
     </div>
 </div>
 
+<!-- Feedback Modal -->
 <div id="feedbackModal" class="modal">
     <div class="modal-content">
         <div class="modal-header"><h2><i class="fab fa-telegram"></i> Kirim Feedback</h2><div class="close-modal" id="closeFeedbackModal">&times;</div></div>
@@ -899,7 +1095,7 @@
                 </div>
             </div>
             <div class="form-group"><label>Pesan</label><textarea id="feedbackMessage" rows="4" placeholder="Tulis feedback atau request..." required></textarea></div>
-            <button type="submit" class="btn-submit"><i class="fab fa-telegram"></i> Kirim</button>
+            <button type="submit" class="btn-submit"><i class="fab fa-telegram"></i> Kirim ke Telegram</button>
         </form>
     </div>
 </div>
@@ -913,13 +1109,12 @@
     <i class="fas fa-grip-vertical" style="opacity: 0.5; margin-left: 5px;"></i>
 </div>
 
-<div class="footer"><p>© 2025 FaizCraftMC Marketplace | Tidak terafiliasi dengan Mojang AB</p></div>
+<div class="footer"><p>© 2025 FaizCraftMC Marketplace</p></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script>
-    // ========== FIREBASE CONFIG ==========
     const firebaseConfig = {
         apiKey: "AIzaSyDxPsQio4A9LF7bCv5nWj10Et8_ekAsqis",
         authDomain: "faizcraftmc-acc42.firebaseapp.com",
@@ -930,12 +1125,10 @@
         appId: "1:486094594414:web:181b2d433a4fb9759be17f"
     };
 
-    // ========== TELEGRAM CONFIG ==========
     const TELEGRAM_BOT_TOKEN = "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE";
     const TELEGRAM_CHAT_ID = "8367322295";
     const ADMIN_PASSWORD = "faizcraftmc2025";
 
-    // ========== SEMUA KATEGORI ==========
     const CATEGORIES = [
         { id: "all", name: "Semua", icon: "fas fa-th-large" },
         { id: "addon", name: "Addons", icon: "fas fa-puzzle-piece" },
@@ -946,15 +1139,12 @@
     ];
 
     let allItems = [], activeCategory = "all", searchKeyword = "", selectedRating = 0, db = null, isAdminLoggedIn = false, clickCount = 0;
-    let isMaintenanceMode = false;
-
-    let isDragging = false;
-    let dragOffsetX = 0, dragOffsetY = 0;
+    let isMaintenanceMode = false, currentDetailItem = null;
+    let isDragging = false, dragOffsetX = 0, dragOffsetY = 0;
 
     function initDraggable() {
         const badge = document.getElementById("maintenanceBadge");
         if (!badge) return;
-        
         badge.addEventListener("mousedown", (e) => {
             if (e.target.closest('.fa-grip-vertical') || e.target === badge || badge.contains(e.target)) {
                 isDragging = true;
@@ -965,7 +1155,6 @@
                 e.preventDefault();
             }
         });
-        
         document.addEventListener("mousemove", (e) => {
             if (!isDragging) return;
             let newLeft = e.clientX - dragOffsetX;
@@ -977,20 +1166,11 @@
             badge.style.bottom = "auto";
             badge.style.right = "auto";
         });
-        
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-            badge.style.cursor = "grab";
-        });
-        
+        document.addEventListener("mouseup", () => { isDragging = false; badge.style.cursor = "grab"; });
         badge.style.cursor = "grab";
     }
 
-    function shakeElement(element) {
-        element.classList.add('shake');
-        setTimeout(() => element.classList.remove('shake'), 400);
-    }
-
+    function shakeElement(element) { element.classList.add('shake'); setTimeout(() => element.classList.remove('shake'), 400); }
     function showToast(msg, isErr = false) {
         const toast = document.createElement("div");
         toast.className = `toast ${isErr ? "error" : ""}`;
@@ -998,9 +1178,9 @@
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
     }
-
     function formatNumber(n) { return n?.toLocaleString() || "0"; }
     function escapeHtml(str) { if (!str) return ""; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
+    function getCategoryIcon(cat) { const icons = { addon: "🧩", texture: "🎨", world: "🌍", skin: "👤", mashup: "⚡" }; return icons[cat] || "📦"; }
 
     async function loadMaintenanceStatus() {
         if (!db) return;
@@ -1036,15 +1216,12 @@
         const counts = {};
         allItems.forEach(i => counts[i.category] = (counts[i.category] || 0) + 1);
         counts["all"] = allItems.length;
-        
         document.getElementById("categoryGrid").innerHTML = CATEGORIES.map(cat => `
             <div class="category-chip ${activeCategory === cat.id ? 'active' : ''}" data-category="${cat.id}">
-                <i class="${cat.icon}"></i>
-                <span class="category-name">${cat.name}</span>
+                <i class="${cat.icon}"></i><span class="category-name">${cat.name}</span>
                 <span class="category-count">${counts[cat.id] || 0}</span>
             </div>
         `).join("");
-        
         document.querySelectorAll(".category-chip").forEach(chip => {
             chip.addEventListener("click", () => {
                 shakeElement(chip);
@@ -1058,6 +1235,97 @@
         });
     }
 
+    async function updateRating(itemId, newRating) {
+        if (!db) return;
+        try {
+            await db.collection("items").doc(itemId).update({ rating: newRating });
+            const item = allItems.find(i => i.id === itemId);
+            if (item) item.rating = newRating;
+            showToast(`⭐ Rating berhasil diubah menjadi ${newRating}/5!`);
+            if (currentDetailItem && currentDetailItem.id === itemId) {
+                openDetailModal(item);
+            }
+        } catch(e) { showToast("Gagal menyimpan rating!", true); }
+    }
+
+    function openDetailModal(item) {
+        currentDetailItem = item;
+        const modal = document.getElementById("detailModal");
+        const body = document.getElementById("detailBody");
+        const rating = item.rating || 5;
+        const fullStars = Math.floor(rating);
+        const emptyStars = 5 - fullStars;
+        const starsHtml = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+        
+        body.innerHTML = `
+            <div class="detail-image-wrapper">
+                <img class="detail-image" src="${item.imageUrl || 'https://picsum.photos/id/20/800/400'}" alt="${escapeHtml(item.title)}">
+            </div>
+            <div class="detail-info">
+                <h3>${escapeHtml(item.title)}</h3>
+                <div class="detail-category">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
+                <div class="detail-description">${escapeHtml(item.description)}</div>
+                <div class="detail-rating-section">
+                    <div class="detail-rating">
+                        <span class="stars">${starsHtml}</span>
+                        <span class="rating-value">${rating}/5</span>
+                    </div>
+                    <div class="rating-input">
+                        <span><i class="fas fa-star" style="color:#ffa502;"></i> Beri Rating:</span>
+                        <div class="rating-stars-input" id="ratingStarsInput">
+                            ${[1,2,3,4,5].map(r => `<i class="far fa-star" data-rating="${r}"></i>`).join('')}
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-download-count"><i class="fas fa-download"></i> ${formatNumber(item.downloads)} downloads</div>
+                <button class="detail-btn-download" data-url="${item.downloadUrl}" data-id="${item.id}">
+                    <i class="fas fa-download"></i> Download Now
+                </button>
+            </div>
+        `;
+        
+        modal.classList.add("show");
+        
+        const ratingInputStars = body.querySelectorAll("#ratingStarsInput i");
+        ratingInputStars.forEach(star => {
+            const starRating = parseInt(star.dataset.rating);
+            if (starRating <= rating) star.className = "fas fa-star active";
+            else star.className = "far fa-star";
+            star.addEventListener("click", () => {
+                const newRating = parseInt(star.dataset.rating);
+                updateRating(item.id, newRating);
+                ratingInputStars.forEach(s => {
+                    if (parseInt(s.dataset.rating) <= newRating) s.className = "fas fa-star active";
+                    else s.className = "far fa-star";
+                });
+                const starsSpan = body.querySelector(".stars");
+                const ratingSpan = body.querySelector(".rating-value");
+                if (starsSpan) starsSpan.innerHTML = '★'.repeat(newRating) + '☆'.repeat(5-newRating);
+                if (ratingSpan) ratingSpan.innerHTML = `${newRating}/5`;
+            });
+        });
+        
+        const detailBtn = body.querySelector(".detail-btn-download");
+        if (detailBtn) {
+            detailBtn.addEventListener("click", async (e) => {
+                e.stopPropagation();
+                const url = detailBtn.dataset.url;
+                const id = detailBtn.dataset.id;
+                let target = allItems.find(i => i.id === id);
+                if (target && db) {
+                    try {
+                        await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 });
+                        target.downloads++;
+                        updateStats();
+                        renderItems();
+                    } catch(e) {}
+                } else if (target) { target.downloads++; updateStats(); renderItems(); }
+                if (url && url !== "#") window.open(url, "_blank");
+                else showToast("✅ Link download akan segera tersedia!");
+            });
+        }
+    }
+
     function renderItems() {
         let filtered = allItems.filter(i => (activeCategory === "all" || i.category === activeCategory) && (!searchKeyword.trim() || i.title.toLowerCase().includes(searchKeyword.toLowerCase()) || i.description.toLowerCase().includes(searchKeyword.toLowerCase())));
         document.getElementById("resultCount").innerText = filtered.length;
@@ -1067,11 +1335,12 @@
             return;
         }
         grid.innerHTML = filtered.map(item => `
-            <div class="card">
-                <div class="card-image" style="background-image: url('${item.imageUrl || 'https://picsum.photos/id/20/400/200'}');">
-                    <div class="card-category-badge">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
-                    <div class="download-overlay"><button class="btn-download" data-id="${item.id}" data-url="${item.downloadUrl}"><i class="fas fa-download"></i> Download Now</button></div>
+            <div class="card" data-id="${item.id}">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="${item.imageUrl || 'https://picsum.photos/id/20/400/200'}" alt="${escapeHtml(item.title)}">
                 </div>
+                <div class="card-category-badge">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
+                <div class="download-overlay"><button class="btn-download" data-id="${item.id}" data-url="${item.downloadUrl}"><i class="fas fa-download"></i> Download Now</button></div>
                 <div class="card-content">
                     <h3 class="card-title">${escapeHtml(item.title)}</h3>
                     <p class="card-desc">${escapeHtml(item.description.substring(0, 90))}${item.description.length>90?'...':''}</p>
@@ -1079,20 +1348,25 @@
                 </div>
             </div>
         `).join("");
+        
+        document.querySelectorAll(".card").forEach(card => {
+            card.addEventListener("click", (e) => {
+                if (e.target.closest('.btn-download')) return;
+                const id = card.dataset.id;
+                const item = allItems.find(i => i.id === id);
+                if (item) openDetailModal(item);
+            });
+        });
+        
         document.querySelectorAll(".btn-download").forEach(btn => btn.addEventListener("click", async (e) => {
             e.stopPropagation();
             const id = btn.dataset.id, url = btn.dataset.url;
             let target = allItems.find(i => i.id === id);
-            if (target && db) try { await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 }); target.downloads++; updateStats(); } catch(e) {}
-            else if (target) { target.downloads++; updateStats(); }
+            if (target && db) try { await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 }); target.downloads++; updateStats(); renderItems(); } catch(e) {}
+            else if (target) { target.downloads++; updateStats(); renderItems(); }
             if (url && url !== "#") window.open(url, "_blank");
             else showToast("✅ Link download akan segera tersedia!");
         }));
-    }
-
-    function getCategoryIcon(cat) {
-        const icons = { addon: "🧩", texture: "🎨", world: "🌍", skin: "👤", mashup: "⚡" };
-        return icons[cat] || "📦";
     }
 
     async function loadItems() {
@@ -1104,36 +1378,21 @@
         } catch(e) { allItems = []; }
         renderCategories(); renderItems(); updateStats();
         const dbStatusDiv = document.getElementById("dbStatus");
-        if (dbStatusDiv) {
-            dbStatusDiv.innerHTML = `<i class="fas fa-check-circle"></i> <span>✅ Database terhubung</span>`;
-            dbStatusDiv.classList.remove("error");
-        }
+        if (dbStatusDiv) { dbStatusDiv.innerHTML = `<i class="fas fa-check-circle"></i> <span>✅ Database terhubung</span>`; dbStatusDiv.classList.remove("error"); }
     }
 
     async function sendToTelegram(name, rating, msg) {
         const stars = "★".repeat(rating) + "☆".repeat(5-rating);
         const text = `📢 *FEEDBACK FaizCraftMC* 📢\n\n👤 *Nama:* ${name}\n⭐ *Rating:* ${stars} (${rating}/5)\n💬 *Pesan:* ${msg}\n🕐 *Waktu:* ${new Date().toLocaleString('id-ID')}`;
         try {
-            const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, { 
-                method: "POST", 
-                headers: { "Content-Type": "application/json" }, 
-                body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" }) 
-            });
+            const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" }) });
             return res.ok;
         } catch(e) { return false; }
     }
 
     const logo = document.getElementById("secretLogo");
     const adminTriggerBtn = document.getElementById("adminTriggerBtn");
-    
-    logo.addEventListener("click", () => {
-        clickCount++;
-        if (clickCount >= 20) {
-            adminTriggerBtn.classList.add("show");
-            showToast("🔓 Admin mode unlocked! Klik tombol mahkota untuk login!", false);
-            clickCount = 0;
-        }
-    });
+    logo.addEventListener("click", () => { clickCount++; if (clickCount >= 20) { adminTriggerBtn.classList.add("show"); showToast("🔓 Admin mode unlocked!", false); clickCount = 0; } });
 
     const adminModal = document.getElementById("adminModal");
     const adminTrigger = document.getElementById("adminTriggerBtn");
@@ -1146,7 +1405,7 @@
 
     adminTrigger.addEventListener("click", () => adminModal.classList.add("show"));
     closeAdminModal.addEventListener("click", () => adminModal.classList.remove("show"));
-    window.addEventListener("click", (e) => { if (e.target === adminModal) adminModal.classList.remove("show"); });
+    window.addEventListener("click", (e) => { if (e.target === adminModal || e.target === document.getElementById("detailModal")) { adminModal.classList.remove("show"); } });
 
     loginBtn.addEventListener("click", async () => {
         if (adminPassword.value === ADMIN_PASSWORD) {
@@ -1160,36 +1419,20 @@
         } else { showToast("❌ Password salah!", true); }
     });
 
-    maintenanceToggle.addEventListener("change", async (e) => {
-        await setMaintenanceMode(e.target.checked);
-    });
+    maintenanceToggle.addEventListener("change", async (e) => { await setMaintenanceMode(e.target.checked); });
 
     async function loadAdminItems() {
         if (!db) return;
         const snap = await db.collection("items").get();
         const items = []; snap.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
-        if (items.length === 0) {
-            document.getElementById("adminItemList").innerHTML = '<div style="text-align:center; padding:1rem; opacity:0.5;">Belum ada item, tambahkan yang pertama!</div>';
-            return;
-        }
+        if (items.length === 0) { document.getElementById("adminItemList").innerHTML = '<div style="text-align:center; padding:0.8rem; opacity:0.5;">Belum ada item, tambahkan yang pertama!</div>'; return; }
         document.getElementById("adminItemList").innerHTML = items.map(item => `
-            <div class="admin-item">
-                <div><strong>${escapeHtml(item.title)}</strong><br><small>${item.category} | ${formatNumber(item.downloads)} downloads</small></div>
-                <div class="admin-item-actions">
-                    <button onclick="deleteItem('${item.id}')" class="delete-btn"><i class="fas fa-trash"></i></button>
-                </div>
-            </div>
+            <div class="admin-item"><div><strong>${escapeHtml(item.title)}</strong><br><small>${item.category} | ${formatNumber(item.downloads)} downloads</small></div>
+            <div class="admin-item-actions"><button onclick="deleteItem('${item.id}')" class="delete-btn"><i class="fas fa-trash"></i></button></div></div>
         `).join("");
     }
 
-    window.deleteItem = async (id) => {
-        if (confirm("Hapus item ini?")) {
-            await db.collection("items").doc(id).delete();
-            showToast("✅ Item dihapus!");
-            loadAdminItems();
-            loadItems();
-        }
-    };
+    window.deleteItem = async (id) => { if (confirm("Hapus item ini?")) { await db.collection("items").doc(id).delete(); showToast("✅ Item dihapus!"); loadAdminItems(); loadItems(); } };
 
     document.getElementById("addItemForm").addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -1199,7 +1442,8 @@
             description: document.getElementById("itemDesc").value,
             downloadUrl: document.getElementById("itemUrl").value || "#",
             imageUrl: document.getElementById("itemImage").value || "https://picsum.photos/id/20/400/200",
-            downloads: 0
+            downloads: 0,
+            rating: 5
         };
         const newId = Date.now().toString();
         await db.collection("items").doc(newId).set(newItem);
@@ -1214,7 +1458,6 @@
     const closeFeedback = document.getElementById("closeFeedbackModal");
     fabBtn.onclick = () => feedbackModal.classList.add("show");
     closeFeedback.onclick = () => feedbackModal.classList.remove("show");
-    window.onclick = (e) => { if (e.target === feedbackModal) feedbackModal.classList.remove("show"); };
 
     const stars = document.querySelectorAll("#ratingStars i");
     stars.forEach(star => star.addEventListener("click", () => {
@@ -1238,22 +1481,18 @@
         feedbackModal.classList.remove("show");
     });
 
-    document.getElementById("searchInput").addEventListener("input", (e) => { 
-        searchKeyword = e.target.value; 
-        renderItems(); 
-    });
-    
-    document.addEventListener("keydown", (e) => { 
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') { 
-            e.preventDefault(); 
-            document.getElementById("searchInput").focus(); 
-        } 
-    });
+    document.getElementById("searchInput").addEventListener("input", (e) => { searchKeyword = e.target.value; renderItems(); });
+    document.addEventListener("keydown", (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); document.getElementById("searchInput").focus(); } });
+
+    const detailModal = document.getElementById("detailModal");
+    const closeDetail = document.getElementById("closeDetailModal");
+    closeDetail.addEventListener("click", () => detailModal.classList.remove("show"));
+    window.addEventListener("click", (e) => { if (e.target === detailModal) detailModal.classList.remove("show"); });
 
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement("div");
         particle.classList.add("particle");
-        particle.style.width = Math.random() * 4 + "px";
+        particle.style.width = Math.random() * 3 + "px";
         particle.style.height = particle.style.width;
         particle.style.left = Math.random() * 100 + "%";
         particle.style.animationDuration = Math.random() * 10 + 8 + "s";
@@ -1261,12 +1500,7 @@
         document.getElementById("particles").appendChild(particle);
     }
 
-    try {
-        firebase.initializeApp(firebaseConfig);
-        db = firebase.firestore();
-        console.log("🔥 Firebase connected!");
-    } catch(e) { console.error(e); db = null; }
-    
+    try { firebase.initializeApp(firebaseConfig); db = firebase.firestore(); console.log("🔥 Firebase connected!"); } catch(e) { console.error(e); db = null; }
     initDraggable();
     loadMaintenanceStatus();
     loadItems();
