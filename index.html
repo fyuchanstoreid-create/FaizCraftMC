@@ -33,7 +33,6 @@
             min-height: 100vh;
         }
 
-        /* Lock scroll ketika maintenance aktif */
         body.maintenance-lock {
             overflow: hidden;
             position: fixed;
@@ -41,7 +40,6 @@
             height: 100%;
         }
 
-        /* Animated Background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -67,7 +65,6 @@
             background: radial-gradient(circle at 20% 40%, rgba(255, 71, 87, 0.05), transparent 60%);
         }
 
-        /* Floating Particles */
         .particles {
             position: fixed;
             top: 0;
@@ -94,17 +91,16 @@
         ::-webkit-scrollbar-track { background: #1a1d2e; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #ff4757, #ff6b81); border-radius: 10px; }
 
-        /* Navbar */
         .navbar {
             background: rgba(10, 12, 21, 0.95);
             backdrop-filter: blur(20px);
-            padding: 0.8rem 0;
+            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 71, 87, 0.2);
-            box-shadow: none;
+            border-bottom: 1px solid rgba(255, 71, 87, 0.15);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
         }
 
         .nav-container {
@@ -117,32 +113,32 @@
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.5rem;
             cursor: pointer;
         }
 
         .logo-icon {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, #ff4757, #ff6b81);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            box-shadow: 0 0 8px rgba(255, 71, 87, 0.2);
+            box-shadow: 0 0 12px rgba(255, 71, 87, 0.3);
         }
 
         .logo:hover .logo-icon {
             transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 0 12px rgba(255, 71, 87, 0.3);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
         }
 
-        .logo-icon i { font-size: 1.1rem; color: white; }
+        .logo-icon i { font-size: 1.3rem; color: white; }
         .logo .brand-name { 
             background: linear-gradient(135deg, #ffffff, #ff4757); 
             -webkit-background-clip: text; 
@@ -159,7 +155,52 @@
             font-weight: 700;
         }
 
-        /* Admin Button */
+        /* Search Box */
+        .search-wrapper-center {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .search-box-center {
+            width: 100%;
+            padding: 0.7rem 1rem 0.7rem 3rem;
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box-center:focus {
+            outline: none;
+            border-color: #ff4757;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .search-wrapper-center i {
+            position: absolute;
+            left: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+        }
+
+        .search-shortcut-center {
+            position: absolute;
+            right: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
         .admin-trigger {
             position: fixed;
             bottom: 100px;
@@ -186,10 +227,8 @@
 
         .admin-trigger:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(46, 213, 115, 0.4);
         }
 
-        /* Maintenance Overlay - FULL LAYAR */
         .maintenance-overlay {
             position: fixed;
             top: 0;
@@ -205,9 +244,7 @@
             text-align: center;
             backdrop-filter: blur(10px);
         }
-        .maintenance-overlay.hidden {
-            display: none;
-        }
+        .maintenance-overlay.hidden { display: none; }
         .maintenance-overlay .maintenance-icon {
             font-size: 4rem;
             color: rgba(255, 165, 2, 0.7);
@@ -229,7 +266,6 @@
             cursor: pointer;
             display: inline-block;
             color: rgba(255,255,255,0.9);
-            transition: none;
         }
         .maintenance-overlay p {
             color: rgba(255,255,255,0.5);
@@ -243,9 +279,9 @@
             opacity: 0.3;
         }
 
-        /* Categories */
+        /* Categories - margin-top dinaikkan sedikit (lebih dekat ke navbar) */
         .categories-wrapper {
-            margin-top: 70px;
+            margin-top: 60px;
             padding: 0.6rem 2rem;
             background: rgba(10, 12, 21, 0.7);
             backdrop-filter: blur(10px);
@@ -269,7 +305,7 @@
         }
 
         .category-chip {
-            padding: 0.45rem 1.2rem;
+            padding: 0.5rem 1.3rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -280,7 +316,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             white-space: nowrap;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .category-chip.shake {
@@ -307,10 +343,7 @@
             box-shadow: 0 4px 12px rgba(255,71,87,0.3);
         }
 
-        .category-name {
-            font-weight: 600;
-        }
-
+        .category-name { font-weight: 600; }
         .category-count { 
             background: rgba(0,0,0,0.3); 
             padding: 0.15rem 0.5rem; 
@@ -320,7 +353,12 @@
             margin-left: 0.2rem;
         }
 
-        /* Top Banner */
+        .search-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
         .top-banner {
             width: 100%;
             overflow: hidden;
@@ -337,10 +375,8 @@
             display: block;
             border-radius: 20px;
             object-fit: cover;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
-        /* Hero Section */
         .hero { 
             padding: 0.8rem 2rem 1rem; 
             text-align: center; 
@@ -395,60 +431,6 @@
             margin-right: auto;
         }
 
-        /* Search Box */
-        .search-section {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .search-wrapper-center {
-            position: relative;
-            width: 100%;
-            max-width: 480px;
-        }
-
-        .search-box-center {
-            width: 100%;
-            padding: 0.85rem 1.2rem 0.85rem 3.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 60px;
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .search-box-center:focus {
-            outline: none;
-            border-color: #ff4757;
-            background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.15);
-        }
-
-        .search-wrapper-center i {
-            position: absolute;
-            left: 1.3rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.1rem;
-        }
-
-        .search-shortcut-center {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.2rem 0.6rem;
-            border-radius: 8px;
-            font-size: 0.65rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Stats */
         .stats-wrapper {
             display: flex;
             justify-content: center;
@@ -494,7 +476,6 @@
             letter-spacing: 1px;
         }
 
-        /* Content Grid */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem 2.5rem; }
         .content-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem; }
         .result-info { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
@@ -502,7 +483,7 @@
 
         .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
         
-        /* Card */
+        /* CARD - Tanpa tombol download di depan */
         .card {
             background: rgba(18, 20, 35, 0.7);
             backdrop-filter: blur(12px);
@@ -512,6 +493,8 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
         .card::before {
             content: '';
@@ -526,7 +509,7 @@
             z-index: 1;
         }
         .card:hover::before { transform: scaleX(1); }
-        .card:hover { transform: translateY(-8px); border-color: rgba(255,71,87,0.3); box-shadow: 0 20px 35px rgba(0,0,0,0.4); }
+        .card:hover { transform: translateY(-8px); border-color: rgba(255,71,87,0.3); box-shadow: 0 20px 30px rgba(0,0,0,0.4); }
         
         .card-image-wrapper {
             width: 100%;
@@ -534,13 +517,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 1rem;
         }
         .card-image { 
             width: 100%;
             height: auto;
-            max-height: 200px;
+            max-height: 220px;
             object-fit: contain;
             display: block;
+            border-radius: 12px;
         }
         .card-category-badge {
             position: absolute;
@@ -554,39 +539,61 @@
             font-weight: 700;
             z-index: 2;
         }
-        .download-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        .card-content { 
             padding: 1.2rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
-        .card:hover .download-overlay { opacity: 1; }
-        .card-content { padding: 1.2rem; }
-        .card-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem; }
-        .card-desc { font-size: 0.85rem; opacity: 0.6; margin-bottom: 0.8rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .card-footer { display: flex; justify-content: space-between; align-items: center; }
-        .download-count { font-size: 0.8rem; opacity: 0.5; }
-        .download-count i { margin-right: 5px; color: #ff4757; }
-        .btn-download {
-            background: linear-gradient(135deg, #ff4757, #e84118);
-            border: none;
-            padding: 0.55rem 1.3rem;
-            border-radius: 40px;
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.85rem;
-            font-family: 'Poppins', sans-serif;
+        .card-title { 
+            font-size: 1.1rem; 
+            font-weight: 800; 
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .btn-download:hover { transform: scale(1.03); box-shadow: 0 4px 12px rgba(255,71,87,0.4); }
+        .card-desc { 
+            font-size: 0.8rem; 
+            opacity: 0.6; 
+            margin-bottom: 0.8rem; 
+            line-height: 1.4; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+        }
+        .card-footer { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            margin-top: auto;
+        }
+        .download-count { 
+            font-size: 0.75rem; 
+            opacity: 0.5;
+            background: rgba(255,255,255,0.05);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .download-count i { color: #ff4757; }
+        
+        /* Indikator klik untuk melihat detail */
+        .click-hint {
+            font-size: 0.7rem;
+            opacity: 0.4;
+            margin-top: 0.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 0.5rem;
+        }
+        .click-hint i {
+            font-size: 0.6rem;
+        }
 
-        /* Detail Modal */
+        /* DETAIL MODAL */
         .detail-modal {
             display: none;
             position: fixed;
@@ -604,13 +611,12 @@
         .detail-modal-content {
             background: linear-gradient(145deg, #1a1d2e, #121420);
             width: 90%;
-            max-width: 900px;
+            max-width: 950px;
             border-radius: 32px;
             border: 1px solid rgba(255,71,87,0.3);
             animation: modalSlideIn 0.3s ease;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: none;
         }
         .detail-modal-header {
             display: flex;
@@ -648,18 +654,19 @@
         .detail-image-wrapper {
             width: 100%;
             border-radius: 24px;
-            overflow: hidden;
             background: rgba(0,0,0,0.3);
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 1rem;
         }
         .detail-image {
             width: 100%;
             height: auto;
-            max-height: 400px;
+            max-height: 500px;
             object-fit: contain;
             display: block;
+            border-radius: 16px;
         }
         .detail-info {
             display: flex;
@@ -741,7 +748,6 @@
         .rating-stars-input i:hover,
         .rating-stars-input i.active {
             color: #ffa502;
-            text-shadow: 0 0 6px rgba(255,165,2,0.4);
             transform: scale(1.03);
         }
         .detail-download-count {
@@ -790,26 +796,32 @@
             cursor: not-allowed;
             opacity: 0.7;
         }
-        .detail-btn-download.disabled:hover {
-            transform: none;
-            box-shadow: none;
-        }
-        .detail-btn-download:hover { 
-            transform: scale(1.01); 
-            box-shadow: 0 4px 15px rgba(255,71,87,0.4);
-        }
 
         .empty-state {
             text-align: center;
-            padding: 2.5rem;
+            padding: 3rem 2rem;
             background: rgba(255,255,255,0.03);
             border-radius: 32px;
+            grid-column: 1 / -1;
         }
-        .empty-state i { font-size: 3rem; margin-bottom: 0.8rem; opacity: 0.4; }
-        .empty-state h3 { margin-bottom: 0.3rem; font-size: 1.2rem; }
-        .empty-state p { opacity: 0.5; font-size: 0.85rem; }
+        .empty-state i { 
+            font-size: 3rem; 
+            margin-bottom: 1rem; 
+            opacity: 0.4;
+            color: #ffa502;
+        }
+        .empty-state h3 { 
+            margin-bottom: 0.5rem; 
+            font-size: 1.3rem; 
+            font-weight: 600;
+        }
+        .empty-state p { 
+            opacity: 0.6; 
+            font-size: 0.9rem;
+            max-width: 300px;
+            margin: 0 auto;
+        }
 
-        /* Modal Admin & Feedback */
         .modal {
             display: none;
             position: fixed;
@@ -828,13 +840,12 @@
             background: linear-gradient(145deg, #1a1d2e, #121420);
             padding: 1.5rem;
             width: 90%;
-            max-width: 550px;
+            max-width: 600px;
             border-radius: 32px;
             border: 1px solid rgba(255,71,87,0.3);
             animation: modalSlideIn 0.3s ease;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: none;
         }
         @keyframes modalSlideIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
@@ -857,6 +868,7 @@
             outline: none;
             border-color: #ff4757;
         }
+        
         .btn-submit, .btn-primary {
             width: 100%;
             padding: 0.8rem;
@@ -871,7 +883,7 @@
             font-family: 'Poppins', sans-serif;
         }
         .btn-primary { background: linear-gradient(135deg, #2ed573, #00a8ff); margin-top: 0.8rem; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(46,213,115,0.3); }
+        .btn-primary:hover { transform: translateY(-2px); }
 
         .toggle-switch {
             display: flex;
@@ -915,7 +927,6 @@
         input:checked + .toggle-slider { background: linear-gradient(135deg, #ff4757, #ffa502); }
         input:checked + .toggle-slider:before { transform: translateX(26px); }
 
-        /* Admin Item List */
         .admin-item-list { 
             max-height: 400px; 
             overflow-y: auto; 
@@ -957,21 +968,13 @@
         .admin-item-actions button:hover { 
             background: rgba(255,255,255,0.15); 
         }
-        .move-up-btn, .move-down-btn {
-            color: #2ed573;
-        }
-        .move-up-btn:hover, .move-down-btn:hover {
-            background: rgba(46,213,115,0.2);
-        }
+        .move-up-btn, .move-down-btn { color: #2ed573; }
         .edit-btn { color: #ffa502; }
-        .edit-btn:hover { background: rgba(255,165,2,0.2); }
         .delete-btn { color: #ff4757; }
-        .delete-btn:hover { background: rgba(255,71,87,0.2); }
         .drag-icon {
             color: rgba(255,255,255,0.3);
             cursor: grab;
         }
-        .drag-icon:active { cursor: grabbing; }
 
         .db-status {
             background: rgba(46, 213, 115, 0.1);
@@ -984,9 +987,6 @@
             align-items: center;
             gap: 0.5rem;
         }
-        .db-status i { color: #2ed573; }
-        .db-status.error { background: rgba(255, 71, 87, 0.1); border-color: rgba(255, 71, 87, 0.3); }
-        .db-status.error i { color: #ff4757; }
 
         .fab {
             position: fixed;
@@ -1000,7 +1000,6 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255,71,87,0.4);
             transition: all 0.25s;
             z-index: 1000;
             display: flex;
@@ -1021,7 +1020,6 @@
             animation: slideInRight 0.3s ease;
             border-left: 4px solid #2ed573;
             font-size: 0.85rem;
-            box-shadow: none;
         }
         .toast.error { border-left-color: #ff4757; }
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
@@ -1037,34 +1035,30 @@
             cursor: pointer;
         }
         .rating i { transition: 0.15s; }
-        .rating i:hover, .rating i.active { color: #ffa502; text-shadow: 0 0 6px rgba(255,165,2,0.4); }
+        .rating i:hover, .rating i.active { color: #ffa502; }
 
         @media (max-width: 768px) {
-            .nav-container { justify-content: center; }
-            .logo { gap: 0.2rem; font-size: 1rem; }
-            .logo-icon { width: 30px; height: 30px; }
-            .logo-icon i { font-size: 0.85rem; }
+            .nav-container { justify-content: center; flex-direction: column; gap: 0.5rem; }
+            .logo { gap: 0.2rem; font-size: 1.1rem; }
+            .logo-icon { width: 32px; height: 32px; }
+            .logo-icon i { font-size: 0.9rem; }
             .hero-content h1 { font-size: 1.8rem; letter-spacing: 2px; }
             .subtitle-text { font-size: 1.2rem; letter-spacing: 5px; }
-            .hero-description { font-size: 0.8rem; }
-            .category-chip { padding: 0.35rem 0.9rem; font-size: 0.7rem; gap: 0.3rem; }
-            .categories-wrapper { margin-top: 62px; padding: 0.5rem 1rem; }
+            .category-chip { padding: 0.4rem 1rem; font-size: 0.75rem; }
+            .categories-wrapper { margin-top: 78px; padding: 0.5rem 1rem; }
             .content-grid { grid-template-columns: 1fr; gap: 1rem; }
             .stats { gap: 1rem; }
             .stat-card { padding: 0.5rem 1rem; min-width: 110px; }
             .stat-number { font-size: 1.6rem; }
-            .stat-label { font-size: 0.65rem; }
             .hero { padding: 0.5rem 1rem 0.8rem; }
-            .search-wrapper-center { max-width: 100%; }
-            .search-section { padding: 0 1rem; margin-bottom: 0.8rem; }
-            .top-banner { padding: 0 1rem; margin: 0.5rem 0; }
+            .top-banner { padding: 0 1rem; }
             .container { padding: 0 1rem 1.5rem; }
-            .detail-body { padding: 1.2rem; }
-            .detail-image { max-height: 220px; }
-            .detail-info h3 { font-size: 1.2rem; }
             .maintenance-overlay .maintenance-icon { font-size: 3rem; }
             .maintenance-overlay h2 { font-size: 1.4rem; }
-            .maintenance-overlay p { font-size: 0.8rem; max-width: 280px; }
+            .card-image { max-height: 180px; }
+            .detail-image { max-height: 300px; }
+            .search-wrapper-center { max-width: 100%; }
+            .search-section { padding: 0 1rem; }
         }
     </style>
 </head>
@@ -1082,30 +1076,26 @@
     </div>
 </nav>
 
-<!-- Categories -->
 <div class="categories-wrapper">
     <div class="categories-container">
         <div class="category-grid" id="categoryGrid"></div>
     </div>
 </div>
 
-<!-- Top Banner -->
 <div class="top-banner">
     <img src="BANNER3.png" alt="FaizCraftMC Banner">
 </div>
 
-<!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
         <div class="title-line">
             <h1><span class="gradient-text">FaizCraftMC</span></h1>
             <div class="subtitle-text">MARKETPLACE</div>
         </div>
-        <div class="hero-description">Download addon, texture pack, world, skin & mashups terbaik!</div>
+        <div class="hero-description">Klik konten untuk lihat detail & download</div>
     </div>
 </section>
 
-<!-- Search Box -->
 <div class="search-section">
     <div class="search-wrapper-center">
         <i class="fas fa-search"></i>
@@ -1114,7 +1104,6 @@
     </div>
 </div>
 
-<!-- Stats -->
 <div class="stats-wrapper">
     <div class="stats">
         <div class="stat-card">
@@ -1128,7 +1117,6 @@
     </div>
 </div>
 
-<!-- Content -->
 <div class="container">
     <div class="content-header">
         <div class="result-info">Menampilkan <strong id="resultCount">0</strong> item</div>
@@ -1138,7 +1126,6 @@
     </div>
 </div>
 
-<!-- Detail Modal -->
 <div id="detailModal" class="detail-modal">
     <div class="detail-modal-content">
         <div class="detail-modal-header">
@@ -1149,7 +1136,6 @@
     </div>
 </div>
 
-<!-- Admin Modal -->
 <div id="adminModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -1186,7 +1172,10 @@
                 </div>
                 <div class="form-group"><label>Deskripsi</label><textarea id="itemDesc" rows="3" required placeholder="Deskripsi lengkap..."></textarea></div>
                 <div class="form-group"><label>Link Download</label><input type="url" id="itemUrl" placeholder="https://..."></div>
-                <div class="form-group"><label>URL Gambar</label><input type="url" id="itemImage" placeholder="https://... (isi dengan URL gambar)"></div>
+                <div class="form-group"><label>URL Gambar</label>
+                    <input type="url" id="itemImage" placeholder="https://... (contoh: https://picsum.photos/id/1/400/200)">
+                    <p style="font-size:0.7rem; opacity:0.6; margin-top:0.3rem;">Masukkan link gambar dari internet (Imgur, Postimages, atau picsum.photos)</p>
+                </div>
                 <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Tambah Item</button>
             </form>
             <hr style="margin: 1rem 0; border-color: rgba(255,255,255,0.1);">
@@ -1196,7 +1185,6 @@
     </div>
 </div>
 
-<!-- Edit Item Modal -->
 <div id="editItemModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -1223,7 +1211,6 @@
     </div>
 </div>
 
-<!-- Feedback Modal -->
 <div id="feedbackModal" class="modal">
     <div class="modal-content">
         <div class="modal-header"><h2><i class="fab fa-telegram"></i> Kirim Feedback</h2><div class="close-modal" id="closeFeedbackModal">&times;</div></div>
@@ -1244,7 +1231,6 @@
     </div>
 </div>
 
-<!-- Maintenance Overlay FULL LAYAR -->
 <div id="maintenanceOverlay" class="maintenance-overlay hidden">
     <div class="maintenance-icon"><i class="fas fa-tools"></i></div>
     <h2>Sedang Dalam <span class="m-letter" id="mLetter">M</span>aintenance</h2>
@@ -1271,7 +1257,6 @@
         appId: "1:486094594414:web:181b2d433a4fb9759be17f"
     };
 
-    // ========== TELEGRAM CONFIG ==========
     const TELEGRAM_BOT_TOKEN = "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE";
     const TELEGRAM_CHAT_ID = "8367322295";
     const ADMIN_PASSWORD = "faizcraftmc2025";
@@ -1285,58 +1270,30 @@
         { id: "mashup", name: "Mashups", icon: "fas fa-code-branch" }
     ];
 
-    let allItems = [], activeCategory = "all", searchKeyword = "", selectedRating = 0, db = null, isAdminLoggedIn = false, clickCountAdmin = 0;
+    let allItems = [], activeCategory = "all", searchKeyword = "", selectedRating = 0, db = null;
+    let isAdminLoggedIn = false, clickCountAdmin = 0;
     let isMaintenanceMode = false, currentDetailItem = null;
-    let isDragging = false, dragOffsetX = 0, dragOffsetY = 0;
-    
-    // Bypass maintenance (klik huruf M 20x) - DIAM TANPA EFEK
-    let mClickCount = 0;
-    let isBypassActive = false;
-    let bypassTimeout = null;
+    let mClickCount = 0, isBypassActive = false, bypassTimeout = null;
+
+    const DEFAULT_IMAGE = "https://picsum.photos/id/20/400/200";
+    const DEFAULT_DETAIL_IMAGE = "https://picsum.photos/id/20/800/400";
 
     function isLinkValid(url) {
         return url && url !== "#" && url !== "" && url !== "https://#" && url !== "http://#";
     }
 
-    // Fungsi untuk mengunci/membuka scroll body
-    function lockBodyScroll(lock) {
-        if (lock) {
-            document.body.classList.add("maintenance-lock");
-        } else {
-            document.body.classList.remove("maintenance-lock");
-        }
+    function isValidImageUrl(url) {
+        if (!url || url === "") return false;
+        if (url.match(/^[A-Za-z]:\\/i) || url.match(/^file:\/\//i)) return false;
+        if (url.includes("drive.google.com")) return false;
+        return true;
     }
 
-    function initDraggable() {
-        const badge = document.getElementById("maintenanceBadge");
-        if (!badge) return;
-        badge.addEventListener("mousedown", (e) => {
-            if (e.target.closest('.fa-grip-vertical') || e.target === badge || badge.contains(e.target)) {
-                isDragging = true;
-                const rect = badge.getBoundingClientRect();
-                dragOffsetX = e.clientX - rect.left;
-                dragOffsetY = e.clientY - rect.top;
-                badge.style.cursor = "grabbing";
-                e.preventDefault();
-            }
-        });
-        document.addEventListener("mousemove", (e) => {
-            if (!isDragging) return;
-            let newLeft = e.clientX - dragOffsetX;
-            let newTop = e.clientY - dragOffsetY;
-            newLeft = Math.max(5, Math.min(window.innerWidth - badge.offsetWidth - 5, newLeft));
-            newTop = Math.max(5, Math.min(window.innerHeight - badge.offsetHeight - 5, newTop));
-            badge.style.left = newLeft + "px";
-            badge.style.top = newTop + "px";
-            badge.style.bottom = "auto";
-            badge.style.right = "auto";
-        });
-        document.addEventListener("mouseup", () => { isDragging = false; badge.style.cursor = "grab"; });
-        badge.style.cursor = "grab";
+    function getValidImageUrl(url, isDetail = false) {
+        if (isValidImageUrl(url)) return url;
+        return isDetail ? DEFAULT_DETAIL_IMAGE : DEFAULT_IMAGE;
     }
 
-    function shakeElement(element) { element.classList.add('shake'); setTimeout(() => element.classList.remove('shake'), 400); }
-    
     function showToast(msg, isErr = false) {
         const toast = document.createElement("div");
         toast.className = `toast ${isErr ? "error" : ""}`;
@@ -1344,7 +1301,7 @@
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
     }
-    
+
     function formatNumber(n) { return n?.toLocaleString() || "0"; }
     function escapeHtml(str) { if (!str) return ""; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
     function getCategoryIcon(cat) { const icons = { addon: "🧩", texture: "🎨", world: "🌍", skin: "👤", mashup: "⚡" }; return icons[cat] || "📦"; }
@@ -1352,13 +1309,12 @@
     function updateMaintenanceOverlay() {
         const overlay = document.getElementById("maintenanceOverlay");
         if (!overlay) return;
-        
         if (isMaintenanceMode && !isBypassActive) {
             overlay.classList.remove("hidden");
-            lockBodyScroll(true);
+            document.body.classList.add("maintenance-lock");
         } else {
             overlay.classList.add("hidden");
-            lockBodyScroll(false);
+            document.body.classList.remove("maintenance-lock");
         }
     }
 
@@ -1386,36 +1342,26 @@
         } catch(e) { showToast("Gagal mengubah mode maintenance!", true); }
     }
 
-    // Event klik huruf M pada overlay - DIAM TANPA EFEK
     function setupMClickHandler() {
         const mLetter = document.getElementById("mLetter");
         if (!mLetter) return;
-        
+        let resetTimeout = null;
         mLetter.addEventListener("click", () => {
             mClickCount++;
-            // TIDAK ADA ANIMASI APAPUN - DIAM TANPA EFEK
-            
             if (mClickCount >= 20 && !isBypassActive) {
                 isBypassActive = true;
                 if (bypassTimeout) clearTimeout(bypassTimeout);
                 bypassTimeout = setTimeout(() => {
                     isBypassActive = false;
                     updateMaintenanceOverlay();
-                }, 30 * 60 * 1000); // 30 menit
+                }, 30 * 60 * 1000);
                 updateMaintenanceOverlay();
                 mClickCount = 0;
             } else if (mClickCount >= 20) {
                 mClickCount = 0;
             }
-        });
-        
-        // Reset counter setelah beberapa saat jika tidak mencapai 20 (biar tidak numpuk)
-        let resetTimeout = null;
-        mLetter.addEventListener("click", () => {
             if (resetTimeout) clearTimeout(resetTimeout);
-            resetTimeout = setTimeout(() => {
-                mClickCount = 0;
-            }, 5000);
+            resetTimeout = setTimeout(() => { mClickCount = 0; }, 5000);
         });
     }
 
@@ -1437,13 +1383,9 @@
         `).join("");
         document.querySelectorAll(".category-chip").forEach(chip => {
             chip.addEventListener("click", () => {
-                shakeElement(chip);
-                const newCategory = chip.dataset.category;
-                if (activeCategory !== newCategory) {
-                    activeCategory = newCategory;
-                    renderCategories();
-                    renderItems();
-                }
+                activeCategory = chip.dataset.category;
+                renderCategories();
+                renderItems();
             });
         });
     }
@@ -1455,83 +1397,8 @@
             const item = allItems.find(i => i.id === itemId);
             if (item) item.rating = newRating;
             showToast(`⭐ Rating berhasil diubah menjadi ${newRating}/5!`);
-            if (currentDetailItem && currentDetailItem.id === itemId) {
-                openDetailModal(item);
-            }
+            if (currentDetailItem && currentDetailItem.id === itemId) openDetailModal(item);
         } catch(e) { showToast("Gagal menyimpan rating!", true); }
-    }
-
-    async function editItem(itemId) {
-        const item = allItems.find(i => i.id === itemId);
-        if (!item) return;
-        
-        document.getElementById("editItemId").value = item.id;
-        document.getElementById("editTitle").value = item.title;
-        document.getElementById("editCategory").value = item.category;
-        document.getElementById("editDescription").value = item.description;
-        document.getElementById("editDownloadUrl").value = item.downloadUrl || "";
-        document.getElementById("editImageUrl").value = item.imageUrl || "";
-        
-        const editModal = document.getElementById("editItemModal");
-        editModal.classList.add("show");
-    }
-
-    window.editItem = editItem;
-
-    async function saveEditItem(e) {
-        e.preventDefault();
-        const id = document.getElementById("editItemId").value;
-        const updatedData = {
-            title: document.getElementById("editTitle").value,
-            category: document.getElementById("editCategory").value,
-            description: document.getElementById("editDescription").value,
-            downloadUrl: document.getElementById("editDownloadUrl").value || "#",
-            imageUrl: document.getElementById("editImageUrl").value || "https://picsum.photos/id/20/400/200"
-        };
-        
-        try {
-            await db.collection("items").doc(id).update(updatedData);
-            const index = allItems.findIndex(i => i.id === id);
-            if (index !== -1) {
-                allItems[index] = { ...allItems[index], ...updatedData };
-            }
-            showToast("✅ Item berhasil diupdate!");
-            renderItems();
-            renderAdminItems();
-            const editModal = document.getElementById("editItemModal");
-            editModal.classList.remove("show");
-        } catch(e) {
-            showToast("❌ Gagal mengupdate item!", true);
-        }
-    }
-
-    async function moveItemUp(index) {
-        if (index === 0) return;
-        const newItems = [...allItems];
-        [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
-        allItems = newItems;
-        await reorderItemsInFirebase();
-        renderItems();
-        renderAdminItems();
-        showToast("✅ Urutan item berhasil diubah!");
-    }
-
-    async function moveItemDown(index) {
-        if (index === allItems.length - 1) return;
-        const newItems = [...allItems];
-        [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
-        allItems = newItems;
-        await reorderItemsInFirebase();
-        renderItems();
-        renderAdminItems();
-        showToast("✅ Urutan item berhasil diubah!");
-    }
-
-    async function reorderItemsInFirebase() {
-        if (!db) return;
-        for (let i = 0; i < allItems.length; i++) {
-            await db.collection("items").doc(allItems[i].id).update({ order: i });
-        }
     }
 
     function openDetailModal(item) {
@@ -1539,20 +1406,17 @@
         const modal = document.getElementById("detailModal");
         const body = document.getElementById("detailBody");
         const rating = item.rating || 5;
-        const fullStars = Math.floor(rating);
-        const emptyStars = 5 - fullStars;
-        const starsHtml = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+        const starsHtml = '★'.repeat(rating) + '☆'.repeat(5-rating);
         const linkValid = isLinkValid(item.downloadUrl);
+        const imgUrl = getValidImageUrl(item.imageUrl, true);
         
         body.innerHTML = `
             <div class="detail-image-wrapper">
-                <img class="detail-image" src="${item.imageUrl || 'https://picsum.photos/id/20/800/400'}" alt="${escapeHtml(item.title)}">
+                <img class="detail-image" src="${imgUrl}" alt="${escapeHtml(item.title)}" onerror="this.src='${DEFAULT_DETAIL_IMAGE}'">
             </div>
             <div class="detail-info">
                 <h3>${escapeHtml(item.title)} 
-                    ${linkValid ? 
-                        '<span class="link-status available"><i class="fas fa-link"></i> Link Tersedia</span>' : 
-                        '<span class="link-status unavailable"><i class="fas fa-exclamation-triangle"></i> Link Belum Tersedia</span>'}
+                    ${linkValid ? '<span class="link-status available"><i class="fas fa-link"></i> Link Tersedia</span>' : '<span class="link-status unavailable"><i class="fas fa-exclamation-triangle"></i> Link Belum Tersedia</span>'}
                 </h3>
                 <div class="detail-category">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
                 <div class="detail-description">${escapeHtml(item.description)}</div>
@@ -1611,11 +1475,6 @@
                         renderItems();
                         openDetailModal(target);
                     } catch(e) {}
-                } else if (target && isLinkValid(target.downloadUrl)) {
-                    target.downloads++;
-                    updateStats();
-                    renderItems();
-                    openDetailModal(target);
                 }
                 if (url && url !== "#") window.open(url, "_blank");
                 else showToast("⚠️ Link download belum tersedia!", true);
@@ -1628,52 +1487,48 @@
         document.getElementById("resultCount").innerText = filtered.length;
         const grid = document.getElementById("contentGrid");
         if (!filtered.length) {
-            grid.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><h3>Belum Ada Konten</h3><p>Belum ada item yang tersedia saat ini</p></div>`;
+            if (searchKeyword.trim() !== "") {
+                grid.innerHTML = `<div class="empty-state">
+                    <i class="fas fa-search"></i>
+                    <h3>Item Tidak Ditemukan</h3>
+                    <p>Maaf, "${escapeHtml(searchKeyword)}" belum tersedia saat ini.<br>Coba dengan kata kunci lain.</p>
+                </div>`;
+            } else {
+                grid.innerHTML = `<div class="empty-state">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Belum Ada Konten</h3>
+                    <p>Belum ada item yang tersedia saat ini</p>
+                </div>`;
+            }
             return;
         }
-        grid.innerHTML = filtered.map(item => `
-            <div class="card" data-id="${item.id}">
-                <div class="card-image-wrapper">
-                    <img class="card-image" src="${item.imageUrl || 'https://picsum.photos/id/20/400/200'}" alt="${escapeHtml(item.title)}">
+        grid.innerHTML = filtered.map(item => {
+            const imgUrl = getValidImageUrl(item.imageUrl, false);
+            return `
+                <div class="card" data-id="${item.id}">
+                    <div class="card-image-wrapper">
+                        <img class="card-image" src="${imgUrl}" alt="${escapeHtml(item.title)}" onerror="this.src='${DEFAULT_IMAGE}'">
+                    </div>
+                    <div class="card-category-badge">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
+                    <div class="card-content">
+                        <h3 class="card-title">${escapeHtml(item.title)}</h3>
+                        <p class="card-desc">${escapeHtml(item.description.substring(0, 90))}${item.description.length>90?'...':''}</p>
+                        <div class="card-footer">
+                            <span class="download-count"><i class="fas fa-download"></i> ${formatNumber(item.downloads)} downloads</span>
+                        </div>
+                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Klik untuk detail & download</div>
+                    </div>
                 </div>
-                <div class="card-category-badge">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
-                <div class="download-overlay"><button class="btn-download" data-id="${item.id}" data-url="${item.downloadUrl}"><i class="fas fa-download"></i> Download Now</button></div>
-                <div class="card-content">
-                    <h3 class="card-title">${escapeHtml(item.title)}</h3>
-                    <p class="card-desc">${escapeHtml(item.description.substring(0, 90))}${item.description.length>90?'...':''}</p>
-                    <div class="card-footer"><span class="download-count"><i class="fas fa-download"></i> ${formatNumber(item.downloads)} downloads</span></div>
-                </div>
-            </div>
-        `).join("");
+            `;
+        }).join("");
         
         document.querySelectorAll(".card").forEach(card => {
             card.addEventListener("click", (e) => {
-                if (e.target.closest('.btn-download')) return;
                 const id = card.dataset.id;
                 const item = allItems.find(i => i.id === id);
                 if (item) openDetailModal(item);
             });
         });
-        
-        document.querySelectorAll(".btn-download").forEach(btn => btn.addEventListener("click", async (e) => {
-            e.stopPropagation();
-            const id = btn.dataset.id, url = btn.dataset.url;
-            let target = allItems.find(i => i.id === id);
-            if (target && db && isLinkValid(url)) {
-                try {
-                    await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 });
-                    target.downloads++;
-                    updateStats();
-                    renderItems();
-                } catch(e) {}
-            } else if (target && isLinkValid(target.downloadUrl)) {
-                target.downloads++;
-                updateStats();
-                renderItems();
-            }
-            if (url && url !== "#") window.open(url, "_blank");
-            else showToast("⚠️ Link download belum tersedia!", true);
-        }));
     }
 
     function renderAdminItems() {
@@ -1688,21 +1543,45 @@
                 <i class="fas fa-grip-vertical drag-icon"></i>
                 <div class="admin-item-content">
                     <strong>${escapeHtml(item.title)}</strong>
-                    ${!isLinkValid(item.downloadUrl) ? '<span style="color:#ffa502; font-size:0.7rem; margin-left:0.5rem;"><i class="fas fa-exclamation-triangle"></i> Link tidak valid</span>' : ''}
+                    ${!isLinkValid(item.downloadUrl) ? '<span style="color:#ffa502; font-size:0.7rem;"><i class="fas fa-exclamation-triangle"></i> Link tidak valid</span>' : ''}
+                    ${!isValidImageUrl(item.imageUrl) ? '<span style="color:#ffa502; font-size:0.7rem;"><i class="fas fa-image"></i> Gambar tidak valid</span>' : ''}
                     <br><small>${item.category} | ${formatNumber(item.downloads)} downloads | Rating: ${item.rating || 5}/5</small>
                 </div>
                 <div class="admin-item-actions">
-                    <button class="move-up-btn" onclick="window.moveItemUp(${idx})" title="Pindah ke atas"><i class="fas fa-arrow-up"></i></button>
-                    <button class="move-down-btn" onclick="window.moveItemDown(${idx})" title="Pindah ke bawah"><i class="fas fa-arrow-down"></i></button>
-                    <button class="edit-btn" onclick="window.editItem('${item.id}')" title="Edit"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="window.deleteItem('${item.id}')" title="Hapus"><i class="fas fa-trash"></i></button>
+                    <button class="move-up-btn" onclick="window.moveItemUp(${idx})"><i class="fas fa-arrow-up"></i></button>
+                    <button class="move-down-btn" onclick="window.moveItemDown(${idx})"><i class="fas fa-arrow-down"></i></button>
+                    <button class="edit-btn" onclick="window.editItem('${item.id}')"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" onclick="window.deleteItem('${item.id}')"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         `).join("");
     }
 
-    window.moveItemUp = moveItemUp;
-    window.moveItemDown = moveItemDown;
+    window.moveItemUp = async (index) => {
+        if (index === 0) return;
+        const newItems = [...allItems];
+        [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
+        allItems = newItems;
+        for (let i = 0; i < allItems.length; i++) {
+            await db.collection("items").doc(allItems[i].id).update({ order: i });
+        }
+        renderItems();
+        renderAdminItems();
+        showToast("✅ Urutan item berhasil diubah!");
+    };
+
+    window.moveItemDown = async (index) => {
+        if (index === allItems.length - 1) return;
+        const newItems = [...allItems];
+        [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+        allItems = newItems;
+        for (let i = 0; i < allItems.length; i++) {
+            await db.collection("items").doc(allItems[i].id).update({ order: i });
+        }
+        renderItems();
+        renderAdminItems();
+        showToast("✅ Urutan item berhasil diubah!");
+    };
 
     async function loadItems() {
         if (!db) { allItems = []; renderCategories(); renderItems(); updateStats(); renderAdminItems(); return; }
@@ -1717,7 +1596,7 @@
         updateStats();
         renderAdminItems();
         const dbStatusDiv = document.getElementById("dbStatus");
-        if (dbStatusDiv) { dbStatusDiv.innerHTML = `<i class="fas fa-check-circle"></i> <span>✅ Database terhubung</span>`; dbStatusDiv.classList.remove("error"); }
+        if (dbStatusDiv) { dbStatusDiv.innerHTML = `<i class="fas fa-check-circle"></i> <span>✅ Database terhubung</span>`; }
     }
 
     window.deleteItem = async (id) => { 
@@ -1728,21 +1607,87 @@
         } 
     };
 
+    window.editItem = async (itemId) => {
+        const item = allItems.find(i => i.id === itemId);
+        if (!item) return;
+        
+        document.getElementById("editItemId").value = item.id;
+        document.getElementById("editTitle").value = item.title;
+        document.getElementById("editCategory").value = item.category;
+        document.getElementById("editDescription").value = item.description;
+        document.getElementById("editDownloadUrl").value = item.downloadUrl || "";
+        document.getElementById("editImageUrl").value = item.imageUrl || "";
+        
+        const editModal = document.getElementById("editItemModal");
+        editModal.classList.add("show");
+    };
+
     async function sendToTelegram(name, rating, message) {
         const stars = "★".repeat(rating) + "☆".repeat(5-rating);
         const text = `📢 *FEEDBACK FaizCraftMC* 📢\n\n👤 *Nama:* ${name}\n⭐ *Rating:* ${stars} (${rating}/5)\n💬 *Pesan:* ${message}\n🕐 *Waktu:* ${new Date().toLocaleString('id-ID')}`;
         try {
             const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+                method: "POST", headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" })
             });
             return res.ok;
-        } catch(e) {
-            console.error("Telegram error:", e);
-            return false;
-        }
+        } catch(e) { return false; }
     }
+
+    document.getElementById("addItemForm")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const newId = Date.now().toString();
+        const imageUrl = document.getElementById("itemImage").value.trim();
+        
+        const newItem = {
+            title: document.getElementById("itemTitle").value,
+            category: document.getElementById("itemCategory").value,
+            description: document.getElementById("itemDesc").value,
+            downloadUrl: document.getElementById("itemUrl").value || "#",
+            imageUrl: imageUrl || DEFAULT_IMAGE,
+            downloads: 0,
+            rating: 5,
+            order: allItems.length
+        };
+        
+        try {
+            await db.collection("items").doc(newId).set(newItem);
+            showToast("✅ Item berhasil ditambahkan!");
+            document.getElementById("addItemForm").reset();
+            loadItems();
+        } catch(e) {
+            showToast("❌ Gagal menambahkan item!", true);
+            console.error(e);
+        }
+    });
+
+    document.getElementById("editItemForm")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const id = document.getElementById("editItemId").value;
+        const imageUrl = document.getElementById("editImageUrl").value.trim();
+        
+        const updatedData = {
+            title: document.getElementById("editTitle").value,
+            category: document.getElementById("editCategory").value,
+            description: document.getElementById("editDescription").value,
+            downloadUrl: document.getElementById("editDownloadUrl").value || "#"
+        };
+        
+        if (imageUrl) {
+            updatedData.imageUrl = imageUrl;
+        }
+        
+        try {
+            await db.collection("items").doc(id).update(updatedData);
+            showToast("✅ Item berhasil diupdate!");
+            const editModal = document.getElementById("editItemModal");
+            editModal.classList.remove("show");
+            loadItems();
+        } catch(e) {
+            showToast("❌ Gagal mengupdate item!", true);
+            console.error(e);
+        }
+    });
 
     const logo = document.getElementById("secretLogo");
     const adminTriggerBtn = document.getElementById("adminTriggerBtn");
@@ -1759,7 +1704,7 @@
 
     adminTrigger.addEventListener("click", () => adminModal.classList.add("show"));
     closeAdminModal.addEventListener("click", () => adminModal.classList.remove("show"));
-    window.addEventListener("click", (e) => { if (e.target === adminModal || e.target === document.getElementById("detailModal")) { adminModal.classList.remove("show"); } });
+    window.addEventListener("click", (e) => { if (e.target === adminModal) adminModal.classList.remove("show"); });
 
     loginBtn.addEventListener("click", async () => {
         if (adminPassword.value === ADMIN_PASSWORD) {
@@ -1772,39 +1717,7 @@
         } else { showToast("❌ Password salah!", true); }
     });
 
-    maintenanceToggle.addEventListener("change", async (e) => { 
-        await setMaintenanceMode(e.target.checked);
-        if (!e.target.checked) {
-            isBypassActive = false;
-            if (bypassTimeout) clearTimeout(bypassTimeout);
-        }
-    });
-
-    document.getElementById("addItemForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const newItem = {
-            title: document.getElementById("itemTitle").value,
-            category: document.getElementById("itemCategory").value,
-            description: document.getElementById("itemDesc").value,
-            downloadUrl: document.getElementById("itemUrl").value || "#",
-            imageUrl: document.getElementById("itemImage").value || "https://picsum.photos/id/20/400/200",
-            downloads: 0,
-            rating: 5,
-            order: allItems.length
-        };
-        const newId = Date.now().toString();
-        await db.collection("items").doc(newId).set(newItem);
-        showToast("✅ Item berhasil ditambahkan!");
-        document.getElementById("addItemForm").reset();
-        loadItems();
-    });
-
-    document.getElementById("editItemForm").addEventListener("submit", saveEditItem);
-
-    const editModal = document.getElementById("editItemModal");
-    const closeEditModal = document.getElementById("closeEditModal");
-    closeEditModal.addEventListener("click", () => editModal.classList.remove("show"));
-    window.addEventListener("click", (e) => { if (e.target === editModal) editModal.classList.remove("show"); });
+    maintenanceToggle.addEventListener("change", async (e) => { await setMaintenanceMode(e.target.checked); });
 
     const feedbackModal = document.getElementById("feedbackModal");
     const fabBtn = document.getElementById("fabBtn");
@@ -1812,10 +1725,10 @@
     fabBtn.onclick = () => feedbackModal.classList.add("show");
     closeFeedback.onclick = () => feedbackModal.classList.remove("show");
 
-    const stars = document.querySelectorAll("#ratingStars i");
-    stars.forEach(star => star.addEventListener("click", () => {
+    const ratingStars = document.querySelectorAll("#ratingStars i");
+    ratingStars.forEach(star => star.addEventListener("click", () => {
         selectedRating = parseInt(star.dataset.rating);
-        stars.forEach(s => { if (parseInt(s.dataset.rating) <= selectedRating) s.className = "fas fa-star"; else s.className = "far fa-star"; });
+        ratingStars.forEach(s => { if (parseInt(s.dataset.rating) <= selectedRating) s.className = "fas fa-star"; else s.className = "far fa-star"; });
     }));
 
     document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
@@ -1826,37 +1739,31 @@
         if (selectedRating === 0) { showToast("Klik rating bintangnya!", true); return; }
         
         const ok = await sendToTelegram(name, selectedRating, msg);
-        if (ok) {
-            showToast("✅ Feedback terkirim!");
-        } else {
-            showToast("⚠️ Gagal mengirim FeedBack!", true);
-        }
-        
-        if (db) {
-            try {
-                await db.collection("feedbacks").add({
-                    name: name,
-                    rating: selectedRating,
-                    message: msg,
-                    timestamp: new Date().toISOString()
-                });
-            } catch(e) {}
-        }
+        if (ok) showToast("✅ Feedback terkirim!");
+        else showToast("⚠️ Gagal mengirim FeedBack!", true);
         
         document.getElementById("feedbackName").value = "";
         document.getElementById("feedbackMessage").value = "";
-        stars.forEach(s => s.className = "far fa-star");
+        ratingStars.forEach(s => s.className = "far fa-star");
         selectedRating = 0;
         feedbackModal.classList.remove("show");
     });
 
-    document.getElementById("searchInput").addEventListener("input", (e) => { searchKeyword = e.target.value; renderItems(); });
+    document.getElementById("searchInput").addEventListener("input", (e) => { 
+        searchKeyword = e.target.value; 
+        renderItems(); 
+    });
     document.addEventListener("keydown", (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); document.getElementById("searchInput").focus(); } });
 
     const detailModalEl = document.getElementById("detailModal");
     const closeDetail = document.getElementById("closeDetailModal");
     closeDetail.addEventListener("click", () => detailModalEl.classList.remove("show"));
     window.addEventListener("click", (e) => { if (e.target === detailModalEl) detailModalEl.classList.remove("show"); });
+
+    const editModal = document.getElementById("editItemModal");
+    const closeEditModal = document.getElementById("closeEditModal");
+    closeEditModal.addEventListener("click", () => editModal.classList.remove("show"));
+    window.addEventListener("click", (e) => { if (e.target === editModal) editModal.classList.remove("show"); });
 
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement("div");
@@ -1869,9 +1776,12 @@
         document.getElementById("particles").appendChild(particle);
     }
 
-    try { firebase.initializeApp(firebaseConfig); db = firebase.firestore(); console.log("🔥 Firebase connected!"); } catch(e) { console.error(e); db = null; }
+    try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+        console.log("🔥 Firebase connected!");
+    } catch(e) { console.error(e); db = null; }
     
-    initDraggable();
     setupMClickHandler();
     loadMaintenanceStatus();
     loadItems();
