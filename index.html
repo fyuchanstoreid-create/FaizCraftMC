@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="author" content="FaizCraftMC">
+    <meta name="copyright" content="FaizCraftMC 2026">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta property="og:title" content="FaizCraftMC Marketplace">
+    <meta property="og:description" content="Download addon Minecraft gratis & terbaru.">
+    <meta property="og:image" content="https://faizcraftmc.vercel.app/thumbnail.png">
+    <meta property="og:site_name" content="FaizCraftMC Marketplace">
+    <title>FaizCraftMC Marketplace</title>
+    <meta name="description" content="Download addon, texture pack, world, skin, dan mashups terbaru di FaizCraftMC Marketplace.">
+    <link rel="icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Swiper Slider CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XY6DZNWBK"></script>
+     <script>
+ window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0XY6DZNWBK');
+</script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #0a0c15; color: #ffffff; overflow-x: hidden; min-height: 100vh; }
+        body.maintenance-lock { overflow: hidden; position: fixed; width: 100%; height: 100%; }
+        body.detail-open { overflow: hidden; position: fixed; width: 100%; height: 100%; }
+        
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: linear-gradient(135deg, #0a0c15 0%, #1a0b1a 25%, #0f172a 50%, #1a1a2e 75%, #0a0c15 100%); background-size: 400% 400%; animation: gradientBG 15s ease infinite; }
+        @keyframes gradientBG { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .bg-animation::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 20% 40%, rgba(255, 71, 87, 0.05), transparent 60%); }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .particle { position: absolute; background: rgba(255, 71, 87, 0.2); border-radius: 50%; animation: floatParticle linear infinite; }
+        @keyframes floatParticle { from { transform: translateY(100vh) rotate(0deg); opacity: 0; } to { transform: translateY(-100vh) rotate(360deg); opacity: 0.4; } }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1d2e; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #ff4757, #ff6b81); border-radius: 10px; }
+        
+        .navbar { background: rgba(10, 12, 21, 0.95); backdrop-filter: blur(20px); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 71, 87, 0.15); box-shadow: 0 2px 15px rgba(0,0,0,0.3); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 2rem; }
+        .logo { font-size: 1.6rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+        .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, #ff4757, #ff6b81); border-radius: 12px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 0 12px rgba(255, 71, 87, 0.3); }
+        .logo:hover .logo-icon { transform: scale(1.05) rotate(5deg); box-shadow: 0 0 20px rgba(255, 71, 87, 0.5); }
+        .logo-icon i { font-size: 1.3rem; color: white; }
+        .logo .brand-name { background: linear-gradient(135deg, #ffffff, #ff4757); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; }
+        .logo .marketplace-name { background: linear-gradient(135deg, #ffa502, #ff4757); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; }
+        
+        .search-wrapper-center { position: relative; width: 100%; max-width: 380px; }
+        .search-box-center { width: 100%; padding: 0.7rem 1rem 0.7rem 3rem; border: 1.5px solid rgba(255, 255, 255, 0.1); border-radius: 50px; background: rgba(255, 255, 255, 0.05); color: white; font-size: 0.85rem; transition: all 0.3s; font-family: 'Poppins', sans-serif; }
+        .search-box-center:focus { outline: none; border-color: #ff4757; background: rgba(255, 255, 255, 0.1); }
+        .search-wrapper-center i { position: absolute; left: 1.1rem; top: 50%; transform: translateY(-50%); color: rgba(255, 255, 255, 0.5); font-size: 0.95rem; }
+        .search-shortcut-center { position: absolute; right: 0.8rem; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.6rem; color: rgba(255, 255, 255, 0.5); }
+        
+        .admin-trigger { position: fixed; bottom: 100px; right: 30px; width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #2ed573, #00a8ff); border: none; color: white; font-size: 1.5rem; cursor: pointer; z-index: 1001; opacity: 0; transform: scale(0); transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3); }
+        .admin-trigger.show { opacity: 1; transform: scale(1); }
+        .admin-trigger:hover { transform: scale(1.1); }
+        
+        .maintenance-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0a0c15, #1a0b1a); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; backdrop-filter: blur(10px); }
+        .maintenance-overlay.hidden { display: none; }
+        .maintenance-overlay .maintenance-icon { font-size: 4rem; color: rgba(255, 165, 2, 0.7); margin-bottom: 1.2rem; animation: pulse 2s ease infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.05); opacity: 1; } }
+        .maintenance-overlay h2 { font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 500; letter-spacing: 1px; color: rgba(255,255,255,0.9); }
+        .maintenance-overlay h2 .m-letter { cursor: pointer; display: inline-block; color: rgba(255,255,255,0.9); }
+        .maintenance-overlay p { color: rgba(255,255,255,0.5); max-width: 400px; line-height: 1.6; margin-bottom: 0.8rem; font-size: 0.9rem; }
+        .maintenance-overlay .small-text { font-size: 0.7rem; opacity: 0.3; }
+        
+        .categories-wrapper { margin-top: 60px; padding: 0.6rem 2rem; background: rgba(10, 12, 21, 0.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 71, 87, 0.1); display: flex; justify-content: center; }
+        .categories-container { max-width: 1000px; width: 100%; margin: 0 auto; }
+        .category-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; align-items: center; }
+        .category-chip { padding: 0.5rem 1.3rem; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); white-space: nowrap; font-weight: 600; font-size: 0.9rem; }
+        .category-chip:hover { transform: translateY(-2px); background: rgba(255, 71, 87, 0.15); border-color: rgba(255, 71, 87, 0.4); }
+        .category-chip.active { background: linear-gradient(135deg, #ff4757, #ff6b81); border-color: transparent; box-shadow: 0 4px 12px rgba(255,71,87,0.3); }
+        .category-name { font-weight: 600; }
+        .category-count { background: rgba(0,0,0,0.3); padding: 0.15rem 0.5rem; border-radius: 30px; font-size: 0.65rem; font-weight: 600; margin-left: 0.2rem; }
+        
+        .search-section { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+        .top-banner { width: 100%; overflow: hidden; padding: 0 2rem; margin: 0.8rem 0 0.5rem 0; display: flex; justify-content: center; }
+        .top-banner img { width: 100%; max-width: 1200px; height: auto; display: block; border-radius: 20px; object-fit: cover; }
+        .hero { padding: 0.8rem 2rem 1rem; text-align: center; }
+        .hero-content h1 { font-size: 3.2rem; margin-bottom: 0.2rem; font-weight: 900; letter-spacing: 3px; line-height: 1.2; }
+        .hero-content .title-line { display: flex; flex-direction: column; align-items: center; gap: 0rem; }
+        .gradient-text { background: linear-gradient(135deg, #ff4757, #ffa502, #ff6b81, #ff4757); background-size: 300% 300%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: textShift 5s ease infinite; font-weight: 900; letter-spacing: 2px; }
+        .subtitle-text { font-size: 1.9rem; font-weight: 800; letter-spacing: 8px; opacity: 0.9; margin-top: 0rem; }
+        @keyframes textShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+        .hero-description { font-size: 0.95rem; opacity: 0.7; margin-top: 0.5rem; letter-spacing: 0.5px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .stats-wrapper { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+        .stats { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .stat-card { background: rgba(255,255,255,0.04); padding: 0.7rem 1.8rem; border-radius: 28px; border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; min-width: 150px; }
+        .stat-card:hover { transform: translateY(-4px); border-color: rgba(255,71,87,0.3); background: rgba(255,71,87,0.05); }
+        .stat-number { font-size: 2.3rem; font-weight: 900; background: linear-gradient(135deg, #ff4757, #ffa502); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.2; margin-bottom: 0.2rem; }
+        .stat-label { font-size: 0.8rem; opacity: 0.7; font-weight: 500; letter-spacing: 1px; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem 2.5rem; }
+        .content-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem; }
+        .result-info { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+        .result-info strong { color: #ff4757; }
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+        
+        .card { background: rgba(18, 20, 35, 0.7); backdrop-filter: blur(12px); border-radius: 28px; overflow: hidden; transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); border: 1px solid rgba(255, 255, 255, 0.06); position: relative; cursor: pointer; display: flex; flex-direction: column; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ff4757, #ffa502, #ff4757); transform: scaleX(0); transition: transform 0.5s; z-index: 1; }
+        .card:hover::before { transform: scaleX(1); }
+        .card:hover { transform: translateY(-8px); border-color: rgba(255,71,87,0.3); box-shadow: 0 20px 30px rgba(0,0,0,0.4); }
+        .card-image-wrapper { width: 100%; background: rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; padding: 1rem; }
+        .card-image { width: 100%; height: auto; max-height: 220px; object-fit: contain; display: block; border-radius: 12px; }
+        .card-category-badge { position: absolute; top: 12px; right: 12px; padding: 0.3rem 1rem; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); border-radius: 40px; font-size: 0.7rem; font-weight: 700; z-index: 2; }
+        .card-content { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 1px; }
+        .card-desc { font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.8rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .download-count { font-size: 0.75rem; opacity: 0.5; background: rgba(255,255,255,0.05); padding: 0.3rem 0.8rem; border-radius: 30px; display: inline-flex; align-items: center; gap: 0.3rem; }
+        .download-count i { color: #ff4757; }
+        .click-hint { font-size: 0.7rem; opacity: 0.4; margin-top: 0.5rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; }
+        .click-hint i { font-size: 0.6rem; }
+        
+        /* DETAIL FULLSCREEN STYLES */
+        .detail-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0c15;
+            z-index: 2000;
+            overflow-y: auto;
+            display: none;
+        }
+        .detail-fullscreen.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .detail-fullscreen .detail-header {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 12, 21, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,71,87,0.2);
+            z-index: 10;
+        }
+        .detail-fullscreen .detail-header h2 {
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.3rem;
+        }
+        .detail-fullscreen .close-detail-full {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.5rem;
+        }
+        .detail-fullscreen .close-detail-full:hover {
+            background: #ff4757;
+            transform: rotate(90deg);
+        }
+        .detail-fullscreen .detail-body-full {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Swiper Slider Styling - Tombol di tengah vertikal, pagination di bawah */
+        .detail-swiper-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .detail-swiper-container {
+            position: relative;
+            width: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #0f111a;
+        }
+        .detail-swiper {
+            width: 100%;
+        }
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0f111a;
+        }
+        /* Gambar - ukuran asli, tanpa potong */
+        .swiper-slide img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        /* Video wrapper - rasio YouTube 16:9 */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Tombol Navigasi - di tengah vertikal, di pinggir kiri/kanan */
+        .detail-swiper-container .swiper-button-next,
+        .detail-swiper-container .swiper-button-prev {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 71, 87, 0.5);
+            transition: all 0.3s ease;
+            z-index: 5;
+            cursor: pointer;
+            margin: 0;
+        }
+        .detail-swiper-container .swiper-button-next {
+            right: 15px;
+            left: auto;
+        }
+        .detail-swiper-container .swiper-button-prev {
+            left: 15px;
+            right: auto;
+        }
+        .detail-swiper-container .swiper-button-next:hover,
+        .detail-swiper-container .swiper-button-prev:hover {
+            background: rgba(255, 71, 87, 0.8);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .detail-swiper-container .swiper-button-next:after,
+        .detail-swiper-container .swiper-button-prev:after {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        /* Pagination - dipisah di luar container, di bawah gambar */
+        .detail-swiper-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 8px 0;
+        }
+        .custom-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .custom-pagination-bullet:hover {
+            background: rgba(255, 71, 87, 0.6);
+            transform: scale(1.2);
+        }
+        .custom-pagination-bullet.active {
+            background: #ff4757;
+            transform: scale(1.2);
+        }
+        
+        .detail-swiper-container.hide-navigation .swiper-button-next,
+        .detail-swiper-container.hide-navigation .swiper-button-prev {
+            display: none !important;
+        }
+        
+        .detail-info-full {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .detail-info-full h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ffffff, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .detail-category-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(255,71,87,0.2);
+            border-radius: 40px;
+            font-size: 0.85rem;
+            width: fit-content;
+            border: 1px solid rgba(255,71,87,0.3);
+        }
+        
+        .translate-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 0.5rem 0;
+            background: rgba(255,255,255,0.05);
+            padding: 0.8rem 1rem;
+            border-radius: 20px;
+        }
+        .translate-section label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        .language-select {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+        }
+        .language-select option {
+            background: #1a1d2e;
+        }
+        .translate-btn {
+            background: linear-gradient(135deg, #00a8ff, #0097e6);
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+        }
+        .translate-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .description-box {
+            background: rgba(255,255,255,0.03);
+            padding: 1.2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            line-height: 1.6;
+        }
+        .description-box p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .detail-rating-full {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: rgba(255,255,255,0.03);
+            padding: 1rem;
+            border-radius: 20px;
+        }
+        .rating-stars-display {
+            font-size: 1.2rem;
+            color: #ffa502;
+            letter-spacing: 3px;
+        }
+        .rating-input-full {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .rating-stars-input-full i {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .rating-stars-input-full i:hover,
+        .rating-stars-input-full i.active {
+            color: #ffa502;
+        }
+        
+        .detail-download-full {
+            background: rgba(255,255,255,0.03);
+            padding: 1rem;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .download-btn-full {
+            background: linear-gradient(135deg, #ff4757, #e84118);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+        .download-btn-full.disabled {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            cursor: not-allowed;
+        }
+        .download-btn-full:not(.disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,71,87,0.3);
+        }
+        
+        .link-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .link-status.available {
+            background: rgba(46, 213, 115, 0.2);
+            color: #2ed573;
+            border: 1px solid rgba(46, 213, 115, 0.3);
+        }
+        .link-status.unavailable {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+        }
+        
+        .empty-state { text-align: center; padding: 3rem 2rem; background: rgba(255,255,255,0.03); border-radius: 32px; grid-column: 1 / -1; }
+        .empty-state i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; color: #ffa502; }
+        .empty-state h3 { margin-bottom: 0.5rem; font-size: 1.3rem; font-weight: 600; }
+        .empty-state p { opacity: 0.6; font-size: 0.9rem; max-width: 300px; margin: 0 auto; }
+        
+        .modal { display: none; position: fixed; z-index: 2001; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-content { background: linear-gradient(145deg, #1a1d2e, #121420); padding: 1.5rem; width: 90%; max-width: 600px; border-radius: 32px; border: 1px solid rgba(255,71,87,0.3); animation: modalSlideIn 0.3s ease; max-height: 85vh; overflow-y: auto; }
+        @keyframes modalSlideIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+        .close-modal { width: 35px; height: 35px; display: flex; align-items: center; justify-content; center; border-radius: 50%; background: rgba(255,255,255,0.05); cursor: pointer; transition: 0.2s; font-size: 1.3rem; }
+        .close-modal:hover { background: #ff4757; }
+        
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.85rem; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem 0.9rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; background: rgba(0,0,0,0.3); color: white; font-family: 'Poppins', sans-serif; font-size: 0.9rem; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #ff4757; }
+        
+        .btn-submit, .btn-primary { width: 100%; padding: 0.8rem; background: linear-gradient(135deg, #ff4757, #e84118); border: none; border-radius: 40px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s; font-size: 0.95rem; font-family: 'Poppins', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, #2ed573, #00a8ff); margin-top: 0.8rem; }
+        .btn-primary:hover { transform: translateY(-2px); }
+        
+        .toggle-switch { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 18px; margin-bottom: 1.2rem; }
+        .toggle-switch span { font-weight: 600; font-size: 0.85rem; }
+        .toggle-label { position: relative; display: inline-block; width: 52px; height: 26px; }
+        .toggle-label input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.2); transition: 0.3s; border-radius: 30px; }
+        .toggle-slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: 0.3s; border-radius: 50%; }
+        input:checked + .toggle-slider { background: linear-gradient(135deg, #ff4757, #ffa502); }
+        input:checked + .toggle-slider:before { transform: translateX(26px); }
+        
+        .admin-item-list { max-height: 400px; overflow-y: auto; margin-top: 0.8rem; }
+        .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem; background: rgba(255,255,255,0.05); border-radius: 14px; margin-bottom: 0.5rem; transition: all 0.2s; }
+        .admin-item:hover { background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); }
+        .admin-item-content { flex: 1; margin-left: 0.5rem; }
+        .admin-item-actions { display: flex; gap: 0.3rem; }
+        .admin-item-actions button { background: none; border: none; color: white; cursor: pointer; width: 32px; height: 32px; border-radius: 8px; transition: 0.2s; font-size: 0.9rem; }
+        .admin-item-actions button:hover { background: rgba(255,255,255,0.15); }
+        .move-up-btn, .move-down-btn { color: #2ed573; }
+        .edit-btn { color: #ffa502; }
+        .delete-btn { color: #ff4757; }
+        .toggle-visibility-btn { color: #00a8ff; }
+        .drag-icon { color: rgba(255,255,255,0.3); cursor: grab; }
+        
+        .db-status { background: rgba(46, 213, 115, 0.1); border: 1px solid rgba(46, 213, 115, 0.3); border-radius: 16px; padding: 0.6rem 0.8rem; margin-bottom: 0.8rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+        
+        .fab { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #ff4757, #e84118); border: none; color: white; font-size: 1.5rem; cursor: pointer; transition: all 0.25s; z-index: 1000; display: flex; align-items: center; justify-content: center; }
+        .fab:hover { transform: scale(1.05) rotate(5deg); }
+        
+        .toast { position: fixed; bottom: 90px; right: 25px; background: #1e1f2e; padding: 0.8rem 1.5rem; border-radius: 50px; color: white; z-index: 1500; animation: slideInRight 0.3s ease; border-left: 4px solid #2ed573; font-size: 0.85rem; }
+        .toast.error { border-left-color: #ff4757; }
+        .toast.new-item { border-left-color: #ffa502; background: linear-gradient(135deg, #2c1a0a, #1e1f2e); font-weight: bold; }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .loader { text-align: center; padding: 2.5rem; }
+        .loader i { font-size: 1.6rem; animation: spin 1s linear infinite; color: #ff4757; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .footer { text-align: center; padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 1.5rem; font-size: 0.8rem; opacity: 0.5; }
+        
+        .rating { display: flex; gap: 0.5rem; font-size: 1.6rem; cursor: pointer; }
+        .rating i { transition: 0.15s; }
+        .rating i:hover, .rating i.active { color: #ffa502; }
+        
+        @media (max-width: 768px) {
+            .nav-container { justify-content: center; flex-direction: column; gap: 0.5rem; }
+            .logo { gap: 0.2rem; font-size: 1.1rem; }
+            .logo-icon { width: 32px; height: 32px; }
+            .logo-icon i { font-size: 0.9rem; }
+            .hero-content h1 { font-size: 1.8rem; letter-spacing: 2px; }
+            .subtitle-text { font-size: 1.2rem; letter-spacing: 5px; }
+            .category-chip { padding: 0.4rem 1rem; font-size: 0.75rem; }
+            .categories-wrapper { margin-top: 78px; padding: 0.5rem 1rem; }
+            .content-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .stats { gap: 1rem; }
+            .stat-card { padding: 0.5rem 1rem; min-width: 110px; }
+            .stat-number { font-size: 1.6rem; }
+            .hero { padding: 0.5rem 1rem 0.8rem; }
+            .top-banner { padding: 0 1rem; }
+            .container { padding: 0 1rem 1.5rem; }
+            .maintenance-overlay .maintenance-icon { font-size: 3rem; }
+            .maintenance-overlay h2 { font-size: 1.4rem; }
+            .card-image { max-height: 180px; }
+            .swiper-slide img { max-height: 50vh; }
+            .detail-fullscreen .detail-body-full { padding: 1rem; }
+            .detail-info-full h1 { font-size: 1.4rem; }
+            .detail-swiper-container .swiper-button-next,
+            .detail-swiper-container .swiper-button-prev {
+                width: 35px;
+                height: 35px;
+            }
+            .detail-swiper-container .swiper-button-next:after,
+            .detail-swiper-container .swiper-button-prev:after {
+                font-size: 14px;
+            }
+            .detail-swiper-container .swiper-button-next {
+                right: 8px;
+            }
+            .detail-swiper-container .swiper-button-prev {
+                left: 8px;
+            }
+            .custom-pagination-bullet {
+                width: 8px;
+                height: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-animation"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo" id="secretLogo">
+            <div class="logo-icon"><i class="fas fa-crown"></i></div>
+            <span class="brand-name">FaizCraftMC</span>
+            <span class="marketplace-name">Marketplace</span>
+        </div>
+    </div>
+</nav>
+
+<div class="categories-wrapper">
+    <div class="categories-container">
+        <div class="category-grid" id="categoryGrid"></div>
+    </div>
+</div>
+
+<div class="top-banner">
+    <img src="BANNER3.png" alt="FaizCraftMC Banner">
+</div>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="title-line">
+            <h1><span class="gradient-text">FaizCraftMC</span></h1>
+            <div class="subtitle-text">MARKETPLACE</div>
+        </div>
+        <div class="hero-description">Download Addon, Texture Pack, World, Skin Bahkan Mashups Terbaik</div>
+    </div>
+</section>
+
+<div class="search-section">
+    <div class="search-wrapper-center">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" class="search-box-center" placeholder="Cari addon, texture pack...">
+        <span class="search-shortcut-center">⌘K</span>
+    </div>
+</div>
+
+<div class="stats-wrapper">
+    <div class="stats">
+        <div class="stat-card">
+            <span class="stat-number" id="totalDownloads">0</span>
+            <span class="stat-label">Total Downloads</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" id="totalItems">0</span>
+            <span class="stat-label">Items Tersedia</span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content-header">
+        <div class="result-info">Menampilkan <strong id="resultCount">0</strong> item</div>
+    </div>
+    <div class="content-grid" id="contentGrid">
+        <div class="loader"><i class="fas fa-spinner fa-pulse"></i> Memuat marketplace...</div>
+    </div>
+</div>
+
+<!-- DETAIL FULLSCREEN MODAL -->
+<div id="detailFullscreen" class="detail-fullscreen">
+    <div class="detail-header">
+        <h2><i class="fas fa-crown"></i> Detail Konten</h2>
+        <div class="close-detail-full" id="closeDetailFull">&times;</div>
+    </div>
+    <div class="detail-body-full" id="detailBodyFull"></div>
+</div>
+
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-shield-alt"></i> Admin Panel</h2>
+            <div class="close-modal" id="closeAdminModal">&times;</div>
+        </div>
+        <div id="adminLoginForm">
+            <div class="form-group"><label>Password Admin</label><input type="password" id="adminPassword" placeholder="Masukkan password admin"></div>
+            <button class="btn-primary" id="loginAdminBtn"><i class="fas fa-key"></i> Login</button>
+        </div>
+        <div id="adminPanel" style="display:none;">
+            <div id="dbStatus" class="db-status">
+                <i class="fas fa-spinner fa-pulse"></i> <span>Mengecek koneksi database...</span>
+            </div>
+            <div class="toggle-switch">
+                <span><i class="fas fa-tools"></i> Mode Maintenance</span>
+                <label class="toggle-label">
+                    <input type="checkbox" id="maintenanceToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <hr style="margin: 0.8rem 0; border-color: rgba(255,255,255,0.1);">
+            <h3><i class="fas fa-plus-circle"></i> Tambah Item Baru</h3>
+            <form id="addItemForm">
+                <div class="form-group"><label>Judul</label><input type="text" id="itemTitle" required placeholder="Ex: Origins Addon"></div>
+                <div class="form-group"><label>Kategori</label>
+                    <select id="itemCategory">
+                        <option value="addon">Addon</option>
+                        <option value="texture">Texture Pack</option>
+                        <option value="world">World</option>
+                        <option value="skin">Skin</option>
+                        <option value="mashup">Mashup</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Deskripsi</label><textarea id="itemDesc" rows="3" required placeholder="Deskripsi lengkap..."></textarea></div>
+                <div class="form-group"><label>Link Download</label><input type="url" id="itemUrl" placeholder="https://..."></div>
+                <div class="form-group"><label>URL Gambar Utama</label>
+                    <input type="url" id="itemImage" placeholder="https://... (contoh: https://picsum.photos/id/1/400/200)">
+                </div>
+                <div class="form-group"><label>URL Video YouTube</label>
+                    <input type="url" id="itemVideo" placeholder="https://youtu.be/... atau https://youtube.com/watch?v=...">
+                    <p style="font-size:0.7rem; opacity:0.6; margin-top:0.3rem;">Opsional, masukkan link video YouTube untuk ditampilkan di slider pertama</p>
+                </div>
+                <div class="form-group"><label>Gambar Tambahan (pisahkan dengan koma)</label>
+                    <input type="text" id="itemExtraImages" placeholder="https://gambar1.jpg, https://gambar2.jpg">
+                    <p style="font-size:0.7rem; opacity:0.6; margin-top:0.3rem;">Opsional, masukkan URL gambar tambahan dipisah koma</p>
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="itemVisible" checked>
+                        <span>Tampilkan langsung di Marketplace (jika tidak dicentang, tersembunyi)</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Tambah Item</button>
+            </form>
+            <hr style="margin: 1rem 0; border-color: rgba(255,255,255,0.1);">
+            <h3><i class="fas fa-list"></i> Kelola Item <span style="font-size:0.7rem; opacity:0.6;">(↑↓ urutkan | ✏️ edit | 🗑️ hapus | 👁️ sembunyikan/tampilkan)</span></h3>
+            <div id="adminItemList" class="admin-item-list"></div>
+        </div>
+    </div>
+</div>
+
+<div id="editItemModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-edit"></i> Edit Item</h2>
+            <div class="close-modal" id="closeEditModal">&times;</div>
+        </div>
+        <form id="editItemForm">
+            <input type="hidden" id="editItemId">
+            <div class="form-group"><label>Judul</label><input type="text" id="editTitle" required></div>
+            <div class="form-group"><label>Kategori</label>
+                <select id="editCategory">
+                    <option value="addon">Addon</option>
+                    <option value="texture">Texture Pack</option>
+                    <option value="world">World</option>
+                    <option value="skin">Skin</option>
+                    <option value="mashup">Mashup</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Deskripsi</label><textarea id="editDescription" rows="4" required></textarea></div>
+            <div class="form-group"><label>Link Download</label><input type="url" id="editDownloadUrl" placeholder="https://..."></div>
+            <div class="form-group"><label>URL Gambar Utama</label><input type="url" id="editImageUrl" placeholder="https://..."></div>
+            <div class="form-group"><label>URL Video YouTube</label><input type="url" id="editVideoUrl" placeholder="https://youtu.be/..."></div>
+            <div class="form-group"><label>Gambar Tambahan (pisahkan dengan koma)</label><input type="text" id="editExtraImages" placeholder="https://gambar1.jpg, https://gambar2.jpg"></div>
+            <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="editVisible">
+                    <span>Tampilkan di Marketplace</span>
+                </label>
+            </div>
+            <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Simpan Perubahan</button>
+        </form>
+    </div>
+</div>
+
+<div id="feedbackModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header"><h2><i class="fab fa-telegram"></i> Kirim Feedback</h2><div class="close-modal" id="closeFeedbackModal">&times;</div></div>
+        <form id="feedbackForm">
+            <div class="form-group"><label>Nama</label><input type="text" id="feedbackName" placeholder="Nama kamu" required></div>
+            <div class="form-group"><label>Rating</label>
+                <div class="rating" id="ratingStars">
+                    <i class="far fa-star" data-rating="1"></i>
+                    <i class="far fa-star" data-rating="2"></i>
+                    <i class="far fa-star" data-rating="3"></i>
+                    <i class="far fa-star" data-rating="4"></i>
+                    <i class="far fa-star" data-rating="5"></i>
+                </div>
+            </div>
+            <div class="form-group"><label>Pesan</label><textarea id="feedbackMessage" rows="4" placeholder="Tulis feedback atau request..." required></textarea></div>
+            <button type="submit" class="btn-submit"><i class="fab fa-telegram"></i> Kirim</button>
+        </form>
+    </div>
+</div>
+
+<div id="maintenanceOverlay" class="maintenance-overlay hidden">
+    <div class="maintenance-icon"><i class="fas fa-tools"></i></div>
+    <h2>Sedang Dalam <span class="m-letter" id="mLetter">M</span>aintenance</h2>
+    <p>Marketplace sedang dalam proses perawatan.<br>Silakan kembali lagi nanti.</p>
+    <p class="small-text">FaizCraftMC Team</p>
+</div>
+
+<button class="fab" id="fabBtn"><i class="fas fa-comment-dots"></i></button>
+<button class="admin-trigger" id="adminTriggerBtn"><i class="fas fa-crown"></i></button>
+
+<div class="footer"><p>© 2025 FaizCraftMC Marketplace</p></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDxPsQio4A9LF7bCv5nWj10Et8_ekAsqis",
+        authDomain: "faizcraftmc-acc42.firebaseapp.com",
+        databaseURL: "https://faizcraftmc-acc42-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "faizcraftmc-acc42",
+        storageBucket: "faizcraftmc-acc42.firebasestorage.app",
+        messagingSenderId: "486094594414",
+        appId: "1:486094594414:web:181b2d433a4fb9759be17f"
+    };
+
+    const TELEGRAM_BOT_TOKEN = "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE";
+    const TELEGRAM_CHAT_ID = "8367322295";
+    const ADMIN_PASSWORD = "faizcraftmc2025";
+
+    const CATEGORIES = [
+        { id: "all", name: "Semua", icon: "fas fa-th-large" },
+        { id: "addon", name: "Addons", icon: "fas fa-puzzle-piece" },
+        { id: "texture", name: "Texture Packs", icon: "fas fa-palette" },
+        { id: "world", name: "Worlds", icon: "fas fa-globe-asia" },
+        { id: "skin", name: "Skins", icon: "fas fa-user-astronaut" },
+        { id: "mashup", name: "Mashups", icon: "fas fa-code-branch" }
+    ];
+
+    let allItems = [], activeCategory = "all", searchKeyword = "", selectedRating = 0, db = null;
+    let isAdminLoggedIn = false, clickCountAdmin = 0;
+    let isMaintenanceMode = false, currentDetailItem = null;
+    let mClickCount = 0, isBypassActive = false, bypassTimeout = null;
+    let swiperInstance = null;
+    let savedScrollPosition = 0;
+    let originalDescription = "";
+    
+    const NOTIFIED_ITEMS_KEY = "faizcraftmc_notified_items";
+    let notifiedItemIds = new Set();
+
+    const DEFAULT_IMAGE = "https://picsum.photos/id/20/400/200";
+    const DEFAULT_DETAIL_IMAGE = "https://picsum.photos/id/20/800/400";
+
+    function extractYouTubeId(url) {
+        if (!url) return null;
+        const patterns = [
+            /(?:youtube\.com\/watch\?v=)([^&]+)/,
+            /(?:youtu\.be\/)([^?]+)/,
+            /(?:youtube\.com\/embed\/)([^?]+)/,
+            /(?:youtube\.com\/shorts\/)([^?]+)/
+        ];
+        for (const pattern of patterns) {
+            const match = url.match(pattern);
+            if (match) return match[1];
+        }
+        return null;
+    }
+
+    function getYouTubeEmbedUrl(url, autoplay = false) {
+        const videoId = extractYouTubeId(url);
+        if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&rel=0&enablejsapi=1`;
+        return null;
+    }
+
+    function isLinkValid(url) {
+        return url && url !== "#" && url !== "" && url !== "https://#" && url !== "http://#";
+    }
+
+    function isValidImageUrl(url) {
+        if (!url || url === "") return false;
+        if (url.match(/^[A-Za-z]:\\/i) || url.match(/^file:\/\//i)) return false;
+        if (url.includes("drive.google.com")) return false;
+        return true;
+    }
+
+    function getValidImageUrl(url, isDetail = false) {
+        if (isValidImageUrl(url)) return url;
+        return isDetail ? DEFAULT_DETAIL_IMAGE : DEFAULT_IMAGE;
+    }
+
+    function showToast(msg, isErr = false, isNewItem = false) {
+        const toast = document.createElement("div");
+        toast.className = `toast ${isErr ? "error" : ""} ${isNewItem ? "new-item" : ""}`;
+        toast.innerHTML = `<i class="fas ${isErr ? 'fa-circle-exclamation' : (isNewItem ? 'fa-plus-circle' : 'fa-circle-check')}"></i> ${msg}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+    }
+
+    function loadNotifiedItems() {
+        const stored = localStorage.getItem(NOTIFIED_ITEMS_KEY);
+        if (stored) {
+            try {
+                const arr = JSON.parse(stored);
+                notifiedItemIds = new Set(arr);
+            } catch(e) { notifiedItemIds = new Set(); }
+        } else {
+            notifiedItemIds = new Set();
+        }
+    }
+
+    function saveNotifiedItems() {
+        localStorage.setItem(NOTIFIED_ITEMS_KEY, JSON.stringify([...notifiedItemIds]));
+    }
+
+    function markItemAsNotified(itemId) {
+        if (!notifiedItemIds.has(itemId)) {
+            notifiedItemIds.add(itemId);
+            saveNotifiedItems();
+        }
+    }
+
+    function checkAndNotifyNewItems(items) {
+        const newVisibleItems = items.filter(item => {
+            return (item.visible !== false) && !notifiedItemIds.has(item.id);
+        });
+        for (const newItem of newVisibleItems) {
+            showToast(`+1 Added`, false, true);
+            markItemAsNotified(newItem.id);
+        }
+        return newVisibleItems.length;
+    }
+
+    function formatNumber(n) { return n?.toLocaleString() || "0"; }
+    function escapeHtml(str) { if (!str) return ""; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
+    function getCategoryIcon(cat) { const icons = { addon: "🧩", texture: "🎨", world: "🌍", skin: "👤", mashup: "⚡" }; return icons[cat] || "📦"; }
+
+    function updateMaintenanceOverlay() {
+        const overlay = document.getElementById("maintenanceOverlay");
+        if (!overlay) return;
+        if (isMaintenanceMode && !isBypassActive) {
+            overlay.classList.remove("hidden");
+            document.body.classList.add("maintenance-lock");
+        } else {
+            overlay.classList.add("hidden");
+            document.body.classList.remove("maintenance-lock");
+        }
+    }
+
+    async function loadMaintenanceStatus() {
+        if (!db) return;
+        try {
+            const doc = await db.collection("settings").doc("maintenance").get();
+            isMaintenanceMode = doc.exists ? (doc.data().enabled || false) : false;
+            if (!doc.exists) await db.collection("settings").doc("maintenance").set({ enabled: false });
+            updateMaintenanceOverlay();
+        } catch(e) { console.warn(e); }
+    }
+
+    async function setMaintenanceMode(enabled) {
+        if (!db) return;
+        try {
+            await db.collection("settings").doc("maintenance").set({ enabled: enabled });
+            isMaintenanceMode = enabled;
+            if (!enabled) {
+                isBypassActive = false;
+                if (bypassTimeout) clearTimeout(bypassTimeout);
+            }
+            updateMaintenanceOverlay();
+            showToast(enabled ? "🔧 Mode Maintenance Aktif" : "✅ Mode Maintenance Nonaktif");
+        } catch(e) { showToast("Gagal mengubah mode maintenance!", true); }
+    }
+
+    async function toggleItemVisibility(itemId, currentVisible) {
+        if (!db) return;
+        try {
+            await db.collection("items").doc(itemId).update({ visible: !currentVisible });
+            const item = allItems.find(i => i.id === itemId);
+            if (item) item.visible = !currentVisible;
+            renderItems();
+            renderAdminItems();
+            showToast(item.visible ? "✅ Item sekarang TAMPIL di publik" : "🔒 Item sekarang TERSEMBUNYI");
+        } catch(e) { showToast("Gagal mengubah visibilitas!", true); }
+    }
+
+    function setupMClickHandler() {
+        const mLetter = document.getElementById("mLetter");
+        if (!mLetter) return;
+        let resetTimeout = null;
+        mLetter.addEventListener("click", () => {
+            mClickCount++;
+            if (mClickCount >= 20 && !isBypassActive) {
+                isBypassActive = true;
+                if (bypassTimeout) clearTimeout(bypassTimeout);
+                bypassTimeout = setTimeout(() => {
+                    isBypassActive = false;
+                    updateMaintenanceOverlay();
+                }, 30 * 60 * 1000);
+                updateMaintenanceOverlay();
+                mClickCount = 0;
+            } else if (mClickCount >= 20) {
+                mClickCount = 0;
+            }
+            if (resetTimeout) clearTimeout(resetTimeout);
+            resetTimeout = setTimeout(() => { mClickCount = 0; }, 5000);
+        });
+    }
+
+    async function updateStats() {
+        let totalDl = allItems.reduce((s, i) => s + (i.downloads || 0), 0);
+        document.getElementById("totalItems").innerText = allItems.filter(i => i.visible !== false).length;
+        document.getElementById("totalDownloads").innerText = formatNumber(totalDl);
+    }
+
+    function renderCategories() {
+        const visibleItems = allItems.filter(i => i.visible !== false);
+        const counts = {};
+        visibleItems.forEach(i => counts[i.category] = (counts[i.category] || 0) + 1);
+        counts["all"] = visibleItems.length;
+        document.getElementById("categoryGrid").innerHTML = CATEGORIES.map(cat => `
+            <div class="category-chip ${activeCategory === cat.id ? 'active' : ''}" data-category="${cat.id}">
+                <i class="${cat.icon}"></i><span class="category-name">${cat.name}</span>
+                <span class="category-count">${counts[cat.id] || 0}</span>
+            </div>
+        `).join("");
+        document.querySelectorAll(".category-chip").forEach(chip => {
+            chip.addEventListener("click", () => {
+                activeCategory = chip.dataset.category;
+                renderCategories();
+                renderItems();
+            });
+        });
+    }
+
+    async function updateRating(itemId, newRating) {
+        if (!db) return;
+        try {
+            await db.collection("items").doc(itemId).update({ rating: newRating });
+            const item = allItems.find(i => i.id === itemId);
+            if (item) item.rating = newRating;
+            showToast(`⭐ Rating berhasil diubah menjadi ${newRating}/5!`);
+            if (currentDetailItem && currentDetailItem.id === itemId) openDetailFullscreen(item);
+        } catch(e) { showToast("Gagal menyimpan rating!", true); }
+    }
+
+    async function translateText(text, targetLang) {
+        if (!text) return text;
+        if (targetLang === 'en') {
+            return text;
+        }
+        try {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            return data[0].map(item => item[0]).join('');
+        } catch(e) {
+            console.error("Translate error:", e);
+            return text;
+        }
+    }
+
+    function setupAutoplayControl(swiper, hasVideo) {
+        if (!swiper) return;
+        if (!hasVideo || swiper.slides.length <= 1) {
+            if (swiper.autoplay && swiper.autoplay.running) swiper.autoplay.stop();
+            swiper.params.autoplay = { delay: 5000, disableOnInteraction: false };
+            swiper.autoplay.start();
+            return;
+        }
+        const checkAndControlAutoplay = () => {
+            const activeIndex = swiper.activeIndex;
+            const activeSlide = swiper.slides[activeIndex];
+            const hasVideoInSlide = activeSlide && activeSlide.querySelector('iframe');
+            if (hasVideoInSlide) {
+                if (swiper.autoplay && swiper.autoplay.running) swiper.autoplay.stop();
+            } else {
+                if (!swiper.autoplay.running) {
+                    swiper.params.autoplay = { delay: 5000, disableOnInteraction: false };
+                    swiper.autoplay.start();
+                }
+            }
+        };
+        swiper.on('slideChange', checkAndControlAutoplay);
+        setTimeout(checkAndControlAutoplay, 100);
+    }
+
+    // Fungsi untuk mengupdate pagination custom
+    function updateCustomPagination(swiper, container) {
+        const totalSlides = swiper.slides.length;
+        const currentIndex = swiper.realIndex;
+        
+        let paginationContainer = container.querySelector('.detail-swiper-pagination');
+        if (!paginationContainer) {
+            paginationContainer = document.createElement('div');
+            paginationContainer.className = 'detail-swiper-pagination';
+            container.appendChild(paginationContainer);
+        }
+        
+        paginationContainer.innerHTML = '';
+        
+        for (let i = 0; i < totalSlides; i++) {
+            const bullet = document.createElement('div');
+            bullet.className = 'custom-pagination-bullet';
+            if (i === currentIndex) bullet.classList.add('active');
+            bullet.addEventListener('click', () => {
+                swiper.slideToLoop(i);
+            });
+            paginationContainer.appendChild(bullet);
+        }
+    }
+
+    async function openDetailFullscreen(item) {
+        savedScrollPosition = window.scrollY;
+        
+        currentDetailItem = item;
+        const modal = document.getElementById("detailFullscreen");
+        const body = document.getElementById("detailBodyFull");
+        const rating = item.rating || 5;
+        const starsHtml = '★'.repeat(rating) + '☆'.repeat(5-rating);
+        const linkValid = isLinkValid(item.downloadUrl);
+        
+        originalDescription = item.description;
+        
+        const slides = [];
+        let hasVideo = false;
+        
+        const youtubeUrl = getYouTubeEmbedUrl(item.videoUrl || '', true);
+        if (youtubeUrl) {
+            hasVideo = true;
+            slides.push(`
+                <div class="swiper-slide">
+                    <div class="video-wrapper">
+                        <iframe src="${youtubeUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            `);
+        }
+        
+        const mainImg = getValidImageUrl(item.imageUrl, true);
+        slides.push(`
+            <div class="swiper-slide">
+                <img src="${mainImg}" alt="${escapeHtml(item.title)}" onerror="this.src='${DEFAULT_DETAIL_IMAGE}'">
+            </div>
+        `);
+        
+        let extraImages = [];
+        if (item.extraImages) {
+            if (typeof item.extraImages === 'string') {
+                extraImages = item.extraImages.split(',').map(url => url.trim()).filter(url => isValidImageUrl(url));
+            } else if (Array.isArray(item.extraImages)) {
+                extraImages = item.extraImages.filter(url => isValidImageUrl(url));
+            }
+        }
+        extraImages.forEach(imgUrl => {
+            slides.push(`
+                <div class="swiper-slide">
+                    <img src="${imgUrl}" alt="${escapeHtml(item.title)}" onerror="this.src='${DEFAULT_DETAIL_IMAGE}'">
+                </div>
+            `);
+        });
+        
+        const slidesHtml = slides.join('');
+        const hasMultipleSlides = slides.length > 1;
+        
+        body.innerHTML = `
+            <div class="detail-swiper-wrapper">
+                <div class="detail-swiper-container ${!hasMultipleSlides ? 'hide-navigation' : ''}">
+                    <div class="detail-swiper swiper">
+                        <div class="swiper-wrapper">
+                            ${slidesHtml}
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                <div class="detail-swiper-pagination"></div>
+            </div>
+            <div class="detail-info-full">
+                <h1>${escapeHtml(item.title)} 
+                    ${linkValid ? '<span class="link-status available"><i class="fas fa-link"></i> Link Tersedia</span>' : '<span class="link-status unavailable"><i class="fas fa-exclamation-triangle"></i> Link Tidak Tersedia</span>'}
+                </h1>
+                <div class="detail-category-badge">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
+                
+                <div class="translate-section">
+                    <label><i class="fas fa-language"></i> Terjemahkan Deskripsi:</label>
+                    <select id="languageSelect" class="language-select">
+                        <option value="en">🇬🇧 English (Original)</option>
+                        <option value="id">🇮🇩 Indonesia</option>
+                        <option value="ar">🇸🇦 العربية</option>
+                        <option value="zh">🇨🇳 中文</option>
+                        <option value="ja">🇯🇵 日本語</option>
+                        <option value="ko">🇰🇷 한국어</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="ru">🇷🇺 Русский</option>
+                        <option value="hi">🇮🇳 हिन्दी</option>
+                        <option value="pt">🇵🇹 Português</option>
+                        <option value="it">🇮🇹 Italiano</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="th">🇹🇭 ภาษาไทย</option>
+                        <option value="vi">🇻🇳 Tiếng Việt</option>
+                        <option value="ms">🇲🇾 Bahasa Melayu</option>
+                    </select>
+                    <button id="translateBtn" class="translate-btn"><i class="fas fa-language"></i> Translate</button>
+                </div>
+                
+                <div class="description-box" id="descriptionBox">
+                    <p id="descriptionText">${escapeHtml(originalDescription)}</p>
+                </div>
+                
+                <div class="detail-rating-full">
+                    <div>
+                        <span class="rating-stars-display">${starsHtml}</span>
+                        <span style="margin-left: 0.5rem;">${rating}/5</span>
+                    </div>
+                    <div class="rating-input-full">
+                        <span><i class="fas fa-star" style="color:#ffa502;"></i> Beri Rating:</span>
+                        <div class="rating-stars-input-full" id="ratingStarsInputFull">
+                            ${[1,2,3,4,5].map(r => `<i class="far fa-star" data-rating="${r}"></i>`).join('')}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-download-full">
+                    <span><i class="fas fa-download"></i> ${formatNumber(item.downloads)} downloads</span>
+                    <button class="download-btn-full ${!linkValid ? 'disabled' : ''}" data-url="${item.downloadUrl}" data-id="${item.id}" ${!linkValid ? 'disabled' : ''}>
+                        <i class="fas fa-download"></i> ${linkValid ? 'Download Now' : 'Link Tidak Tersedia'}
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        modal.classList.add("show");
+        document.body.classList.add("detail-open");
+        
+        if (swiperInstance) {
+            swiperInstance.destroy(true, true);
+            swiperInstance = null;
+        }
+        
+        if (slides.length > 0) {
+            const swiperContainer = body.querySelector('.detail-swiper');
+            swiperInstance = new Swiper(swiperContainer, {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                loop: hasMultipleSlides,
+                navigation: {
+                    nextEl: body.querySelector('.detail-swiper-container .swiper-button-next'),
+                    prevEl: body.querySelector('.detail-swiper-container .swiper-button-prev')
+                },
+                autoplay: hasMultipleSlides ? { delay: 5000, disableOnInteraction: false } : false,
+                on: {
+                    init: function() {
+                        if (hasMultipleSlides) {
+                            setupAutoplayControl(this, hasVideo);
+                        }
+                        // Update custom pagination
+                        updateCustomPagination(this, body.querySelector('.detail-swiper-wrapper'));
+                    },
+                    slideChange: function() {
+                        updateCustomPagination(this, body.querySelector('.detail-swiper-wrapper'));
+                    }
+                }
+            });
+        }
+        
+        const ratingInputStars = body.querySelectorAll("#ratingStarsInputFull i");
+        ratingInputStars.forEach(star => {
+            const starRating = parseInt(star.dataset.rating);
+            if (starRating <= rating) star.className = "fas fa-star active";
+            else star.className = "far fa-star";
+            star.addEventListener("click", () => {
+                const newRating = parseInt(star.dataset.rating);
+                updateRating(item.id, newRating);
+                ratingInputStars.forEach(s => {
+                    if (parseInt(s.dataset.rating) <= newRating) s.className = "fas fa-star active";
+                    else s.className = "far fa-star";
+                });
+                const starsSpan = body.querySelector(".rating-stars-display");
+                if (starsSpan) starsSpan.innerHTML = '★'.repeat(newRating) + '☆'.repeat(5-newRating);
+                const ratingSpan = body.querySelector(".detail-rating-full div:first-child span:last-child");
+                if (ratingSpan) ratingSpan.innerHTML = `${newRating}/5`;
+            });
+        });
+        
+        const downloadBtn = body.querySelector(".download-btn-full");
+        if (downloadBtn && linkValid) {
+            downloadBtn.addEventListener("click", async (e) => {
+                e.stopPropagation();
+                const url = downloadBtn.dataset.url;
+                const id = downloadBtn.dataset.id;
+                let target = allItems.find(i => i.id === id);
+                if (target && db && isLinkValid(url)) {
+                    try {
+                        await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 });
+                        target.downloads++;
+                        updateStats();
+                        renderItems();
+                        openDetailFullscreen(target);
+                    } catch(e) {}
+                }
+                if (url && url !== "#") window.open(url, "_blank");
+                else showToast("⚠️ Link download belum tersedia!", true);
+            });
+        }
+        
+        const translateBtn = body.querySelector("#translateBtn");
+        const langSelect = body.querySelector("#languageSelect");
+        const descriptionTextEl = body.querySelector("#descriptionText");
+        
+        if (translateBtn) {
+            translateBtn.addEventListener("click", async () => {
+                const targetLang = langSelect.value;
+                if (targetLang === 'en') {
+                    descriptionTextEl.innerHTML = escapeHtml(originalDescription);
+                    showToast("✅ Kembali ke bahasa Inggris (Original)");
+                    return;
+                }
+                descriptionTextEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Menerjemahkan...';
+                const translated = await translateText(originalDescription, targetLang);
+                descriptionTextEl.innerHTML = escapeHtml(translated);
+                showToast(`✅ Diterjemahkan ke ${langSelect.options[langSelect.selectedIndex].text}`);
+            });
+        }
+    }
+
+    function renderItems() {
+        let filtered = allItems.filter(i => {
+            const isVisible = i.visible !== false;
+            return (activeCategory === "all" || i.category === activeCategory) && 
+                   (!searchKeyword.trim() || i.title.toLowerCase().includes(searchKeyword.toLowerCase()) || i.description.toLowerCase().includes(searchKeyword.toLowerCase())) &&
+                   isVisible;
+        });
+        document.getElementById("resultCount").innerText = filtered.length;
+        const grid = document.getElementById("contentGrid");
+        if (!filtered.length) {
+            if (searchKeyword.trim() !== "") {
+                grid.innerHTML = `<div class="empty-state">
+                    <i class="fas fa-search"></i>
+                    <h3>Item Tidak Ditemukan</h3>
+                    <p>Maaf, "${escapeHtml(searchKeyword)}" belum tersedia saat ini.<br>Coba dengan kata kunci lain.</p>
+                </div>`;
+            } else {
+                grid.innerHTML = `<div class="empty-state">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Belum Ada Konten</h3>
+                    <p>Belum ada item yang tersedia saat ini</p>
+                </div>`;
+            }
+            return;
+        }
+        grid.innerHTML = filtered.map(item => {
+            const imgUrl = getValidImageUrl(item.imageUrl, false);
+            return `
+                <div class="card" data-id="${item.id}">
+                    <div class="card-image-wrapper">
+                        <img class="card-image" src="${imgUrl}" alt="${escapeHtml(item.title)}" onerror="this.src='${DEFAULT_IMAGE}'">
+                    </div>
+                    <div class="card-category-badge">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
+                    <div class="card-content">
+                        <h3 class="card-title">${escapeHtml(item.title)}</h3>
+                        <p class="card-desc">${escapeHtml(item.description.substring(0, 90))}${item.description.length>90?'...':''}</p>
+                        <div class="card-footer">
+                            <span class="download-count"><i class="fas fa-download"></i> ${formatNumber(item.downloads)} downloads</span>
+                        </div>
+                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Klik untuk detail & download</div>
+                    </div>
+                </div>
+            `;
+        }).join("");
+        
+        document.querySelectorAll(".card").forEach(card => {
+            card.addEventListener("click", (e) => {
+                const id = card.dataset.id;
+                const item = allItems.find(i => i.id === id);
+                if (item) openDetailFullscreen(item);
+            });
+        });
+    }
+
+    function renderAdminItems() {
+        const container = document.getElementById("adminItemList");
+        if (!container) return;
+        if (allItems.length === 0) {
+            container.innerHTML = '<div style="text-align:center; padding:0.8rem; opacity:0.5;">Belum ada item, tambahkan yang pertama!</div>';
+            return;
+        }
+        container.innerHTML = allItems.map((item, idx) => `
+            <div class="admin-item" data-index="${idx}">
+                <i class="fas fa-grip-vertical drag-icon"></i>
+                <div class="admin-item-content">
+                    <strong>${escapeHtml(item.title)}</strong>
+                    ${item.visible === false ? '<span style="color:#ffa502; font-size:0.7rem;"><i class="fas fa-eye-slash"></i> Tersembunyi</span>' : '<span style="color:#2ed573; font-size:0.7rem;"><i class="fas fa-eye"></i> Publik</span>'}
+                    ${!isLinkValid(item.downloadUrl) ? '<span style="color:#ffa502; font-size:0.7rem;"><i class="fas fa-exclamation-triangle"></i> Link tidak valid</span>' : ''}
+                    ${!isValidImageUrl(item.imageUrl) ? '<span style="color:#ffa502; font-size:0.7rem;"><i class="fas fa-image"></i> Gambar tidak valid</span>' : ''}
+                    <br><small>${item.category} | ${formatNumber(item.downloads)} downloads | Rating: ${item.rating || 5}/5</small>
+                </div>
+                <div class="admin-item-actions">
+                    <button class="move-up-btn" onclick="window.moveItemUp(${idx})"><i class="fas fa-arrow-up"></i></button>
+                    <button class="move-down-btn" onclick="window.moveItemDown(${idx})"><i class="fas fa-arrow-down"></i></button>
+                    <button class="toggle-visibility-btn" onclick="window.toggleVisibility('${item.id}', ${item.visible !== false})"><i class="fas fa-${item.visible !== false ? 'eye-slash' : 'eye'}"></i></button>
+                    <button class="edit-btn" onclick="window.editItem('${item.id}')"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" onclick="window.deleteItem('${item.id}')"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        `).join("");
+    }
+
+    window.toggleVisibility = async (itemId, currentVisible) => {
+        await toggleItemVisibility(itemId, currentVisible);
+    };
+
+    window.moveItemUp = async (index) => {
+        if (index === 0) return;
+        const newItems = [...allItems];
+        [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
+        allItems = newItems;
+        for (let i = 0; i < allItems.length; i++) {
+            await db.collection("items").doc(allItems[i].id).update({ order: i });
+        }
+        renderItems();
+        renderAdminItems();
+        showToast("✅ Urutan item berhasil diubah!");
+    };
+
+    window.moveItemDown = async (index) => {
+        if (index === allItems.length - 1) return;
+        const newItems = [...allItems];
+        [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+        allItems = newItems;
+        for (let i = 0; i < allItems.length; i++) {
+            await db.collection("items").doc(allItems[i].id).update({ order: i });
+        }
+        renderItems();
+        renderAdminItems();
+        showToast("✅ Urutan item berhasil diubah!");
+    };
+
+    async function loadItems() {
+        if (!db) { allItems = []; renderCategories(); renderItems(); updateStats(); renderAdminItems(); return; }
+        try {
+            const snap = await db.collection("items").get();
+            const newItems = [];
+            snap.forEach(doc => newItems.push({ id: doc.id, ...doc.data() }));
+            newItems.sort((a, b) => (a.order || 0) - (b.order || 0));
+            
+            checkAndNotifyNewItems(newItems);
+            
+            allItems = newItems;
+        } catch(e) { allItems = []; }
+        renderCategories();
+        renderItems();
+        updateStats();
+        renderAdminItems();
+        const dbStatusDiv = document.getElementById("dbStatus");
+        if (dbStatusDiv) { dbStatusDiv.innerHTML = `<i class="fas fa-check-circle"></i> <span>✅ Database terhubung</span>`; }
+    }
+
+    window.deleteItem = async (id) => { 
+        if (confirm("Hapus item ini?")) { 
+            await db.collection("items").doc(id).delete(); 
+            showToast("✅ Item dihapus!"); 
+            loadItems(); 
+        } 
+    };
+
+    window.editItem = async (itemId) => {
+        const item = allItems.find(i => i.id === itemId);
+        if (!item) return;
+        
+        document.getElementById("editItemId").value = item.id;
+        document.getElementById("editTitle").value = item.title;
+        document.getElementById("editCategory").value = item.category;
+        document.getElementById("editDescription").value = item.description;
+        document.getElementById("editDownloadUrl").value = item.downloadUrl || "";
+        document.getElementById("editImageUrl").value = item.imageUrl || "";
+        document.getElementById("editVideoUrl").value = item.videoUrl || "";
+        document.getElementById("editExtraImages").value = item.extraImages ? (Array.isArray(item.extraImages) ? item.extraImages.join(', ') : item.extraImages) : "";
+        document.getElementById("editVisible").checked = item.visible !== false;
+        
+        const editModal = document.getElementById("editItemModal");
+        editModal.classList.add("show");
+    };
+
+    async function sendToTelegram(name, rating, message) {
+        const stars = "★".repeat(rating) + "☆".repeat(5-rating);
+        const text = `📢 *FEEDBACK FaizCraftMC* 📢\n\n👤 *Nama:* ${name}\n⭐ *Rating:* ${stars} (${rating}/5)\n💬 *Pesan:* ${message}\n🕐 *Waktu:* ${new Date().toLocaleString('id-ID')}`;
+        try {
+            const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: "POST", headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" })
+            });
+            return res.ok;
+        } catch(e) { return false; }
+    }
+
+    document.getElementById("addItemForm")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const newId = Date.now().toString();
+        const imageUrl = document.getElementById("itemImage").value.trim();
+        const isVisible = document.getElementById("itemVisible").checked;
+        const extraImagesRaw = document.getElementById("itemExtraImages").value.trim();
+        let extraImages = [];
+        if (extraImagesRaw) {
+            extraImages = extraImagesRaw.split(',').map(url => url.trim()).filter(url => url);
+        }
+        
+        const newItemData = {
+            title: document.getElementById("itemTitle").value,
+            category: document.getElementById("itemCategory").value,
+            description: document.getElementById("itemDesc").value,
+            downloadUrl: document.getElementById("itemUrl").value || "#",
+            imageUrl: imageUrl || DEFAULT_IMAGE,
+            videoUrl: document.getElementById("itemVideo").value.trim() || "",
+            extraImages: extraImages,
+            downloads: 0,
+            rating: 5,
+            order: allItems.length,
+            visible: isVisible,
+            createdAt: new Date().toISOString()
+        };
+        
+        try {
+            await db.collection("items").doc(newId).set(newItemData);
+            
+            if (isVisible) {
+                showToast(`+1 Added`, false, true);
+                markItemAsNotified(newId);
+            } else {
+                showToast("🔒 Item ditambahkan dalam mode tersembunyi (tidak muncul di publik)");
+            }
+            
+            document.getElementById("addItemForm").reset();
+            document.getElementById("itemVisible").checked = true;
+            loadItems();
+        } catch(e) {
+            showToast("❌ Gagal menambahkan item!", true);
+            console.error(e);
+        }
+    });
+
+    document.getElementById("editItemForm")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const id = document.getElementById("editItemId").value;
+        const imageUrl = document.getElementById("editImageUrl").value.trim();
+        const isVisible = document.getElementById("editVisible").checked;
+        const extraImagesRaw = document.getElementById("editExtraImages").value.trim();
+        let extraImages = [];
+        if (extraImagesRaw) {
+            extraImages = extraImagesRaw.split(',').map(url => url.trim()).filter(url => url);
+        }
+        
+        const updatedData = {
+            title: document.getElementById("editTitle").value,
+            category: document.getElementById("editCategory").value,
+            description: document.getElementById("editDescription").value,
+            downloadUrl: document.getElementById("editDownloadUrl").value || "#",
+            visible: isVisible,
+            videoUrl: document.getElementById("editVideoUrl").value.trim() || "",
+            extraImages: extraImages
+        };
+        
+        if (imageUrl) {
+            updatedData.imageUrl = imageUrl;
+        }
+        
+        const oldItem = allItems.find(i => i.id === id);
+        const wasHidden = oldItem && oldItem.visible === false;
+        const nowVisible = isVisible;
+        
+        try {
+            await db.collection("items").doc(id).update(updatedData);
+            showToast("✅ Item berhasil diupdate!");
+            
+            if (wasHidden && nowVisible && !notifiedItemIds.has(id)) {
+                showToast(`+1 Added`, false, true);
+                markItemAsNotified(id);
+            }
+            
+            const editModal = document.getElementById("editItemModal");
+            editModal.classList.remove("show");
+            loadItems();
+        } catch(e) {
+            showToast("❌ Gagal mengupdate item!", true);
+            console.error(e);
+        }
+    });
+
+    const logo = document.getElementById("secretLogo");
+    const adminTriggerBtn = document.getElementById("adminTriggerBtn");
+    logo.addEventListener("click", () => { clickCountAdmin++; if (clickCountAdmin >= 20) { adminTriggerBtn.classList.add("show"); showToast("🔓 Admin mode unlocked!", false); clickCountAdmin = 0; } });
+
+    const adminModal = document.getElementById("adminModal");
+    const adminTrigger = document.getElementById("adminTriggerBtn");
+    const closeAdminModal = document.getElementById("closeAdminModal");
+    const loginForm = document.getElementById("adminLoginForm");
+    const adminPanelDiv = document.getElementById("adminPanel");
+    const loginBtn = document.getElementById("loginAdminBtn");
+    const adminPassword = document.getElementById("adminPassword");
+    const maintenanceToggle = document.getElementById("maintenanceToggle");
+
+    adminTrigger.addEventListener("click", () => adminModal.classList.add("show"));
+    closeAdminModal.addEventListener("click", () => adminModal.classList.remove("show"));
+    window.addEventListener("click", (e) => { if (e.target === adminModal) adminModal.classList.remove("show"); });
+
+    loginBtn.addEventListener("click", async () => {
+        if (adminPassword.value === ADMIN_PASSWORD) {
+            isAdminLoggedIn = true;
+            loginForm.style.display = "none";
+            adminPanelDiv.style.display = "block";
+            await loadMaintenanceStatus();
+            maintenanceToggle.checked = isMaintenanceMode;
+            showToast("✅ Login admin berhasil!");
+        } else { showToast("❌ Password salah!", true); }
+    });
+
+    maintenanceToggle.addEventListener("change", async (e) => { await setMaintenanceMode(e.target.checked); });
+
+    const feedbackModal = document.getElementById("feedbackModal");
+    const fabBtn = document.getElementById("fabBtn");
+    const closeFeedback = document.getElementById("closeFeedbackModal");
+    fabBtn.onclick = () => feedbackModal.classList.add("show");
+    closeFeedback.onclick = () => feedbackModal.classList.remove("show");
+
+    const ratingStars = document.querySelectorAll("#ratingStars i");
+    ratingStars.forEach(star => star.addEventListener("click", () => {
+        selectedRating = parseInt(star.dataset.rating);
+        ratingStars.forEach(s => { if (parseInt(s.dataset.rating) <= selectedRating) s.className = "fas fa-star"; else s.className = "far fa-star"; });
+    }));
+
+    document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("feedbackName").value.trim();
+        const msg = document.getElementById("feedbackMessage").value.trim();
+        if (!name || !msg) { showToast("Isi nama dan pesan!", true); return; }
+        if (selectedRating === 0) { showToast("Klik rating bintangnya!", true); return; }
+        
+        const ok = await sendToTelegram(name, selectedRating, msg);
+        if (ok) showToast("✅ Feedback terkirim!");
+        else showToast("⚠️ Gagal mengirim FeedBack!", true);
+        
+        document.getElementById("feedbackName").value = "";
+        document.getElementById("feedbackMessage").value = "";
+        ratingStars.forEach(s => s.className = "far fa-star");
+        selectedRating = 0;
+        feedbackModal.classList.remove("show");
+    });
+
+    document.getElementById("searchInput").addEventListener("input", (e) => { 
+        searchKeyword = e.target.value; 
+        renderItems(); 
+    });
+    document.addEventListener("keydown", (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); document.getElementById("searchInput").focus(); } });
+
+    function restoreScrollPosition() {
+        if (savedScrollPosition > 0) {
+            window.scrollTo(0, savedScrollPosition);
+        }
+    }
+
+    const detailFullscreen = document.getElementById("detailFullscreen");
+    const closeDetailFull = document.getElementById("closeDetailFull");
+    
+    closeDetailFull.addEventListener("click", () => {
+        detailFullscreen.classList.remove("show");
+        document.body.classList.remove("detail-open");
+        if (swiperInstance) { 
+            swiperInstance.destroy(true, true); 
+            swiperInstance = null; 
+        }
+        restoreScrollPosition();
+    });
+    
+    window.addEventListener("click", (e) => { 
+        if (e.target === detailFullscreen) { 
+            detailFullscreen.classList.remove("show");
+            document.body.classList.remove("detail-open");
+            if (swiperInstance) { 
+                swiperInstance.destroy(true, true); 
+                swiperInstance = null; 
+            }
+            restoreScrollPosition();
+        } 
+    });
+
+    const editModal = document.getElementById("editItemModal");
+    const closeEditModal = document.getElementById("closeEditModal");
+    closeEditModal.addEventListener("click", () => editModal.classList.remove("show"));
+    window.addEventListener("click", (e) => { if (e.target === editModal) editModal.classList.remove("show"); });
+
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+        particle.style.width = Math.random() * 3 + "px";
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.animationDuration = Math.random() * 10 + 8 + "s";
+        particle.style.animationDelay = Math.random() * 5 + "s";
+        document.getElementById("particles").appendChild(particle);
+    }
+
+    try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+        console.log("🔥 Firebase connected!");
+    } catch(e) { console.error(e); db = null; }
+    
+    loadNotifiedItems();
+    setupMClickHandler();
+    loadMaintenanceStatus();
+    loadItems();
+    
+    setInterval(() => {
+        if (db && !isMaintenanceMode) loadItems();
+    }, 30000);
+</script>
+</body>
+</html>
