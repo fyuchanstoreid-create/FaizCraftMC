@@ -44,7 +44,7 @@
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #ff4757, #ff6b81); border-radius: 10px; }
         
         .navbar { background: rgba(10, 12, 21, 0.95); backdrop-filter: blur(20px); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 71, 87, 0.15); box-shadow: 0 2px 15px rgba(0,0,0,0.3); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; gap: 20px; }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 2rem; gap: 20px; flex-direction: row; flex-wrap: nowrap; }
         
         /* Logo Gambar Custom */
         .logo-icon {
@@ -55,6 +55,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
         .logo-icon img {
             width: 100%;
@@ -66,11 +67,13 @@
             transform: scale(1.05) rotate(5deg);
         }
         
-        /* Search Box di Navbar - lebih dekat ke logo */
+        /* Search Box - satu baris horizontal dengan icon */
         .nav-search-wrapper {
             position: relative;
-            width: 280px;
-            margin-left: 0;
+            width: 360px;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
         }
         .nav-search-box {
             width: 100%;
@@ -79,7 +82,7 @@
             border-radius: 50px;
             background: rgba(255, 255, 255, 0.05);
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             transition: all 0.3s;
             font-family: 'Poppins', sans-serif;
         }
@@ -89,7 +92,9 @@
             background: rgba(255, 255, 255, 0.1);
         }
         .nav-search-box::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.7rem;
+            transition: opacity 0.3s ease;
         }
         .nav-search-wrapper i {
             position: absolute;
@@ -97,18 +102,9 @@
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.85rem;
-        }
-        .nav-search-shortcut {
-            position: absolute;
-            right: 0.8rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.15rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.6rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            pointer-events: none;
+            z-index: 1;
         }
         
         .admin-trigger { position: fixed; bottom: 100px; right: 30px; width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #2ed573, #00a8ff); border: none; color: white; font-size: 1.5rem; cursor: pointer; z-index: 1001; opacity: 0; transform: scale(0); transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3); }
@@ -124,9 +120,10 @@
         .maintenance-overlay p { color: rgba(255,255,255,0.5); max-width: 400px; line-height: 1.6; margin-bottom: 0.8rem; font-size: 0.9rem; }
         .maintenance-overlay .small-text { font-size: 0.7rem; opacity: 0.3; }
         
-        .categories-wrapper { margin-top: 60px; padding: 0.6rem 2rem; background: rgba(10, 12, 21, 0.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 71, 87, 0.1); display: flex; justify-content: center; }
+        /* Jarak kategori dari navbar */
+        .categories-wrapper { margin-top: 85px; padding: 0.8rem 2rem; background: rgba(10, 12, 21, 0.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 71, 87, 0.1); display: flex; justify-content: center; }
         .categories-container { max-width: 1000px; width: 100%; margin: 0 auto; }
-        .category-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; align-items: center; }
+        .category-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; align-items: center; }
         .category-chip { padding: 0.5rem 1.3rem; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); white-space: nowrap; font-weight: 600; font-size: 0.9rem; }
         .category-chip:hover { transform: translateY(-2px); background: rgba(255, 71, 87, 0.15); border-color: rgba(255, 71, 87, 0.4); }
         .category-chip.active { background: linear-gradient(135deg, #ff4757, #ff6b81); border-color: transparent; box-shadow: 0 4px 12px rgba(255,71,87,0.3); }
@@ -233,7 +230,7 @@
             padding: 2rem;
         }
         
-        /* Swiper Slider Styling - Tombol di tengah vertikal, pagination di bawah */
+        /* Swiper Slider Styling */
         .detail-swiper-wrapper {
             position: relative;
             margin-bottom: 1.5rem;
@@ -390,9 +387,6 @@
             font-family: 'Poppins', sans-serif;
             cursor: pointer;
         }
-        .language-select option {
-            background: #1a1d2e;
-        }
         .translate-btn {
             background: linear-gradient(135deg, #00a8ff, #0097e6);
             border: none;
@@ -417,6 +411,9 @@
         .description-box p {
             font-size: 0.95rem;
             opacity: 0.9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.6;
         }
         
         .detail-rating-full {
@@ -562,13 +559,13 @@
         .rating i:hover, .rating i.active { color: #ffa502; }
         
         @media (max-width: 768px) {
-            .nav-container { justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+            .nav-container { justify-content: center; flex-wrap: nowrap; gap: 0.8rem; }
             .logo-icon { width: 32px; height: 32px; }
-            .nav-search-wrapper { width: 200px; }
+            .nav-search-wrapper { width: 240px; }
             .hero-content h1 { font-size: 1.8rem; letter-spacing: 2px; }
             .subtitle-text { font-size: 1.1rem; letter-spacing: 3px; }
             .category-chip { padding: 0.4rem 1rem; font-size: 0.75rem; }
-            .categories-wrapper { margin-top: 70px; padding: 0.5rem 1rem; }
+            .categories-wrapper { margin-top: 95px; padding: 0.5rem 1rem; }
             .content-grid { grid-template-columns: 1fr; gap: 1rem; }
             .stats { gap: 1rem; }
             .stat-card { padding: 0.5rem 1rem; min-width: 110px; }
@@ -616,7 +613,6 @@
         <div class="nav-search-wrapper">
             <i class="fas fa-search"></i>
             <input type="text" id="navSearchInput" class="nav-search-box" placeholder="Search...">
-            <span class="nav-search-shortcut">⌘K</span>
         </div>
     </div>
 </nav>
@@ -628,7 +624,7 @@
 </div>
 
 <div class="top-banner">
-    <img src="BANNER3.png" alt="FaizCraftMC Banner">
+    <img src="BANNER3.jpg" alt="FaizCraftMC Banner">
 </div>
 
 <section class="hero">
@@ -637,7 +633,7 @@
             <h1><span class="gradient-text">FaizCraftMC</span></h1>
             <div class="subtitle-text">MARKETPLACE</div>
         </div>
-        <div class="hero-description">Download Addon, Texture Pack, World, Skin Bahkan Mashups Terbaik</div>
+        <div class="hero-description">Download The Best Addons, Texture Packs, Worlds, Skins, And Even Mashups</div>
     </div>
 </section>
 
@@ -649,14 +645,14 @@
         </div>
         <div class="stat-card">
             <span class="stat-number" id="totalItems">0</span>
-            <span class="stat-label">Items Tersedia</span>
+            <span class="stat-label">Items Available</span>
         </div>
     </div>
 </div>
 
 <div class="container">
     <div class="content-header">
-        <div class="result-info">Menampilkan <strong id="resultCount">0</strong> item</div>
+        <div class="result-info">Showing <strong id="resultCount">0</strong> Items</div>
     </div>
     <div class="content-grid" id="contentGrid">
         <div class="loader"><i class="fas fa-spinner fa-pulse"></i> Memuat marketplace...</div>
@@ -666,7 +662,7 @@
 <!-- DETAIL FULLSCREEN MODAL -->
 <div id="detailFullscreen" class="detail-fullscreen">
     <div class="detail-header">
-        <h2><i class="fas fa-crown"></i> Detail Konten</h2>
+        <h2><i class="fas fa-crown"></i> Content Details</h2>
         <div class="close-detail-full" id="closeDetailFull">&times;</div>
     </div>
     <div class="detail-body-full" id="detailBodyFull"></div>
@@ -706,7 +702,7 @@
                         <option value="mashup">Mashup</option>
                     </select>
                 </div>
-                <div class="form-group"><label>Deskripsi</label><textarea id="itemDesc" rows="3" required placeholder="Deskripsi lengkap..."></textarea></div>
+                <div class="form-group"><label>Deskripsi</label><textarea id="itemDesc" rows="3" required placeholder="Deskripsi lengkap... (gunakan bullet points dengan - atau *)"></textarea></div>
                 <div class="form-group"><label>Link Download</label><input type="url" id="itemUrl" placeholder="https://..."></div>
                 <div class="form-group"><label>URL Gambar Utama</label>
                     <input type="url" id="itemImage" placeholder="https://... (contoh: https://picsum.photos/id/1/400/200)">
@@ -752,7 +748,7 @@
                     <option value="mashup">Mashup</option>
                 </select>
             </div>
-            <div class="form-group"><label>Deskripsi</label><textarea id="editDescription" rows="4" required></textarea></div>
+            <div class="form-group"><label>Deskripsi</label><textarea id="editDescription" rows="4" required placeholder="Gunakan bullet points dengan - atau * untuk membuat list"></textarea></div>
             <div class="form-group"><label>Link Download</label><input type="url" id="editDownloadUrl" placeholder="https://..."></div>
             <div class="form-group"><label>URL Gambar Utama</label><input type="url" id="editImageUrl" placeholder="https://..."></div>
             <div class="form-group"><label>URL Video YouTube</label><input type="url" id="editVideoUrl" placeholder="https://youtu.be/..."></div>
@@ -770,9 +766,9 @@
 
 <div id="feedbackModal" class="modal">
     <div class="modal-content">
-        <div class="modal-header"><h2><i class="fab fa-telegram"></i> Kirim Feedback</h2><div class="close-modal" id="closeFeedbackModal">&times;</div></div>
+        <div class="modal-header"><h2><i class="fab fa-telegram"></i> Send Feedback</h2><div class="close-modal" id="closeFeedbackModal">&times;</div></div>
         <form id="feedbackForm">
-            <div class="form-group"><label>Nama</label><input type="text" id="feedbackName" placeholder="Nama kamu" required></div>
+            <div class="form-group"><label>Name</label><input type="text" id="feedbackName" placeholder="Your name" required></div>
             <div class="form-group"><label>Rating</label>
                 <div class="rating" id="ratingStars">
                     <i class="far fa-star" data-rating="1"></i>
@@ -782,23 +778,23 @@
                     <i class="far fa-star" data-rating="5"></i>
                 </div>
             </div>
-            <div class="form-group"><label>Pesan</label><textarea id="feedbackMessage" rows="4" placeholder="Tulis feedback atau request..." required></textarea></div>
-            <button type="submit" class="btn-submit"><i class="fab fa-telegram"></i> Kirim</button>
+            <div class="form-group"><label>Message</label><textarea id="feedbackMessage" rows="4" placeholder="Write feedback or request..." required></textarea></div>
+            <button type="submit" class="btn-submit"><i class="fab fa-telegram"></i> Send</button>
         </form>
     </div>
 </div>
 
 <div id="maintenanceOverlay" class="maintenance-overlay hidden">
     <div class="maintenance-icon"><i class="fas fa-tools"></i></div>
-    <h2>Sedang Dalam <span class="m-letter" id="mLetter">M</span>aintenance</h2>
-    <p>Marketplace sedang dalam proses perawatan.<br>Silakan kembali lagi nanti.</p>
-    <p class="small-text">FaizCraftMC Team</p>
+    <h2>Under <span class="m-letter" id="mLetter">M</span>aintenance</h2>
+    <p>The website is currently under maintenance.<br>Please come back later.</p>
+    <p class="small-text">FaizCraftMC</p>
 </div>
 
 <button class="fab" id="fabBtn"><i class="fas fa-comment-dots"></i></button>
 <button class="admin-trigger" id="adminTriggerBtn"><i class="fas fa-crown"></i></button>
 
-<div class="footer"><p>© 2025 FaizCraftMC Marketplace</p></div>
+<div class="footer"><p>© 2026 FaizCraftMC Marketplace</p></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -817,7 +813,7 @@
 
     const TELEGRAM_BOT_TOKEN = "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE";
     const TELEGRAM_CHAT_ID = "8367322295";
-    const ADMIN_PASSWORD = "faizcraftmc2025";
+    const ADMIN_PASSWORD = "Faiz040713";
 
     const CATEGORIES = [
         { id: "all", name: "Semua", icon: "fas fa-th-large" },
@@ -835,12 +831,59 @@
     let swiperInstance = null;
     let savedScrollPosition = 0;
     let originalDescription = "";
+    let typingInterval = null;
+    let currentPhraseIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
     
     const NOTIFIED_ITEMS_KEY = "faizcraftmc_notified_items";
     let notifiedItemIds = new Set();
+    
+    const PLACEHOLDER_TEXTS = [
+        "Search...",
+        "Search Mods By FaizCraftMC..."
+    ];
+    const TYPING_SPEED = 70;
+    const DELETING_SPEED = 45;
+    const PAUSE_BETWEEN = 2000;
 
     const DEFAULT_IMAGE = "https://picsum.photos/id/20/400/200";
     const DEFAULT_DETAIL_IMAGE = "https://picsum.photos/id/20/800/400";
+
+    function startTypingAnimation() {
+        const searchInput = document.getElementById("navSearchInput");
+        if (!searchInput) return;
+        
+        function animatePlaceholder() {
+            const currentPhrase = PLACEHOLDER_TEXTS[currentPhraseIndex];
+            
+            if (!isDeleting) {
+                if (currentCharIndex <= currentPhrase.length) {
+                    searchInput.placeholder = currentPhrase.substring(0, currentCharIndex);
+                    currentCharIndex++;
+                    typingInterval = setTimeout(animatePlaceholder, TYPING_SPEED);
+                } else {
+                    isDeleting = true;
+                    typingInterval = setTimeout(animatePlaceholder, PAUSE_BETWEEN);
+                }
+            } else {
+                if (currentCharIndex > 0) {
+                    searchInput.placeholder = currentPhrase.substring(0, currentCharIndex - 1);
+                    currentCharIndex--;
+                    typingInterval = setTimeout(animatePlaceholder, DELETING_SPEED);
+                } else {
+                    isDeleting = false;
+                    currentPhraseIndex = (currentPhraseIndex + 1) % PLACEHOLDER_TEXTS.length;
+                    typingInterval = setTimeout(animatePlaceholder, TYPING_SPEED);
+                }
+            }
+        }
+        
+        if (typingInterval) clearTimeout(typingInterval);
+        currentCharIndex = 0;
+        isDeleting = false;
+        animatePlaceholder();
+    }
 
     function extractYouTubeId(url) {
         if (!url) return null;
@@ -1195,12 +1238,12 @@
             </div>
             <div class="detail-info-full">
                 <h1>${escapeHtml(item.title)} 
-                    ${linkValid ? '<span class="link-status available"><i class="fas fa-link"></i> Link Tersedia</span>' : '<span class="link-status unavailable"><i class="fas fa-exclamation-triangle"></i> Link Tidak Tersedia</span>'}
+                    ${linkValid ? '<span class="link-status available"><i class="fas fa-link"></i> Link Available</span>' : '<span class="link-status unavailable"><i class="fas fa-exclamation-triangle"></i> Link Not Available</span>'}
                 </h1>
                 <div class="detail-category-badge">${getCategoryIcon(item.category)} ${item.category.toUpperCase()}</div>
                 
                 <div class="translate-section">
-                    <label><i class="fas fa-language"></i> Terjemahkan Deskripsi:</label>
+                    <label><i class="fas fa-language"></i> Translate Description:</label>
                     <select id="languageSelect" class="language-select">
                         <option value="en">🇬🇧 English (Original)</option>
                         <option value="id">🇮🇩 Indonesia</option>
@@ -1224,7 +1267,7 @@
                 </div>
                 
                 <div class="description-box" id="descriptionBox">
-                    <p id="descriptionText">${escapeHtml(originalDescription)}</p>
+                    <p id="descriptionText" style="white-space: pre-wrap; word-wrap: break-word;">${escapeHtml(originalDescription)}</p>
                 </div>
                 
                 <div class="detail-rating-full">
@@ -1233,7 +1276,7 @@
                         <span style="margin-left: 0.5rem;">${rating}/5</span>
                     </div>
                     <div class="rating-input-full">
-                        <span><i class="fas fa-star" style="color:#ffa502;"></i> Beri Rating:</span>
+                        <span><i class="fas fa-star" style="color:#ffa502;"></i> Rate It:</span>
                         <div class="rating-stars-input-full" id="ratingStarsInputFull">
                             ${[1,2,3,4,5].map(r => `<i class="far fa-star" data-rating="${r}"></i>`).join('')}
                         </div>
@@ -1329,12 +1372,14 @@
                 const targetLang = langSelect.value;
                 if (targetLang === 'en') {
                     descriptionTextEl.innerHTML = escapeHtml(originalDescription);
+                    descriptionTextEl.style.whiteSpace = "pre-wrap";
                     showToast("✅ Kembali ke bahasa Inggris (Original)");
                     return;
                 }
                 descriptionTextEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Menerjemahkan...';
                 const translated = await translateText(originalDescription, targetLang);
                 descriptionTextEl.innerHTML = escapeHtml(translated);
+                descriptionTextEl.style.whiteSpace = "pre-wrap";
                 showToast(`✅ Diterjemahkan ke ${langSelect.options[langSelect.selectedIndex].text}`);
             });
         }
@@ -1353,14 +1398,14 @@
             if (searchKeyword.trim() !== "") {
                 grid.innerHTML = `<div class="empty-state">
                     <i class="fas fa-search"></i>
-                    <h3>Item Tidak Ditemukan</h3>
-                    <p>Maaf, "${escapeHtml(searchKeyword)}" belum tersedia saat ini.<br>Coba dengan kata kunci lain.</p>
+                    <h3>Item Not Found</h3>
+                    <p>Sorry, "${escapeHtml(searchKeyword)}" is not available at this time.<br>Try another keyword</p>
                 </div>`;
             } else {
                 grid.innerHTML = `<div class="empty-state">
                     <i class="fas fa-box-open"></i>
-                    <h3>Belum Ada Konten</h3>
-                    <p>Belum ada item yang tersedia saat ini</p>
+                    <h3>No Content Yet</h3>
+                    <p>There are no items available at this time</p>
                 </div>`;
             }
             return;
@@ -1379,7 +1424,7 @@
                         <div class="card-footer">
                             <span class="download-count"><i class="fas fa-download"></i> ${formatNumber(item.downloads)} downloads</span>
                         </div>
-                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Klik untuk detail & download</div>
+                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Click for details & download</div>
                     </div>
                 </div>
             `;
@@ -1652,8 +1697,8 @@
         if (selectedRating === 0) { showToast("Klik rating bintangnya!", true); return; }
         
         const ok = await sendToTelegram(name, selectedRating, msg);
-        if (ok) showToast("✅ Feedback terkirim!");
-        else showToast("⚠️ Gagal mengirim FeedBack!", true);
+        if (ok) showToast("✅ Feedback sent!");
+        else showToast("⚠️ Failed to send FeedBack!", true);
         
         document.getElementById("feedbackName").value = "";
         document.getElementById("feedbackMessage").value = "";
@@ -1734,6 +1779,7 @@
     setupMClickHandler();
     loadMaintenanceStatus();
     loadItems();
+    startTypingAnimation();
     
     setInterval(() => {
         if (db && !isMaintenanceMode) loadItems();
