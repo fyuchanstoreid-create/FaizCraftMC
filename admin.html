@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - FaizCraftMC</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: #0a0c15; 
+            color: #ffffff; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0c15 0%, #1a0b1a 25%, #0f172a 50%, #1a1a2e 75%, #0a0c15 100%);
+        }
+        .admin-wrapper {
+            width: 100%;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        .admin-card {
+            background: linear-gradient(145deg, rgba(25, 28, 45, 0.95), rgba(18, 20, 35, 0.95));
+            backdrop-filter: blur(15px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .admin-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4757, #ffa502, #ff4757);
+        }
+        .admin-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: radial-gradient(ellipse at bottom, rgba(255,71,87,0.05), transparent);
+            pointer-events: none;
+        }
+        .admin-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .admin-logo i {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .admin-logo h1 {
+            font-size: 1.8rem;
+            margin-top: 0.5rem;
+            background: linear-gradient(135deg, #fff, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+        .admin-logo .subtitle {
+            font-size: 0.8rem;
+            opacity: 0.4;
+            margin-top: 0.2rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .form-group label i {
+            color: #ffa502;
+            margin-right: 0.5rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff4757;
+            box-shadow: 0 0 20px rgba(255,71,87,0.2);
+            background: rgba(255,255,255,0.05);
+        }
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+        .btn-login {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #ff4757, #e84118);
+            border: none;
+            border-radius: 40px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-login:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,71,87,0.4);
+        }
+        .btn-login:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .login-attempts {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #ffa502;
+            position: relative;
+            z-index: 1;
+        }
+        .login-attempts.locked {
+            color: #ff4757;
+            font-weight: 600;
+        }
+        .admin-panel {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+        .admin-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .panel-header h2 {
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .panel-header .btn-logout {
+            background: rgba(255,71,87,0.2);
+            border: 1px solid rgba(255,71,87,0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            color: #ff4757;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+        }
+        .panel-header .btn-logout:hover {
+            background: rgba(255,71,87,0.3);
+            transform: scale(1.05);
+        }
+        .stats-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 0.8rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .stat-box:hover {
+            border-color: rgba(255,71,87,0.2);
+            transform: translateY(-2px);
+        }
+        .stat-box .number {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .stat-box .label {
+            font-size: 0.65rem;
+            opacity: 0.6;
+            margin-top: 0.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .action-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .action-btn:hover {
+            background: rgba(255,71,87,0.1);
+            border-color: rgba(255,71,87,0.3);
+            transform: translateX(5px);
+        }
+        .action-btn.danger:hover {
+            background: rgba(255,71,87,0.2);
+            border-color: #ff4757;
+        }
+        .action-btn i {
+            font-size: 1.2rem;
+        }
+        .action-btn .badge {
+            background: #ff4757;
+            color: white;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            margin-left: 0.3rem;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .back-link a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .back-link a:hover {
+            color: #ffa502;
+        }
+        .security-badge {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            opacity: 0.2;
+            position: relative;
+            z-index: 1;
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e1f2e;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            z-index: 999;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid #2ed573;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+        }
+        .toast.error { border-left-color: #ff4757; }
+        .toast.warning { border-left-color: #ffa502; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @media (max-width: 480px) {
+            .admin-wrapper { padding: 1rem; }
+            .admin-card { padding: 1.5rem; }
+            .stats-panel { grid-template-columns: 1fr 1fr; }
+            .admin-logo i { font-size: 2.5rem; }
+            .admin-logo h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <div class="admin-card">
+            <div class="admin-logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>Admin Panel</h1>
+                <div class="subtitle">FaizCraftMC Marketplace</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm">
+                <div class="form-group">
+                    <label><i class="fas fa-key"></i> Admin Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" autocomplete="off">
+                </div>
+                <button class="btn-login" id="loginBtn">
+                    <i class="fas fa-unlock"></i> Login
+                </button>
+                <div id="loginAttempts" class="login-attempts"></div>
+            </div>
+            
+            <!-- Admin Panel -->
+            <div id="adminPanel" class="admin-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-cog"></i> Dashboard</h2>
+                    <button class="btn-logout" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+                
+                <div class="stats-panel">
+                    <div class="stat-box">
+                        <div class="number" id="totalItems">0</div>
+                        <div class="label">Items</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="totalDownloads">0</div>
+                        <div class="label">Downloads</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="maintenanceStatus">⚪</div>
+                        <div class="label">Status</div>
+                    </div>
+                </div>
+                
+                <button class="action-btn" id="manageItemsBtn">
+                    <i class="fas fa-list"></i> Manage Items
+                </button>
+                <button class="action-btn" id="addItemBtn">
+                    <i class="fas fa-plus-circle"></i> Add New Item
+                </button>
+                <button class="action-btn" id="maintenanceBtn">
+                    <i class="fas fa-tools"></i> Toggle Maintenance Mode
+                    <span class="badge" id="maintenanceBadge">OFF</span>
+                </button>
+                <button class="action-btn danger" id="refreshCacheBtn">
+                    <i class="fas fa-sync"></i> Refresh Cache
+                </button>
+            </div>
+            
+            <div class="back-link">
+                <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Marketplace</a>
+            </div>
+            <div class="security-badge">🔒 Secured v2.0</div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <script>
+        // ============================================================
+        // 🔒 KONFIGURASI
+        // ============================================================
+        
+        const ADMIN_PASSWORD = "fyuchan04132031";
+        const MAX_LOGIN_ATTEMPTS = 5;
+        const LOCKOUT_TIME = 300000;
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDxPsQio4A9LF7bCv5nWj10Et8_ekAsqis",
+            authDomain: "faizcraftmc-acc42.firebaseapp.com",
+            databaseURL: "https://faizcraftmc-acc42-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "faizcraftmc-acc42",
+            storageBucket: "faizcraftmc-acc42.firebasestorage.app",
+            messagingSenderId: "486094594414",
+            appId: "1:486094594414:web:181b2d433a4fb9759be17f"
+        };
+        
+        let db = null;
+        let loginAttempts = 0;
+        let lockoutUntil = 0;
+        let isLoggedIn = false;
+        let allItems = [];
+        let isMaintenanceMode = false;
+        
+        // ============================================================
+        // 🔒 FUNGSI
+        // ============================================================
+        
+        function sanitizeHTML(str) {
+            if (!str) return '';
+            const temp = document.createElement('div');
+            temp.textContent = str;
+            return temp.innerHTML;
+        }
+        
+        function showToast(msg, type = 'success') {
+            const toast = document.createElement("div");
+            toast.className = `toast ${type === 'error' ? 'error' : type === 'warning' ? 'warning' : ''}`;
+            const icon = type === 'error' ? 'fa-exclamation-circle' : type === 'warning' ? 'fa-triangle-exclamation' : 'fa-check-circle';
+            toast.innerHTML = `<i class="fas ${icon}"></i> ${sanitizeHTML(msg)}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+        
+        // ============================================================
+        // 🔒 FIREBASE
+        // ============================================================
+        
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            db.enablePersistence({ synchronizeTabs: true }).catch(err => console.warn('Firestore persistence:', err));
+            console.log("🔥 Admin Panel: Firebase connected!");
+        } catch(e) {
+            console.error("Firebase init error:", e);
+            showToast("Failed to connect to database!", 'error');
+        }
+        
+        // ============================================================
+        // 🔒 LOGIN - PAKAI PASSWORD LANGSUNG!
+        // ============================================================
+        
+        const loginForm = document.getElementById("loginForm");
+        const adminPanel = document.getElementById("adminPanel");
+        const loginBtn = document.getElementById("loginBtn");
+        const adminPassword = document.getElementById("adminPassword");
+        const loginAttemptsEl = document.getElementById("loginAttempts");
+        const logoutBtn = document.getElementById("logoutBtn");
+        
+        function updateLoginAttempts() {
+            const remaining = MAX_LOGIN_ATTEMPTS - loginAttempts;
+            if (Date.now() < lockoutUntil) {
+                const mins = Math.ceil((lockoutUntil - Date.now()) / 60000);
+                loginAttemptsEl.textContent = `🔒 Locked for ${mins} minute(s)`;
+                loginAttemptsEl.className = "login-attempts locked";
+                loginBtn.disabled = true;
+                return;
+            }
+            if (loginAttempts > 0) {
+                loginAttemptsEl.textContent = `⚠️ ${remaining} attempts remaining`;
+                loginAttemptsEl.className = "login-attempts";
+                loginBtn.disabled = false;
+            } else {
+                loginAttemptsEl.textContent = "";
+                loginBtn.disabled = false;
+            }
+        }
+        
+        function checkSession() {
+            const session = localStorage.getItem("admin_session");
+            if (session === "true" && db) {
+                loginForm.style.display = "none";
+                adminPanel.classList.add("active");
+                isLoggedIn = true;
+                loadStats();
+                loadMaintenanceStatus();
+            }
+        }
+        
+        // 🔑 LOGIN - CEK PASSWORD LANGSUNG (TANPA HASH!)
+        loginBtn.addEventListener("click", async () => {
+            if (Date.now() < lockoutUntil) {
+                updateLoginAttempts();
+                return;
+            }
+            
+            const inputPassword = adminPassword.value;
+            
+            // 🔍 LANGSUNG CEK PASSWORD (TANPA HASH!)
+            if (inputPassword === ADMIN_PASSWORD) {
+                loginAttempts = 0;
+                isLoggedIn = true;
+                loginForm.style.display = "none";
+                adminPanel.classList.add("active");
+                localStorage.setItem("admin_session", "true");
+                showToast("✅ Login successful!");
+                await loadStats();
+                await loadMaintenanceStatus();
+            } else {
+                loginAttempts++;
+                const remaining = MAX_LOGIN_ATTEMPTS - loginAttempts;
+                showToast(`❌ Wrong password! ${remaining} attempts remaining.`, 'error');
+                
+                if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+                    lockoutUntil = Date.now() + LOCKOUT_TIME;
+                    showToast("🔒 Too many attempts. Locked for 5 minutes.", 'error');
+                }
+                updateLoginAttempts();
+                adminPassword.value = "";
+                adminPassword.focus();
+            }
+        });
+        
+        adminPassword.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") loginBtn.click();
+        });
+        
+        setInterval(updateLoginAttempts, 5000);
+        
+        // ============================================================
+        // 🔒 LOGOUT
+        // ============================================================
+        
+        logoutBtn.addEventListener("click", () => {
+            isLoggedIn = false;
+            loginForm.style.display = "block";
+            adminPanel.classList.remove("active");
+            adminPassword.value = "";
+            localStorage.removeItem("admin_session");
+            showToast("👋 Logged out");
+        });
+        
+        // ============================================================
+        // 🔒 LOAD STATS & MAINTENANCE
+        // ============================================================
+        
+        async function loadStats() {
+            if (!db) return;
+            try {
+                const snap = await db.collection("items").get();
+                allItems = [];
+                snap.forEach(doc => allItems.push({ id: doc.id, ...doc.data() }));
+                
+                const visibleItems = allItems.filter(i => i.visible !== false);
+                const totalDownloads = allItems.reduce((sum, i) => sum + (i.downloads || 0), 0);
+                
+                document.getElementById("totalItems").textContent = visibleItems.length;
+                document.getElementById("totalDownloads").textContent = totalDownloads.toLocaleString();
+            } catch(e) {
+                console.error("Error loading stats:", e);
+                showToast("Failed to load stats!", 'error');
+            }
+        }
+        
+        async function loadMaintenanceStatus() {
+            if (!db) return;
+            try {
+                const doc = await db.collection("settings").doc("maintenance").get();
+                isMaintenanceMode = doc.exists ? (doc.data().enabled || false) : false;
+                updateMaintenanceUI();
+            } catch(e) { console.warn(e); }
+        }
+        
+        function updateMaintenanceUI() {
+            const badge = document.getElementById("maintenanceBadge");
+            const statusEl = document.getElementById("maintenanceStatus");
+            if (isMaintenanceMode) {
+                badge.textContent = "ON";
+                badge.style.background = "#ffa502";
+                statusEl.textContent = "🔧";
+                statusEl.style.color = "#ffa502";
+            } else {
+                badge.textContent = "OFF";
+                badge.style.background = "#2ed573";
+                statusEl.textContent = "✅";
+                statusEl.style.color = "#2ed573";
+            }
+        }
+        
+        async function toggleMaintenance() {
+            if (!db) return;
+            const newState = !isMaintenanceMode;
+            try {
+                await db.collection("settings").doc("maintenance").set({ enabled: newState });
+                isMaintenanceMode = newState;
+                updateMaintenanceUI();
+                showToast(newState ? "🔧 Maintenance Mode ON" : "✅ Maintenance Mode OFF");
+            } catch(e) {
+                showToast("Failed to toggle maintenance!", 'error');
+            }
+        }
+        
+        // ============================================================
+        // 🔒 ACTION BUTTONS
+        // ============================================================
+        
+        document.getElementById("manageItemsBtn").addEventListener("click", () => {
+            window.location.href = "index.html?admin=true";
+        });
+        
+        document.getElementById("addItemBtn").addEventListener("click", () => {
+            window.location.href = "index.html?admin=true&action=add";
+        });
+        
+        document.getElementById("maintenanceBtn").addEventListener("click", toggleMaintenance);
+        
+        document.getElementById("refreshCacheBtn").addEventListener("click", async () => {
+            showToast("🔄 Refreshing cache...", 'warning');
+            await loadStats();
+            await loadMaintenanceStatus();
+            showToast("✅ Cache refreshed!");
+        });
+        
+        // ============================================================
+        // 🔒 START
+        // ============================================================
+        
+        checkSession();
+        
+        setInterval(() => {
+            if (isLoggedIn && db) loadStats();
+        }, 30000);
+        
+        console.log('%c🔒 FaizCraftMC Admin Panel v2.0', 'font-size: 20px; color: #ff4757; font-weight: bold;');
+        console.log('%c🔑 Password Admin: fyuchan04132031', 'font-size: 14px; color: #2ed573;');
+        console.log('%c✅ Login: LANGSUNG (tanpa hash)', 'font-size: 14px; color: #ffa502;');
+    </script>
+</body>
+</html>
