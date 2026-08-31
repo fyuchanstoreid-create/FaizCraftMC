@@ -187,9 +187,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-// ============================================================
-// 🔒 SEMUA KONFIGURASI DIAMBIL DARI SERVER
-// ============================================================
 
 let db = null;
 let allItems = [];
@@ -211,7 +208,6 @@ let isDeleting = false;
 let currentTab = "home";
 let currentDetailItem = null;
 
-// 🔥 TELEGRAM TOKEN - AKAN DIISI DARI CONFIG
 let TELEGRAM_BOT_TOKEN = null;
 let TELEGRAM_CHAT_ID = null;
 
@@ -263,10 +259,6 @@ const translations = {
     }
 };
 
-// ============================================================
-// 🔒 FUNGSI DASAR
-// ============================================================
-
 function sanitizeHTML(str) {
     if (!str) return '';
     const temp = document.createElement('div');
@@ -283,10 +275,6 @@ function showToast(msg, isErr = false, isNewItem = false) {
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 4000);
 }
-
-// ============================================================
-// 🔒 FUNGSI UTILITY
-// ============================================================
 
 function loadLanguagePreference() {
     const saved = localStorage.getItem("faizcraft_language");
@@ -434,10 +422,6 @@ function checkAndNotifyNewItems(items) {
     return newVisibleItems.length; 
 }
 
-// ============================================================
-// 🔒 TUTORIAL
-// ============================================================
-
 const tutorials = [
     { id: 1, title: { en: "How To Open SFL Link", id: "Cara Membuka Link SFL" }, description: { en: "Step by Step Guide to Opening SFL Links", id: "Panduan Langkah Langkah Membuka Link SFL" }, videoId: "9XofAWcQAKI", duration: "0:55", type: "shorts" }
 ];
@@ -486,10 +470,6 @@ function showTutorialList() {
     container.classList.remove("active");
 }
 
-// ============================================================
-// 🔒 UPDATE MAINTENANCE
-// ============================================================
-
 function updateMaintenanceOverlay() { 
     const overlay = document.getElementById("maintenanceOverlay"); 
     if (!overlay) return; 
@@ -536,10 +516,6 @@ async function updateStats() {
     document.getElementById("totalDownloads").innerText = formatNumber(totalDl); 
 }
 
-// ============================================================
-// 🔒 CATEGORIES
-// ============================================================
-
 const CATEGORIES = [
     { id: "all", name: { en: "All", id: "Semua" }, icon: "fas fa-th-large" },
     { id: "addon", name: { en: "Addons", id: "Addon" }, icon: "fas fa-puzzle-piece" },
@@ -569,10 +545,6 @@ function renderCategories() {
         }); 
     });
 }
-
-// ============================================================
-// 🔒 RENDER ITEMS
-// ============================================================
 
 function renderItems() {
     let filtered = allItems.filter(i => { 
@@ -626,10 +598,6 @@ function renderItems() {
         }); 
     });
 }
-
-// ============================================================
-// 🔒 DETAIL FULLSCREEN
-// ============================================================
 
 async function openDetailFullscreen(item) {
     savedScrollPosition = window.scrollY;
@@ -888,17 +856,12 @@ function updateCustomPagination(swiper, container) {
     } 
 }
 
-// ============================================================
-// 🔒 LOAD CONFIG & START APP
-// ============================================================
-
 async function startApp() {
     try {
         console.log('🔄 Loading config from server...');
         const res = await fetch('/api/config');
         const config = await res.json();
         
-        // 🔥 SIMPAN TELEGRAM TOKEN
         TELEGRAM_BOT_TOKEN = config.telegram.botToken;
         TELEGRAM_CHAT_ID = config.telegram.chatId;
         
@@ -929,10 +892,6 @@ async function startApp() {
     }
 }
 
-// ============================================================
-// 🔒 LOAD ITEMS
-// ============================================================
-
 async function loadItems() {
     if (!db) { 
         allItems = []; 
@@ -954,12 +913,7 @@ async function loadItems() {
     updateStats(); 
 }
 
-// ============================================================
-// 🔒 SEND TO TELEGRAM
-// ============================================================
-
 async function sendToTelegram(name, rating, message) {
-    // 🔥 CEK APAKAH TOKEN SUDAH TERSEDIA
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
         console.error('❌ Telegram token not loaded!');
         showToast('⚠️ Config belum siap, coba lagi nanti!', true);
@@ -992,10 +946,6 @@ async function sendToTelegram(name, rating, message) {
     }
 }
 
-// ============================================================
-// 🔒 SWITCH TAB
-// ============================================================
-
 function switchTab(tab) {
     currentTab = tab;
     const homePage = document.getElementById("homePage");
@@ -1022,15 +972,7 @@ function restoreScrollPosition() {
     if (savedScrollPosition > 0) window.scrollTo(0, savedScrollPosition); 
 }
 
-// ============================================================
-// 🔒 MULAI
-// ============================================================
-
 startApp();
-
-// ============================================================
-// 🔒 EVENT LISTENERS
-// ============================================================
 
 // Feedback
 const feedbackModal = document.getElementById("feedbackModal");
@@ -1126,10 +1068,6 @@ tutorialBtn.addEventListener("click", () => {
 closeTutorialModal.addEventListener("click", () => tutorialModal.classList.remove("show"));
 window.addEventListener("click", (e) => { if (e.target === tutorialModal) tutorialModal.classList.remove("show"); });
 if (backToListBtn) backToListBtn.addEventListener("click", showTutorialList);
-
-// ============================================================
-// 🔒 PARTICLES
-// ============================================================
 
 for (let i = 0; i < 50; i++) {
     const particle = document.createElement("div");
