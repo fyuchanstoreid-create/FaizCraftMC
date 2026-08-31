@@ -15,7 +15,7 @@ export default function handler(req, res) {
             chatId: process.env.TELEGRAM_CHAT_ID || "8367322295"
         },
         admin: {
-            password: process.env.ADMIN_PASSWORD || "fyuchan04132031"
+            password: process.env.ADMIN_PASSWORD || "fyuxzar0304834031"
         }
     });
 }
