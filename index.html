@@ -247,18 +247,62 @@
 // 🔒 KONFIGURASI
 // ============================================================
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDxPsQio4A9LF7bCv5nWj10Et8_ekAsqis",
-    authDomain: "faizcraftmc-acc42.firebaseapp.com",
-    databaseURL: "https://faizcraftmc-acc42-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "faizcraftmc-acc42",
-    storageBucket: "faizcraftmc-acc42.firebasestorage.app",
-    messagingSenderId: "486094594414",
-    appId: "1:486094594414:web:181b2d433a4fb9759be17f"
-};
+// ============================================================
+// 🔒 AMBIL KONFIGURASI DARI SERVERLESS FUNCTION
+// ============================================================
 
-const TELEGRAM_BOT_TOKEN = "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE";
-const TELEGRAM_CHAT_ID = "8367322295";
+let firebaseConfig = null;
+let TELEGRAM_BOT_TOKEN = null;
+let TELEGRAM_CHAT_ID = null;
+let db = null;
+
+async function loadConfig() {
+    try {
+        const response = await fetch('/api/config');
+        if (!response.ok) {
+            throw new Error('Gagal mengambil konfigurasi');
+        }
+        const config = await response.json();
+        
+        firebaseConfig = config.firebase;
+        TELEGRAM_BOT_TOKEN = config.telegram.botToken;
+        TELEGRAM_CHAT_ID = config.telegram.chatId;
+        
+        console.log('✅ Konfigurasi berhasil dimuat!');
+        startApp();
+    } catch (error) {
+        console.error('❌ Gagal load config:', error);
+        showToast('⚠️ Gagal memuat konfigurasi!', true);
+    }
+}
+
+function startApp() {
+    try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+        db.enablePersistence({ synchronizeTabs: true })
+            .catch(err => console.warn('Firestore persistence:', err));
+        console.log("🔥 Firebase connected!");
+        
+        loadNotifiedItems();
+        setupMClickHandler();
+        loadMaintenanceStatus();
+        loadLanguagePreference();
+        loadItems();
+        startTypingAnimation();
+        switchTab("home");
+        
+        setInterval(() => { 
+            if (db && !isMaintenanceMode) loadItems(); 
+        }, 30000);
+    } catch(e) {
+        console.error('Firebase init error:', e);
+        showToast('⚠️ Gagal koneksi ke database!', true);
+    }
+}
+
+// MULAI APLIKASI
+loadConfig();
 
 // ============================================================
 // 🔒 FUNGSI DASAR
