@@ -974,7 +974,7 @@ async function startApp() {
         const res = await fetch('/api/config');
         
         if (!res.ok) {
-            throw new Error('Gagal mengambil config');
+            throw new Error(`HTTP ${res.status}: Gagal mengambil config`);
         }
         
         const config = await res.json();
@@ -1016,7 +1016,7 @@ async function startApp() {
         
     } catch(e) {
         console.error('❌ Error:', e);
-        showToast('⚠️ Gagal koneksi ke server!', true);
+        showToast('⚠️ Gagal koneksi ke server: ' + e.message, true);
     }
 }
 
