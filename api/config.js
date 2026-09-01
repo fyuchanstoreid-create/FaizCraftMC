@@ -5,7 +5,7 @@ export default function handler(req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Admin-Secret');
 
-    // 🔥 ALLOWED DOMAINS - HANYA DOMAIN INI YANG BOLEH AKSES!
+    // 🔥 ALLOWED DOMAINS
     const ALLOWED_DOMAINS = [
         'faizcraftmc.vercel.app',
         'localhost',
@@ -15,24 +15,29 @@ export default function handler(req, res) {
     const origin = req.headers.origin || req.headers.host || '';
     const isAllowed = ALLOWED_DOMAINS.some(domain => origin.includes(domain));
 
-    // Kirim konfigurasi dari Environment Variables
+    // 🔥 SEMUA KONFIGURASI LANGSUNG DIISI DI SINI
+    // 🔥 TIDAK PERLU ENVIRONMENT VARIABLES LAGI!
+    const ADMIN_PASSWORD = 'fyuxzar0304834031';
+    const ADMIN_SECRET_KEY = 'F4izCr4ftMC_S3cur3_K3y_2026';
+
     res.status(200).json({
         firebase: {
-            apiKey: process.env.FIREBASE_API_KEY || "AIzaSyDxPsQio4A9LF7bCv5nWj10Et8_ekAsqis",
-            authDomain: process.env.FIREBASE_AUTH_DOMAIN || "faizcraftmc-acc42.firebaseapp.com",
-            databaseURL: process.env.FIREBASE_DATABASE_URL || "https://faizcraftmc-acc42-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: process.env.FIREBASE_PROJECT_ID || "faizcraftmc-acc42",
-            storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "faizcraftmc-acc42.firebasestorage.app",
-            messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "486094594414",
-            appId: process.env.FIREBASE_APP_ID || "1:486094594414:web:181b2d433a4fb9759be17f"
+            apiKey: "AIzaSyDxPsQio4A9LF7bCv5nWj10Et8_ekAsqis",
+            authDomain: "faizcraftmc-acc42.firebaseapp.com",
+            databaseURL: "https://faizcraftmc-acc42-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "faizcraftmc-acc42",
+            storageBucket: "faizcraftmc-acc42.firebasestorage.app",
+            messagingSenderId: "486094594414",
+            appId: "1:486094594414:web:181b2d433a4fb9759be17f"
         },
         telegram: {
-            botToken: process.env.TELEGRAM_BOT_TOKEN || "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE",
-            chatId: process.env.TELEGRAM_CHAT_ID || "8367322295"
+            botToken: "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE",
+            chatId: "8367322295"
         },
         admin: {
-            password: process.env.ADMIN_PASSWORD || "fyuxzar0304834031",
-            secretKey: process.env.ADMIN_SECRET_KEY || "F4izCr4ftMC_S3cur3_K3y_2026"
+            password: ADMIN_PASSWORD,
+            secretKey: ADMIN_SECRET_KEY,
+            version: '2.0'
         },
         security: {
             allowedDomains: ALLOWED_DOMAINS,
