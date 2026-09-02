@@ -246,7 +246,6 @@ let currentDetailItem = null;
 let TELEGRAM_BOT_TOKEN = null;
 let TELEGRAM_CHAT_ID = null;
 
-// 🔥 ANTI SPAM FEEDBACK
 const FEEDBACK_LIMIT = 5;
 const FEEDBACK_WINDOW_MS = 60000; // 1 menit
 let feedbackHistory = [];
@@ -971,7 +970,7 @@ function updateCustomPagination(swiper, container) {
 async function startApp() {
     try {
         console.log('🔄 Loading config from server...');
-        const res = await fetch('/api/config');
+        const res = await fetch('/api/c0478621g.js');
         const config = await res.json();
         
         TELEGRAM_BOT_TOKEN = config.telegram.botToken;
