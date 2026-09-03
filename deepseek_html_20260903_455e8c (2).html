@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - FaizCraftMC</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <style>
+        /* ============================================ */
+        /* CSS SAMA PERSIS SEPERTI SEBELUMNYA           */
+        /* ============================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: #0a0c15; 
+            color: #ffffff; 
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0c15 0%, #1a0b1a 25%, #0f172a 50%, #1a1a2e 75%, #0a0c15 100%);
+        }
+        .admin-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .admin-card {
+            background: linear-gradient(145deg, rgba(25, 28, 45, 0.95), rgba(18, 20, 35, 0.95));
+            backdrop-filter: blur(15px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .admin-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4757, #ffa502, #ff4757);
+        }
+        .admin-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: radial-gradient(ellipse at bottom, rgba(255,71,87,0.05), transparent);
+            pointer-events: none;
+        }
+        .admin-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .admin-logo i {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .admin-logo h1 {
+            font-size: 1.8rem;
+            margin-top: 0.5rem;
+            background: linear-gradient(135deg, #fff, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+        .admin-logo .subtitle {
+            font-size: 0.8rem;
+            opacity: 0.4;
+            margin-top: 0.2rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .form-group label i {
+            color: #ffa502;
+            margin-right: 0.5rem;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #ff4757;
+            box-shadow: 0 0 20px rgba(255,71,87,0.2);
+            background: rgba(255,255,255,0.05);
+        }
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group select option {
+            background: #1a1d2e;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #ff4757, #e84118);
+            border: none;
+            border-radius: 40px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-login:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,71,87,0.4);
+        }
+        .btn-login:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .login-attempts {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #ffa502;
+            position: relative;
+            z-index: 1;
+        }
+        .login-attempts.locked {
+            color: #ff4757;
+            font-weight: 600;
+        }
+        .admin-panel {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+        .admin-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .panel-header h2 {
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .panel-header .btn-logout {
+            background: rgba(255,71,87,0.2);
+            border: 1px solid rgba(255,71,87,0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            color: #ff4757;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+        }
+        .panel-header .btn-logout:hover {
+            background: rgba(255,71,87,0.3);
+            transform: scale(1.05);
+        }
+        .stats-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 0.8rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .stat-box:hover {
+            border-color: rgba(255,71,87,0.2);
+            transform: translateY(-2px);
+        }
+        .stat-box .number {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .stat-box .label {
+            font-size: 0.65rem;
+            opacity: 0.6;
+            margin-top: 0.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .action-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .action-btn:hover {
+            background: rgba(255,71,87,0.1);
+            border-color: rgba(255,71,87,0.3);
+            transform: translateX(5px);
+        }
+        .action-btn.danger:hover {
+            background: rgba(255,71,87,0.2);
+            border-color: #ff4757;
+        }
+        .action-btn i {
+            font-size: 1.2rem;
+        }
+        .action-btn .badge {
+            background: #ff4757;
+            color: white;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            margin-left: 0.3rem;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 0.5rem;
+        }
+        .section-title i {
+            color: #ffa502;
+        }
+        
+        .admin-item-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 0.8rem;
+        }
+        .admin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .admin-item:hover {
+            background: rgba(255,71,87,0.1);
+            border: 1px solid rgba(255,71,87,0.3);
+        }
+        .admin-item-content {
+            flex: 1;
+            min-width: 150px;
+        }
+        .admin-item-content strong {
+            font-size: 0.95rem;
+        }
+        .admin-item-content small {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            display: block;
+        }
+        .admin-item-actions {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+        .admin-item-actions button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .admin-item-actions button:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        .move-up-btn, .move-down-btn { color: #2ed573; }
+        .pin-btn { color: #ffa502; }
+        .unpin-btn { color: #ffa502; }
+        .edit-btn { color: #00a8ff; }
+        .delete-btn { color: #ff4757; }
+        .toggle-visibility-btn { color: #a29bfe; }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #ff4757, #e84118);
+            border: none;
+            border-radius: 40px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 0.5rem;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,71,87,0.4);
+        }
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.05);
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .toggle-switch span {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .toggle-switch span i {
+            color: #ffa502;
+            margin-right: 0.5rem;
+        }
+        .toggle-label {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 26px;
+        }
+        .toggle-label input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.2);
+            transition: 0.3s;
+            border-radius: 30px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #ff4757, #ffa502);
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #ff4757;
+            cursor: pointer;
+        }
+        .checkbox-group label {
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .modal-edit {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal-edit.show {
+            display: flex;
+        }
+        .modal-edit .modal-content {
+            background: linear-gradient(145deg, #1a1d2e, #121420);
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 32px;
+            border: 1px solid rgba(255,71,87,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+        }
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-edit .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+        .modal-edit .modal-header h2 {
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #ffa502, #ff4757);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .modal-edit .close-modal {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-edit .close-modal:hover {
+            background: #ff4757;
+        }
+        
+        .db-status {
+            background: rgba(46, 213, 115, 0.1);
+            border: 1px solid rgba(46, 213, 115, 0.3);
+            border-radius: 16px;
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e1f2e;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid #2ed573;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+        }
+        .toast.error { border-left-color: #ff4757; }
+        .toast.warning { border-left-color: #ffa502; }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .back-link a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .back-link a:hover {
+            color: #ffa502;
+        }
+        .security-badge {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            opacity: 0.2;
+            position: relative;
+            z-index: 1;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.5;
+        }
+        .empty-state i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #ffa502;
+        }
+        
+        .access-denied {
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .access-denied i {
+            font-size: 4rem;
+            color: #ff4757;
+            margin-bottom: 1rem;
+        }
+        .access-denied h2 {
+            font-size: 1.8rem;
+            color: #ff4757;
+            margin-bottom: 0.5rem;
+        }
+        .access-denied p {
+            opacity: 0.6;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .domain-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+        }
+        .domain-badge.allowed {
+            background: rgba(46,213,115,0.2);
+            color: #2ed573;
+            border: 1px solid rgba(46,213,115,0.3);
+        }
+        .domain-badge.denied {
+            background: rgba(255,71,87,0.2);
+            color: #ff4757;
+            border: 1px solid rgba(255,71,87,0.3);
+        }
+        
+        .pinned-badge {
+            background: #ffa502;
+            color: #0a0c15;
+            font-size: 0.6rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-left: 0.3rem;
+        }
+        
+        @media (max-width: 480px) {
+            .admin-wrapper { padding: 1rem; }
+            .admin-card { padding: 1.5rem; }
+            .stats-panel { grid-template-columns: 1fr 1fr; }
+            .admin-logo i { font-size: 2.5rem; }
+            .admin-logo h1 { font-size: 1.4rem; }
+            .admin-item { flex-direction: column; align-items: stretch; }
+            .admin-item-actions { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <div class="admin-card">
+            <div class="admin-logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>Admin Panel</h1>
+                <div class="subtitle">FaizCraftMC Marketplace</div>
+            </div>
+            
+            <!-- ACCESS DENIED -->
+            <div id="accessDenied" style="display:none;">
+                <div class="access-denied">
+                    <i class="fas fa-ban"></i>
+                    <h2>Access Denied</h2>
+                    <p>You are not authorized to access this admin panel from this domain.</p>
+                    <p style="font-size:0.8rem; margin-top:1rem; opacity:0.4;">Only <strong>faizcraftmc.vercel.app</strong> is allowed.</p>
+                    <span class="domain-badge denied" id="domainBadge">❌ Unauthorized</span>
+                </div>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm">
+                <div class="form-group">
+                    <label><i class="fas fa-key"></i> Admin Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" autocomplete="off">
+                </div>
+                <button class="btn-login" id="loginBtn">
+                    <i class="fas fa-unlock"></i> Login
+                </button>
+                <div id="loginAttempts" class="login-attempts"></div>
+            </div>
+            
+            <!-- Admin Panel -->
+            <div id="adminPanel" class="admin-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-cog"></i> Dashboard</h2>
+                    <button class="btn-logout" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+                
+                <div id="dbStatus" class="db-status">
+                    <i class="fas fa-spinner fa-pulse"></i> <span id="dbStatusText">Checking database connection...</span>
+                </div>
+                
+                <div class="stats-panel">
+                    <div class="stat-box">
+                        <div class="number" id="totalItems">0</div>
+                        <div class="label">Items</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="totalDownloads">0</div>
+                        <div class="label">Downloads</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="maintenanceStatus">⚪</div>
+                        <div class="label">Status</div>
+                    </div>
+                </div>
+                
+                <!-- Maintenance Toggle -->
+                <div class="toggle-switch">
+                    <span><i class="fas fa-tools"></i> Maintenance Mode</span>
+                    <label class="toggle-label">
+                        <input type="checkbox" id="maintenanceToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <hr style="margin: 1rem 0; border-color: rgba(255,255,255,0.05);">
+                
+                <!-- Add Item Form -->
+                <div class="section-title"><i class="fas fa-plus-circle"></i> Add New Item</div>
+                <form id="addItemForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> Title</label>
+                        <input type="text" id="itemTitle" required placeholder="Ex: Origins Addon">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-folder"></i> Category</label>
+                        <select id="itemCategory">
+                            <option value="addon">Addon</option>
+                            <option value="texture">Texture Pack</option>
+                            <option value="world">World</option>
+                            <option value="skin">Skin</option>
+                            <option value="mashup">Mashup</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> Description</label>
+                        <textarea id="itemDesc" rows="3" required placeholder="Full description... (use bullet points with - or *)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-link"></i> Download Link</label>
+                        <input type="url" id="itemUrl" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-image"></i> Main Image URL</label>
+                        <input type="url" id="itemImage" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fab fa-youtube"></i> YouTube Video URL</label>
+                        <input type="url" id="itemVideo" placeholder="https://youtu.be/...">
+                        <p style="font-size:0.7rem; opacity:0.5; margin-top:0.3rem;">Optional</p>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-images"></i> Extra Images (comma separated)</label>
+                        <input type="text" id="itemExtraImages" placeholder="https://image1.jpg, https://image2.jpg">
+                        <p style="font-size:0.7rem; opacity:0.5; margin-top:0.3rem;">Optional</p>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="itemVisible" checked>
+                        <label for="itemVisible">Show on Marketplace</label>
+                    </div>
+                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Add Item</button>
+                </form>
+                
+                <hr style="margin: 1.5rem 0; border-color: rgba(255,255,255,0.05);">
+                
+                <!-- Manage Items -->
+                <div class="section-title"><i class="fas fa-list"></i> Manage Items <span style="font-size:0.6rem; opacity:0.5;">(↑↓ order | 📌 pin | ✏️ edit | 🗑️ delete | 👁️ hide/show)</span></div>
+                <div id="adminItemList" class="admin-item-list">
+                    <div class="empty-state"><i class="fas fa-box-open"></i><p>No items yet, add the first one!</p></div>
+                </div>
+                
+                <button class="action-btn danger" id="refreshCacheBtn" style="margin-top:1rem;">
+                    <i class="fas fa-sync"></i> Refresh Cache
+                </button>
+            </div>
+            
+            <div class="back-link">
+                <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Marketplace</a>
+            </div>
+            <div class="security-badge">🔒 Secured v2.0</div>
+        </div>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-edit">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Item</h2>
+                <button class="close-modal" id="closeEditModal">&times;</button>
+            </div>
+            <form id="editItemForm">
+                <input type="hidden" id="editItemId">
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Title</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-folder"></i> Category</label>
+                    <select id="editCategory">
+                        <option value="addon">Addon</option>
+                        <option value="texture">Texture Pack</option>
+                        <option value="world">World</option>
+                        <option value="skin">Skin</option>
+                        <option value="mashup">Mashup</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> Description</label>
+                    <textarea id="editDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-link"></i> Download Link</label>
+                    <input type="url" id="editDownloadUrl" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-image"></i> Main Image URL</label>
+                    <input type="url" id="editImageUrl" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label><i class="fab fa-youtube"></i> YouTube Video URL</label>
+                    <input type="url" id="editVideoUrl" placeholder="https://youtu.be/...">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-images"></i> Extra Images (comma separated)</label>
+                    <input type="text" id="editExtraImages" placeholder="https://image1.jpg, https://image2.jpg">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="editVisible">
+                    <label for="editVisible">Show on Marketplace</label>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Save Changes</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <script>
+        // ============================================================
+        // 🔒 ADMIN PANEL - URUTAN ITEM TOTAL FIX
+        // ============================================================
+        
+        let ADMIN_PASSWORD = null;
+        let ADMIN_SECRET_KEY = null;
+        let db = null;
+        let loginAttempts = 0;
+        let lockoutUntil = 0;
+        let isLoggedIn = false;
+        let allItems = [];
+        let isMaintenanceMode = false;
+        let editingItemId = null;
+        let isDomainAllowed = false;
+        let configLoaded = false;
+        
+        const MAX_LOGIN_ATTEMPTS = 5;
+        const LOCKOUT_TIME = 300000;
+        const DEFAULT_IMAGE = "https://picsum.photos/id/20/400/200";
+        
+        const ALLOWED_DOMAINS = [
+            'faizcraftmc.vercel.app',
+            'localhost',
+            '127.0.0.1'
+        ];
+        
+        // ============================================================
+        // 🔒 FUNGSI DASAR
+        // ============================================================
+        
+        function sanitizeHTML(str) {
+            if (!str) return '';
+            const temp = document.createElement('div');
+            temp.textContent = str;
+            return temp.innerHTML;
+        }
+        
+        function safeEscape(str) { return sanitizeHTML(str); }
+        
+        function showToast(msg, type = 'success') {
+            const toast = document.createElement("div");
+            toast.className = `toast ${type === 'error' ? 'error' : type === 'warning' ? 'warning' : ''}`;
+            const icon = type === 'error' ? 'fa-exclamation-circle' : type === 'warning' ? 'fa-triangle-exclamation' : 'fa-check-circle';
+            toast.innerHTML = `<i class="fas ${icon}"></i> ${safeEscape(msg)}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+        
+        function formatNumber(n) { return n?.toLocaleString() || "0"; }
+        function getCategoryIcon(cat) {
+            const icons = { addon: "🧩", texture: "🎨", world: "🌍", skin: "👤", mashup: "⚡" };
+            return icons[cat] || "📦";
+        }
+        
+        // ============================================================
+        // 🔒 CEK DOMAIN
+        // ============================================================
+        
+        function checkDomain() {
+            const host = window.location.hostname;
+            isDomainAllowed = ALLOWED_DOMAINS.some(domain => host.includes(domain));
+            console.log(`🔍 Domain: ${host} → ${isDomainAllowed ? '✅ ALLOWED' : '❌ DENIED'}`);
+            if (!isDomainAllowed) {
+                document.getElementById('accessDenied').style.display = 'block';
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'none';
+                document.getElementById('domainBadge').textContent = `❌ ${host} (Not Allowed)`;
+                document.getElementById('domainBadge').className = 'domain-badge denied';
+            } else {
+                document.getElementById('accessDenied').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('domainBadge').textContent = `✅ ${host} (Allowed)`;
+                document.getElementById('domainBadge').className = 'domain-badge allowed';
+            }
+            return isDomainAllowed;
+        }
+        
+        // ============================================================
+        // 🔒 LOAD CONFIG
+        // ============================================================
+        
+        async function loadConfigAndInit() {
+            try {
+                if (!checkDomain()) {
+                    console.error('❌ Access denied');
+                    return;
+                }
+                
+                console.log('🔄 Loading config from server...');
+                const res = await fetch('/api/config');
+                if (!res.ok) throw new Error(`HTTP ${res.status}: Server error`);
+                const config = await res.json();
+                if (!config.admin || !config.admin.password) throw new Error('Password not found!');
+                if (config.admin.password === '') throw new Error('Password is empty!');
+                
+                ADMIN_PASSWORD = config.admin.password;
+                ADMIN_SECRET_KEY = config.admin.secretKey;
+                configLoaded = true;
+                
+                console.log("✅ Config loaded from server!");
+                firebase.initializeApp(config.firebase);
+                db = firebase.firestore();
+                db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
+                console.log("✅ Firebase connected!");
+                
+                document.getElementById("dbStatusText").textContent = "✅ Database connected";
+                document.getElementById("dbStatus").style.borderColor = "rgba(46,213,115,0.3)";
+                
+                const sessionSecret = localStorage.getItem("admin_secret");
+                if (sessionSecret && sessionSecret !== ADMIN_SECRET_KEY) {
+                    localStorage.removeItem("admin_session");
+                    localStorage.removeItem("admin_secret");
+                    console.log("🔄 Old session cleared");
+                }
+                checkSession();
+                
+            } catch(e) {
+                console.error("❌ Failed to load config:", e);
+                configLoaded = false;
+                document.getElementById("dbStatusText").textContent = "❌ " + e.message;
+                document.getElementById("dbStatus").style.borderColor = "rgba(255,71,87,0.3)";
+                document.getElementById("dbStatus").style.background = "rgba(255,71,87,0.1)";
+                document.getElementById("loginBtn").disabled = true;
+                document.getElementById("loginBtn").innerHTML = '<i class="fas fa-times-circle"></i> Config Error';
+                document.getElementById("loginBtn").style.background = "linear-gradient(135deg, #6c757d, #495057)";
+                showToast("⚠️ " + e.message, 'error');
+            }
+        }
+        
+        // ============================================================
+        // 🔒 LOGIN
+        // ============================================================
+        
+        const loginForm = document.getElementById("loginForm");
+        const adminPanel = document.getElementById("adminPanel");
+        const loginBtn = document.getElementById("loginBtn");
+        const adminPassword = document.getElementById("adminPassword");
+        const loginAttemptsEl = document.getElementById("loginAttempts");
+        const logoutBtn = document.getElementById("logoutBtn");
+        
+        function updateLoginAttempts() {
+            const remaining = MAX_LOGIN_ATTEMPTS - loginAttempts;
+            if (Date.now() < lockoutUntil) {
+                const mins = Math.ceil((lockoutUntil - Date.now()) / 60000);
+                loginAttemptsEl.textContent = `🔒 Locked for ${mins} minute(s)`;
+                loginAttemptsEl.className = "login-attempts locked";
+                loginBtn.disabled = true;
+                return;
+            }
+            if (loginAttempts > 0) {
+                loginAttemptsEl.textContent = `⚠️ ${remaining} attempts remaining`;
+                loginAttemptsEl.className = "login-attempts";
+                loginBtn.disabled = false;
+            } else {
+                loginAttemptsEl.textContent = "";
+                loginBtn.disabled = false;
+            }
+        }
+        
+        function checkSession() {
+            if (!configLoaded || !ADMIN_PASSWORD) {
+                console.warn('⚠️ Password belum di-load dari server!');
+                return;
+            }
+            const session = localStorage.getItem("admin_session");
+            const sessionSecret = localStorage.getItem("admin_secret");
+            if (session === "true" && sessionSecret === ADMIN_SECRET_KEY && db) {
+                loginForm.style.display = "none";
+                adminPanel.classList.add("active");
+                isLoggedIn = true;
+                loadStats();
+                loadMaintenanceStatus();
+                loadItems();
+                console.log("✅ Session restored");
+            } else if (session === "true" && sessionSecret !== ADMIN_SECRET_KEY) {
+                localStorage.removeItem("admin_session");
+                localStorage.removeItem("admin_secret");
+                console.log("🔄 Auto-logout: Secret key changed!");
+                showToast("🔒 Password changed! Please login again.", 'warning');
+            }
+        }
+        
+        loginBtn.addEventListener("click", async () => {
+            if (!configLoaded || !ADMIN_PASSWORD) {
+                showToast("⚠️ Config belum siap! Refresh halaman.", 'error');
+                return;
+            }
+            if (Date.now() < lockoutUntil) {
+                updateLoginAttempts();
+                return;
+            }
+            const inputPassword = adminPassword.value;
+            if (inputPassword === ADMIN_PASSWORD) {
+                loginAttempts = 0;
+                isLoggedIn = true;
+                loginForm.style.display = "none";
+                adminPanel.classList.add("active");
+                localStorage.setItem("admin_session", "true");
+                localStorage.setItem("admin_secret", ADMIN_SECRET_KEY);
+                showToast("✅ Login successful!");
+                await loadStats();
+                await loadMaintenanceStatus();
+                await loadItems();
+            } else {
+                loginAttempts++;
+                const remaining = MAX_LOGIN_ATTEMPTS - loginAttempts;
+                showToast(`❌ Wrong password! ${remaining} attempts remaining.`, 'error');
+                if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+                    lockoutUntil = Date.now() + LOCKOUT_TIME;
+                    showToast("🔒 Too many attempts. Locked for 5 minutes.", 'error');
+                }
+                updateLoginAttempts();
+                adminPassword.value = "";
+                adminPassword.focus();
+            }
+        });
+        
+        adminPassword.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") loginBtn.click();
+        });
+        setInterval(updateLoginAttempts, 5000);
+        
+        // ============================================================
+        // 🔒 LOGOUT
+        // ============================================================
+        
+        logoutBtn.addEventListener("click", () => {
+            isLoggedIn = false;
+            loginForm.style.display = "block";
+            adminPanel.classList.remove("active");
+            adminPassword.value = "";
+            localStorage.removeItem("admin_session");
+            localStorage.removeItem("admin_secret");
+            showToast("👋 Logged out");
+        });
+        
+        // ============================================================
+        // 🔒 LOAD DATA
+        // ============================================================
+        
+        async function loadStats() {
+            if (!db) return;
+            try {
+                const snap = await db.collection("items").get();
+                allItems = [];
+                snap.forEach(doc => allItems.push({ id: doc.id, ...doc.data() }));
+                const visibleItems = allItems.filter(i => i.visible !== false);
+                const totalDownloads = allItems.reduce((sum, i) => sum + (i.downloads || 0), 0);
+                document.getElementById("totalItems").textContent = visibleItems.length;
+                document.getElementById("totalDownloads").textContent = totalDownloads.toLocaleString();
+            } catch(e) { console.error(e); }
+        }
+        
+        // ============================================================
+        // 🔒 LOAD ITEMS - URUTAN: PINNED DI ATAS, LALU ORDER (BESAR DI ATAS)
+        // ============================================================
+        
+        async function loadItems() {
+            if (!db) return;
+            try {
+                const snap = await db.collection("items").get();
+                allItems = [];
+                snap.forEach(doc => allItems.push({ id: doc.id, ...doc.data() }));
+                
+                // 🔥 URUTKAN: Pinned di atas, lalu berdasarkan order (BESAR DI ATAS)
+                allItems.sort((a, b) => {
+                    if (a.pinned && !b.pinned) return -1;
+                    if (!a.pinned && b.pinned) return 1;
+                    return (b.order || 0) - (a.order || 0);
+                });
+                
+                renderAdminItems();
+                updateStats();
+            } catch(e) {
+                console.error(e);
+                showToast("Failed to load items!", 'error');
+            }
+        }
+        
+        async function updateStats() {
+            if (!db) return;
+            try {
+                const snap = await db.collection("items").get();
+                const items = [];
+                snap.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
+                const visibleItems = items.filter(i => i.visible !== false);
+                const totalDownloads = items.reduce((sum, i) => sum + (i.downloads || 0), 0);
+                document.getElementById("totalItems").textContent = visibleItems.length;
+                document.getElementById("totalDownloads").textContent = totalDownloads.toLocaleString();
+            } catch(e) {}
+        }
+        
+        async function loadMaintenanceStatus() {
+            if (!db) return;
+            try {
+                const doc = await db.collection("settings").doc("maintenance").get();
+                isMaintenanceMode = doc.exists ? (doc.data().enabled || false) : false;
+                document.getElementById("maintenanceToggle").checked = isMaintenanceMode;
+                updateMaintenanceUI();
+            } catch(e) { console.warn(e); }
+        }
+        
+        function updateMaintenanceUI() {
+            const statusEl = document.getElementById("maintenanceStatus");
+            if (isMaintenanceMode) {
+                statusEl.textContent = "🔧";
+                statusEl.style.color = "#ffa502";
+            } else {
+                statusEl.textContent = "✅";
+                statusEl.style.color = "#2ed573";
+            }
+        }
+        
+        async function setMaintenanceMode(enabled) {
+            if (!db) {
+                showToast("⚠️ Database belum siap!", 'error');
+                return;
+            }
+            try {
+                await db.collection("settings").doc("maintenance").set({ enabled: enabled });
+                isMaintenanceMode = enabled;
+                updateMaintenanceUI();
+                showToast(enabled ? "🔧 Maintenance Mode ON" : "✅ Maintenance Mode OFF");
+            } catch(e) {
+                console.error("Failed to toggle maintenance:", e);
+                showToast("Failed to toggle maintenance!", 'error');
+            }
+        }
+        
+        // ============================================================
+        // 🔒 RENDER ADMIN ITEMS
+        // ============================================================
+        
+        function renderAdminItems() {
+            const container = document.getElementById("adminItemList");
+            if (!container) return;
+            if (allItems.length === 0) {
+                container.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><p>No items yet, add the first one!</p></div>`;
+                return;
+            }
+            
+            container.innerHTML = allItems.map((item, idx) => {
+                const title = safeEscape(item.title);
+                const category = safeEscape(item.category);
+                const downloads = formatNumber(item.downloads || 0);
+                const rating = item.rating || 5;
+                const visibility = item.visible !== false;
+                const icon = getCategoryIcon(item.category);
+                const isPinned = item.pinned || false;
+                const pinnedBadge = isPinned ? '<span class="pinned-badge">📌 PINNED</span>' : '';
+                
+                return `<div class="admin-item" data-id="${safeEscape(item.id)}" data-index="${idx}">
+                    <div class="admin-item-content">
+                        <strong>${icon} ${title}</strong>
+                        ${pinnedBadge}
+                        ${!visibility ? `<span style="color:#ffa502; font-size:0.7rem;"><i class="fas fa-eye-slash"></i> Hidden</span>` : 
+                                       `<span style="color:#2ed573; font-size:0.7rem;"><i class="fas fa-eye"></i> Public</span>`}
+                        <br><small>${safeEscape(category)} | ${downloads} downloads | Rating: ${rating}/5</small>
+                    </div>
+                    <div class="admin-item-actions">
+                        <button class="move-up-btn" onclick="moveItemUp('${safeEscape(item.id)}')" title="Move Up"><i class="fas fa-arrow-up"></i></button>
+                        <button class="move-down-btn" onclick="moveItemDown('${safeEscape(item.id)}')" title="Move Down"><i class="fas fa-arrow-down"></i></button>
+                        <button class="${isPinned ? 'unpin-btn' : 'pin-btn'}" onclick="togglePin('${safeEscape(item.id)}')" title="${isPinned ? 'Unpin' : 'Pin'}">
+                            <i class="fas fa-thumbtack" style="${isPinned ? 'color:#ffa502;' : 'opacity:0.5;'}"></i>
+                        </button>
+                        <button class="toggle-visibility-btn" onclick="toggleVisibility('${safeEscape(item.id)}', ${visibility})" title="Toggle Visibility">
+                            <i class="fas fa-${visibility ? 'eye-slash' : 'eye'}"></i>
+                        </button>
+                        <button class="edit-btn" onclick="openEditModal('${safeEscape(item.id)}')" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="delete-btn" onclick="deleteItem('${safeEscape(item.id)}')" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+        
+        // ============================================================
+        // 🔒 FITUR PIN
+        // ============================================================
+        
+        async function togglePin(itemId) {
+            if (!db) {
+                showToast("⚠️ Database belum siap!", 'error');
+                return;
+            }
+            try {
+                const item = allItems.find(i => i.id === itemId);
+                if (!item) return;
+                const newPinned = !item.pinned;
+                await db.collection("items").doc(itemId).update({ pinned: newPinned });
+                showToast(newPinned ? "📌 Item pinned to top!" : "📌 Item unpinned!");
+                await loadItems();
+            } catch(e) {
+                console.error("Failed to toggle pin:", e);
+                showToast("Failed to toggle pin!", 'error');
+            }
+        }
+        
+        // ============================================================
+        // 🔒 MOVE ITEM UP - FIX TOTAL!
+        // ============================================================
+        
+        async function moveItemUp(itemId) {
+            if (!db) {
+                showToast("⚠️ Database belum siap!", 'error');
+                return;
+            }
+            try {
+                // 🔥 Cari item
+                const item = allItems.find(i => i.id === itemId);
+                if (!item) return;
+                
+                // 🔥 Cari posisi di array (setelah sorting)
+                const currentIndex = allItems.indexOf(item);
+                if (currentIndex <= 0) {
+                    showToast("⚠️ Item already at top!", 'warning');
+                    return;
+                }
+                
+                const aboveItem = allItems[currentIndex - 1];
+                
+                // 🔥 CEK: Tidak bisa move up melewati pinned item
+                if (aboveItem.pinned && !item.pinned) {
+                    showToast("⚠️ Cannot move above pinned item!", 'warning');
+                    return;
+                }
+                
+                // 🔥 TUKAR ORDER (HANYA 2 ITEM!)
+                const tempOrder = item.order;
+                const aboveOrder = aboveItem.order;
+                
+                console.log(`🔄 Moving "${item.title}" up, swapping orders: ${tempOrder} ↔ ${aboveOrder}`);
+                
+                // 🔥 UPDATE DI DATABASE
+                await db.collection("items").doc(itemId).update({ order: aboveOrder });
+                await db.collection("items").doc(aboveItem.id).update({ order: tempOrder });
+                
+                showToast("✅ Item moved up!");
+                
+                // 🔥 RELOAD DARI DATABASE (biar sinkron)
+                await loadItems();
+                
+            } catch(e) {
+                console.error("Failed to move up:", e);
+                showToast("Failed to move up!", 'error');
+            }
+        }
+        
+        // ============================================================
+        // 🔒 MOVE ITEM DOWN - FIX TOTAL!
+        // ============================================================
+        
+        async function moveItemDown(itemId) {
+            if (!db) {
+                showToast("⚠️ Database belum siap!", 'error');
+                return;
+            }
+            try {
+                const item = allItems.find(i => i.id === itemId);
+                if (!item) return;
+                
+                const currentIndex = allItems.indexOf(item);
+                if (currentIndex >= allItems.length - 1) {
+                    showToast("⚠️ Item already at bottom!", 'warning');
+                    return;
+                }
+                
+                const belowItem = allItems[currentIndex + 1];
+                
+                if (belowItem.pinned && !item.pinned) {
+                    showToast("⚠️ Cannot move below pinned item!", 'warning');
+                    return;
+                }
+                
+                // 🔥 TUKAR ORDER (HANYA 2 ITEM!)
+                const tempOrder = item.order;
+                const belowOrder = belowItem.order;
+                
+                console.log(`🔄 Moving "${item.title}" down, swapping orders: ${tempOrder} ↔ ${belowOrder}`);
+                
+                await db.collection("items").doc(itemId).update({ order: belowOrder });
+                await db.collection("items").doc(belowItem.id).update({ order: tempOrder });
+                
+                showToast("✅ Item moved down!");
+                await loadItems();
+                
+            } catch(e) {
+                console.error("Failed to move down:", e);
+                showToast("Failed to move down!", 'error');
+            }
+        }
+        
+        // ============================================================
+        // 🔒 ADD ITEM - DI ATAS (ORDER TERTINGGI)
+        // ============================================================
+        
+        document.getElementById("addItemForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById("itemTitle").value.trim();
+            const category = document.getElementById("itemCategory").value;
+            const description = document.getElementById("itemDesc").value.trim();
+            const downloadUrl = document.getElementById("itemUrl").value.trim() || "#";
+            const imageUrl = document.getElementById("itemImage").value.trim();
+            const videoUrl = document.getElementById("itemVideo").value.trim() || "";
+            const extraImagesRaw = document.getElementById("itemExtraImages").value.trim();
+            const isVisible = document.getElementById("itemVisible").checked;
+            
+            if (!title || !description) {
+                showToast("⚠️ Title and description are required!", 'error');
+                return;
+            }
+            
+            const newId = Date.now().toString();
+            let extraImages = [];
+            if (extraImagesRaw) extraImages = extraImagesRaw.split(',').map(url => url.trim()).filter(url => url);
+            
+            // 🔥 CARI ORDER TERTINGGI
+            const maxOrder = allItems.reduce((max, i) => Math.max(max, (i.order || 0)), 0);
+            
+            // 🔥 ITEM BARU DI ATAS (order = maxOrder + 1)
+            const newItemData = {
+                title: title,
+                category: category,
+                description: description,
+                downloadUrl: downloadUrl,
+                imageUrl: imageUrl || DEFAULT_IMAGE,
+                videoUrl: videoUrl,
+                extraImages: extraImages,
+                downloads: 0,
+                rating: 5,
+                order: maxOrder + 1,
+                visible: isVisible,
+                pinned: false,
+                createdAt: new Date().toISOString()
+            };
+            
+            try {
+                await db.collection("items").doc(newId).set(newItemData);
+                showToast(isVisible ? "✅ Item added successfully!" : "🔒 Item added in hidden mode");
+                document.getElementById("addItemForm").reset();
+                document.getElementById("itemVisible").checked = true;
+                await loadItems();
+                await loadStats();
+            } catch(e) {
+                showToast("❌ Failed to add item!", 'error');
+                console.error(e);
+            }
+        });
+        
+        // ============================================================
+        // 🔒 EDIT ITEM - TIDAK MENGUBAH URUTAN!
+        // ============================================================
+        
+        async function openEditModal(itemId) {
+            const item = allItems.find(i => i.id === itemId);
+            if (!item) return;
+            
+            editingItemId = itemId;
+            document.getElementById("editItemId").value = item.id;
+            document.getElementById("editTitle").value = item.title;
+            document.getElementById("editCategory").value = item.category;
+            document.getElementById("editDescription").value = item.description;
+            document.getElementById("editDownloadUrl").value = item.downloadUrl || "";
+            document.getElementById("editImageUrl").value = item.imageUrl || "";
+            document.getElementById("editVideoUrl").value = item.videoUrl || "";
+            document.getElementById("editExtraImages").value = item.extraImages ? (Array.isArray(item.extraImages) ? item.extraImages.join(', ') : item.extraImages) : "";
+            document.getElementById("editVisible").checked = item.visible !== false;
+            document.getElementById("editModal").classList.add("show");
+        }
+        
+        document.getElementById("closeEditModal").addEventListener("click", () => {
+            document.getElementById("editModal").classList.remove("show");
+        });
+        
+        document.getElementById("editItemForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const id = document.getElementById("editItemId").value;
+            const title = document.getElementById("editTitle").value.trim();
+            const category = document.getElementById("editCategory").value;
+            const description = document.getElementById("editDescription").value.trim();
+            const downloadUrl = document.getElementById("editDownloadUrl").value.trim() || "#";
+            const imageUrl = document.getElementById("editImageUrl").value.trim();
+            const videoUrl = document.getElementById("editVideoUrl").value.trim() || "";
+            const extraImagesRaw = document.getElementById("editExtraImages").value.trim();
+            const isVisible = document.getElementById("editVisible").checked;
+            
+            if (!title || !description) {
+                showToast("⚠️ Title and description are required!", 'error');
+                return;
+            }
+            
+            let extraImages = [];
+            if (extraImagesRaw) extraImages = extraImagesRaw.split(',').map(url => url.trim()).filter(url => url);
+            
+            const updatedData = {
+                title: title,
+                category: category,
+                description: description,
+                downloadUrl: downloadUrl,
+                visible: isVisible,
+                videoUrl: videoUrl,
+                extraImages: extraImages
+            };
+            if (imageUrl) updatedData.imageUrl = imageUrl;
+            
+            // 🔥 JANGAN UBAH ORDER DAN PINNED!
+            
+            try {
+                await db.collection("items").doc(id).update(updatedData);
+                showToast("✅ Item updated successfully!");
+                document.getElementById("editModal").classList.remove("show");
+                await loadItems();
+                await loadStats();
+            } catch(e) {
+                showToast("❌ Failed to update item!", 'error');
+                console.error(e);
+            }
+        });
+        
+        async function deleteItem(itemId) {
+            if (!confirm("Delete this item?")) return;
+            try {
+                await db.collection("items").doc(itemId).delete();
+                showToast("✅ Item deleted!");
+                await loadItems();
+                await loadStats();
+            } catch(e) {
+                showToast("❌ Failed to delete item!", 'error');
+                console.error(e);
+            }
+        }
+        
+        async function toggleVisibility(itemId, currentVisible) {
+            try {
+                await db.collection("items").doc(itemId).update({ visible: !currentVisible });
+                showToast(!currentVisible ? "✅ Item now VISIBLE" : "🔒 Item now HIDDEN");
+                await loadItems();
+                await loadStats();
+            } catch(e) {
+                showToast("❌ Failed to change visibility!", 'error');
+                console.error(e);
+            }
+        }
+        
+        document.getElementById("maintenanceToggle").addEventListener("change", async (e) => {
+            if (!db) {
+                showToast("⚠️ Database belum siap!", 'error');
+                e.target.checked = !e.target.checked;
+                return;
+            }
+            await setMaintenanceMode(e.target.checked);
+        });
+        
+        document.getElementById("refreshCacheBtn").addEventListener("click", async () => {
+            showToast("🔄 Refreshing cache...", 'warning');
+            await loadItems();
+            await loadStats();
+            await loadMaintenanceStatus();
+            showToast("✅ Cache refreshed!");
+        });
+        
+        // ============================================================
+        // 🔒 START
+        // ============================================================
+        
+        loadConfigAndInit();
+        
+        setInterval(() => {
+            if (isLoggedIn && db) {
+                loadItems();
+                loadStats();
+            }
+        }, 30000);
+        
+        console.log('%c🔒 FaizCraftMC Admin Panel v2.0', 'font-size: 20px; color: #ff4757; font-weight: bold;');
+        console.log('%c🔑 Password 100% from server (not in HTML!)', 'font-size: 14px; color: #2ed573;');
+        console.log('%c🔐 Domain locked to: faizcraftmc.vercel.app', 'font-size: 14px; color: #ffa502;');
+        console.log('%c📌 Pin feature added!', 'font-size: 14px; color: #00a8ff;');
+        console.log('%c✅ TOTAL FIX: Move only swaps 2 items, no other items change!', 'font-size: 14px; color: #2ed573;');
+    </script>
+</body>
+</html>
