@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>Content Details</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #0a0c15; color: #ffffff; overflow-x: hidden; min-height: 100vh; }
+        body.detail-open { overflow: hidden; position: fixed; width: 100%; height: 100%; }
+
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: linear-gradient(135deg, #0a0c15 0%, #1a0b1a 25%, #0f172a 50%, #1a1a2e 75%, #0a0c15 100%); background-size: 400% 400%; animation: gradientBG 15s ease infinite; }
+        @keyframes gradientBG { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .bg-animation::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 20% 40%, rgba(255, 71, 87, 0.05), transparent 60%); }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .particle { position: absolute; background: rgba(255, 71, 87, 0.2); border-radius: 50%; animation: floatParticle linear infinite; }
+        @keyframes floatParticle { from { transform: translateY(100vh) rotate(0deg); opacity: 0; } to { transform: translateY(-100vh) rotate(360deg); opacity: 0.4; } }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1d2e; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #ff4757, #ff6b81); border-radius: 10px; }
+
+        .detail-fullscreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0c15; z-index: 2000; overflow-y: auto; display: block; }
+        .detail-fullscreen .detail-header { position: sticky; top: 0; background: rgba(10, 12, 21, 0.95); backdrop-filter: blur(20px); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,71,87,0.2); z-index: 10; }
+        .detail-fullscreen .detail-header h2 { background: linear-gradient(135deg, #ffa502, #ff4757); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 1.3rem; }
+        .detail-fullscreen .close-detail-full { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; font-size: 1.5rem; }
+        .detail-fullscreen .close-detail-full:hover { background: #ff4757; transform: rotate(90deg); }
+        .detail-fullscreen .detail-body-full { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        .detail-swiper-wrapper { position: relative; margin-bottom: 1.5rem; }
+        .detail-swiper-container { position: relative; width: 100%; border-radius: 28px; overflow: hidden; background: #0f111a; }
+        .detail-swiper { width: 100%; }
+        .swiper-slide { display: flex; justify-content: center; align-items: center; background: #0f111a; }
+        .swiper-slide img { width: auto; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; display: block; margin: 0 auto; }
+        .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .detail-swiper-container .swiper-button-next,
+        .detail-swiper-container .swiper-button-prev {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 71, 87, 0.5);
+            transition: all 0.3s ease;
+            z-index: 5;
+            cursor: pointer;
+            margin: 0;
+        }
+        .detail-swiper-container .swiper-button-next { right: 15px; left: auto; }
+        .detail-swiper-container .swiper-button-prev { left: 15px; right: auto; }
+        .detail-swiper-container .swiper-button-next:hover,
+        .detail-swiper-container .swiper-button-prev:hover {
+            background: rgba(255, 71, 87, 0.8);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .detail-swiper-container .swiper-button-next:after,
+        .detail-swiper-container .swiper-button-prev:after { font-size: 20px; font-weight: bold; color: white; }
+
+        .detail-swiper-pagination { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 15px; padding: 8px 0; }
+        .custom-pagination-bullet { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); cursor: pointer; transition: all 0.2s ease; }
+        .custom-pagination-bullet:hover { background: rgba(255, 71, 87, 0.6); transform: scale(1.2); }
+        .custom-pagination-bullet.active { background: #ff4757; transform: scale(1.2); }
+
+        .detail-swiper-container.hide-navigation .swiper-button-next,
+        .detail-swiper-container.hide-navigation .swiper-button-prev { display: none !important; }
+
+        .detail-info-full { display: flex; flex-direction: column; gap: 1rem; }
+        .detail-info-full h1 { font-size: 2rem; background: linear-gradient(135deg, #ffffff, #ff4757); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .detail-category-badge { display: inline-block; padding: 0.4rem 1.2rem; background: rgba(255,71,87,0.2); border-radius: 40px; font-size: 0.85rem; width: fit-content; border: 1px solid rgba(255,71,87,0.3); }
+
+        .translate-section { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin: 0.5rem 0; background: rgba(255,255,255,0.05); padding: 0.8rem 1rem; border-radius: 20px; }
+        .translate-section label { font-size: 0.85rem; opacity: 0.8; }
+        .language-select { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 30px; color: white; font-family: 'Poppins', sans-serif; cursor: pointer; }
+        .translate-btn { background: linear-gradient(135deg, #00a8ff, #0097e6); border: none; padding: 0.5rem 1.2rem; border-radius: 30px; color: white; cursor: pointer; font-family: 'Poppins', sans-serif; transition: 0.3s; }
+        .translate-btn:hover { transform: translateY(-2px); }
+
+        .description-box { background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); line-height: 1.6; }
+        .description-box p { font-size: 0.95rem; opacity: 0.9; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; }
+
+        .detail-rating-full { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 20px; }
+        .rating-stars-display { font-size: 1.2rem; color: #ffa502; letter-spacing: 3px; }
+        .rating-input-full { display: flex; align-items: center; gap: 0.8rem; }
+        .rating-stars-input-full i { font-size: 1.3rem; color: rgba(255,255,255,0.3); cursor: pointer; transition: 0.2s; }
+        .rating-stars-input-full i:hover, .rating-stars-input-full i.active { color: #ffa502; }
+
+        .detail-download-full { background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .download-btn-full { background: linear-gradient(135deg, #ff4757, #e84118); border: none; padding: 0.8rem 2rem; border-radius: 50px; color: white; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .download-btn-full.disabled { background: linear-gradient(135deg, #6c757d, #495057); cursor: not-allowed; }
+        .download-btn-full:not(.disabled):hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,71,87,0.3); }
+
+        .share-section { background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 20px; display: flex; justify-content: center; align-items: center; gap: 1rem; }
+        .share-btn-full { background: linear-gradient(135deg, #00a8ff, #0097e6); border: none; padding: 0.8rem 2rem; border-radius: 50px; color: white; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; font-family: 'Poppins', sans-serif; }
+        .share-btn-full:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,168,255,0.4); }
+
+        .link-status { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-left: 0.5rem; }
+        .link-status.available { background: rgba(46, 213, 115, 0.2); color: #2ed573; border: 1px solid rgba(46, 213, 115, 0.3); }
+        .link-status.unavailable { background: rgba(255, 71, 87, 0.2); color: #ff4757; border: 1px solid rgba(255, 71, 87, 0.3); }
+
+        .toast { position: fixed; bottom: 110px; right: 30px; background: #1e1f2e; padding: 0.8rem 1.5rem; border-radius: 50px; color: white; z-index: 1500; animation: slideInRight 0.3s ease; border-left: 4px solid #2ed573; font-size: 0.85rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .toast.error { border-left-color: #ff4757; }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        @media (max-width: 768px) {
+            .swiper-slide img { max-height: 50vh; }
+            .detail-fullscreen .detail-body-full { padding: 1rem; }
+            .detail-info-full h1 { font-size: 1.4rem; }
+            .detail-swiper-container .swiper-button-next,
+            .detail-swiper-container .swiper-button-prev { width: 35px; height: 35px; }
+            .detail-swiper-container .swiper-button-next:after,
+            .detail-swiper-container .swiper-button-prev:after { font-size: 14px; }
+            .detail-swiper-container .swiper-button-next { right: 8px; }
+            .detail-swiper-container .swiper-button-prev { left: 8px; }
+            .custom-pagination-bullet { width: 8px; height: 8px; }
+            .toast { bottom: 110px; right: 15px; font-size: 0.75rem; padding: 0.6rem 1.2rem; }
+        }
+    </style>
+</head>
+<body class="detail-open">
+
+<div class="bg-animation"></div>
+<div class="particles" id="particles"></div>
+
+<div id="detailFullscreen" class="detail-fullscreen">
+    <div class="detail-header"><h2><i class="fas fa-crown"></i> <span id="detailTitleText">Content Details</span></h2><div class="close-detail-full" id="closeDetailFull">&times;</div></div>
+    <div class="detail-body-full" id="detailBodyFull"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+
+let db = null;
+let allItems = [];
+let swiperInstance = null;
+let originalDescription = "";
+let currentLanguage = "en";
+let currentDetailItem = null;
+
+const DEFAULT_DETAIL_IMAGE = "https://picsum.photos/id/20/800/400";
+
+const translations = {
+    en: {
+        detailTitle: "Content Details",
+        linkAvailable: "Link Available", linkNotAvailable: "Link Not Available", download: "Download Now",
+        linkUnavailable: "Link Not Available", rating: "Rate It", translate: "Translate",
+        share: "Share", copied: "Link copied to clipboard!", shareFail: "Failed to copy link"
+    },
+    id: {
+        detailTitle: "Detail Konten",
+        linkAvailable: "Tautan Tersedia", linkNotAvailable: "Tautan Tidak Tersedia", download: "Unduh Sekarang",
+        linkUnavailable: "Tautan Tidak Tersedia", rating: "Beri Rating", translate: "Terjemahkan",
+        share: "Bagikan", copied: "Link berhasil di-copy!", shareFail: "Gagal copy link"
+    }
+};
+
+function sanitizeHTML(str) {
+    if (!str) return '';
+    const temp = document.createElement('div');
+    temp.textContent = str;
+    return temp.innerHTML;
+}
+
+function safeEscape(str) { return sanitizeHTML(str); }
+
+function showToast(msg, isErr = false) {
+    const toast = document.createElement("div");
+    toast.className = `toast ${isErr ? "error" : ""}`;
+    toast.innerHTML = `<i class="fas ${isErr ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${safeEscape(msg)}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+}
+
+// ============================================================
+// 🔒 SLUG HELPER
+// ============================================================
+
+function slugify(text) {
+    if (!text) return '';
+    return text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '');
+}
+
+function getItemSlug(item) {
+    // Prioritas: field slug di Firestore, kalau kosong auto-generate dari title
+    if (item.slug && item.slug.trim() !== '') {
+        return slugify(item.slug);
+    }
+    return slugify(item.title);
+}
+
+function extractYouTubeId(url) {
+    if (!url) return null;
+    const patterns = [/(?:youtube\.com\/watch\?v=)([^&]+)/, /(?:youtu\.be\/)([^?]+)/, /(?:youtube\.com\/embed\/)([^?]+)/];
+    for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match) return match[1];
+    }
+    return null;
+}
+
+function getYouTubeEmbedUrl(url, autoplay = false) {
+    const videoId = extractYouTubeId(url);
+    if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&rel=0&enablejsapi=1`;
+    return null;
+}
+
+function isLinkValid(url) { 
+    if (!url) return false;
+    if (url === "#" || url === "" || url === "https://#" || url === "http://#") return false;
+    return true;
+}
+
+function isValidImageUrl(url) { 
+    if (!url || url === "") return false; 
+    if (url.match(/^[A-Za-z]:\\/i) || url.match(/^file:\/\//i)) return false; 
+    if (url.includes("drive.google.com")) return false; 
+    return true;
+}
+
+function getValidImageUrl(url, isDetail = false) { 
+    return isValidImageUrl(url) ? url : (isDetail ? DEFAULT_DETAIL_IMAGE : "https://picsum.photos/id/20/400/200"); 
+}
+
+function formatNumber(n) { 
+    return n?.toLocaleString() || "0"; 
+}
+
+function getCategoryIcon(cat) { 
+    const icons = { addon: "🧩", texture: "🎨", world: "🌍", skin: "👤", mashup: "⚡" }; 
+    return icons[cat] || "📦"; 
+}
+
+// ============================================================
+// 🔒 BACK TO MAIN
+// ============================================================
+
+function goBackToMain() {
+    sessionStorage.removeItem('detailItem');
+    window.location.href = '/';
+}
+
+// ============================================================
+// 🔒 OPEN DETAIL
+// ============================================================
+
+async function openDetailFullscreen(item) {
+    currentDetailItem = item;
+    const body = document.getElementById("detailBodyFull");
+    const rating = item.rating || 5;
+    const starsHtml = '★'.repeat(rating) + '☆'.repeat(5-rating);
+    const linkValid = isLinkValid(item.downloadUrl);
+    const t = translations[currentLanguage];
+    originalDescription = item.description;
+    
+    document.getElementById("detailTitleText").innerText = t.detailTitle;
+    
+    const slides = [];
+    let hasVideo = false;
+    const youtubeUrl = getYouTubeEmbedUrl(item.videoUrl || '', true);
+    if (youtubeUrl) { 
+        hasVideo = true; 
+        slides.push(`<div class="swiper-slide"><div class="video-wrapper"><iframe src="${safeEscape(youtubeUrl)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>`); 
+    }
+    const mainImg = getValidImageUrl(item.imageUrl, true);
+    slides.push(`<div class="swiper-slide"><img src="${safeEscape(mainImg)}" alt="${safeEscape(item.title)}" onerror="this.src='${DEFAULT_DETAIL_IMAGE}'"></div>`);
+    let extraImages = [];
+    if (item.extraImages) {
+        if (typeof item.extraImages === 'string') extraImages = item.extraImages.split(',').map(url => url.trim()).filter(url => isValidImageUrl(url));
+        else if (Array.isArray(item.extraImages)) extraImages = item.extraImages.filter(url => isValidImageUrl(url));
+    }
+    extraImages.forEach(imgUrl => { 
+        slides.push(`<div class="swiper-slide"><img src="${safeEscape(imgUrl)}" alt="${safeEscape(item.title)}" onerror="this.src='${DEFAULT_DETAIL_IMAGE}'"></div>`); 
+    });
+    
+    const slidesHtml = slides.join('');
+    const hasMultipleSlides = slides.length > 1;
+    const title = safeEscape(item.title);
+    const category = safeEscape(item.category.toUpperCase());
+    const icon = getCategoryIcon(item.category);
+    const downloads = formatNumber(item.downloads || 0);
+    const descText = safeEscape(originalDescription);
+    
+    body.innerHTML = `<div class="detail-swiper-wrapper">
+        <div class="detail-swiper-container ${!hasMultipleSlides ? 'hide-navigation' : ''}">
+            <div class="detail-swiper swiper">
+                <div class="swiper-wrapper">${slidesHtml}</div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <div class="detail-swiper-pagination"></div>
+    </div>
+    <div class="detail-info-full">
+        <h1>${title} ${linkValid ? '<span class="link-status available"><i class="fas fa-link"></i> ' + safeEscape(t.linkAvailable) + '</span>' : '<span class="link-status unavailable"><i class="fas fa-exclamation-triangle"></i> ' + safeEscape(t.linkNotAvailable) + '</span>'}</h1>
+        <div class="detail-category-badge">${icon} ${category}</div>
+        <div class="translate-section">
+            <label><i class="fas fa-language"></i> Translate Description:</label>
+            <select id="languageSelect" class="language-select">
+                <option value="en">🇬🇧 English (Original)</option>
+                <option value="id">🇮🇩 Indonesia</option>
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="zh">🇨🇳 中文</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="hi">🇮🇳 हिन्दी</option>
+                <option value="pt">🇵🇹 Português</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="tr">🇹🇷 Türkçe</option>
+                <option value="th">🇹🇭 ภาษาไทย</option>
+                <option value="vi">🇻🇳 Tiếng Việt</option>
+                <option value="ms">🇲🇾 Bahasa Melayu</option>
+            </select>
+            <button id="translateBtn" class="translate-btn"><i class="fas fa-language"></i> ${safeEscape(t.translate)}</button>
+        </div>
+        <div class="description-box" id="descriptionBox">
+            <p id="descriptionText" style="white-space: pre-wrap; word-wrap: break-word;">${descText}</p>
+        </div>
+        <div class="detail-rating-full">
+            <div>
+                <span class="rating-stars-display">${starsHtml}</span>
+                <span style="margin-left:0.5rem;">${rating}/5</span>
+            </div>
+            <div class="rating-input-full">
+                <span><i class="fas fa-star" style="color:#ffa502;"></i> ${safeEscape(t.rating)}:</span>
+                <div class="rating-stars-input-full" id="ratingStarsInputFull">
+                    ${[1,2,3,4,5].map(r => `<i class="far fa-star" data-rating="${r}"></i>`).join('')}
+                </div>
+            </div>
+        </div>
+        <div class="detail-download-full">
+            <span><i class="fas fa-download"></i> ${downloads} downloads</span>
+            <button class="download-btn-full ${!linkValid ? 'disabled' : ''}" data-url="${safeEscape(item.downloadUrl)}" data-id="${safeEscape(item.id)}" ${!linkValid ? 'disabled' : ''}>
+                <i class="fas fa-download"></i> ${linkValid ? safeEscape(t.download) : safeEscape(t.linkUnavailable)}
+            </button>
+        </div>
+        <div class="share-section">
+            <button class="share-btn-full" id="shareBtn">
+                <i class="fas fa-share-alt"></i> ${safeEscape(t.share)}
+            </button>
+        </div>
+    </div>`;
+    
+    if (swiperInstance) { swiperInstance.destroy(true, true); swiperInstance = null; }
+    if (slides.length > 0) {
+        const swiperContainer = body.querySelector('.detail-swiper');
+        swiperInstance = new Swiper(swiperContainer, { 
+            slidesPerView: 1, 
+            spaceBetween: 0, 
+            loop: hasMultipleSlides, 
+            navigation: { 
+                nextEl: body.querySelector('.detail-swiper-container .swiper-button-next'), 
+                prevEl: body.querySelector('.detail-swiper-container .swiper-button-prev') 
+            }, 
+            autoplay: false, 
+            on: { 
+                init: function() { 
+                    setupAutoplayControl(this, hasVideo); 
+                    updateCustomPagination(this, body.querySelector('.detail-swiper-wrapper')); 
+                }, 
+                slideChange: function() { 
+                    updateCustomPagination(this, body.querySelector('.detail-swiper-wrapper')); 
+                } 
+            } 
+        });
+    }
+    
+    const ratingInputStars = body.querySelectorAll("#ratingStarsInputFull i");
+    ratingInputStars.forEach(star => {
+        const starRating = parseInt(star.dataset.rating);
+        if (starRating <= rating) star.className = "fas fa-star active";
+        else star.className = "far fa-star";
+        star.addEventListener("click", () => { 
+            const newRating = parseInt(star.dataset.rating); 
+            updateRating(item.id, newRating); 
+            ratingInputStars.forEach(s => { 
+                if (parseInt(s.dataset.rating) <= newRating) s.className = "fas fa-star active"; 
+                else s.className = "far fa-star"; 
+            }); 
+            const starsSpan = body.querySelector(".rating-stars-display"); 
+            if (starsSpan) starsSpan.innerHTML = '★'.repeat(newRating) + '☆'.repeat(5-newRating); 
+            const ratingSpan = body.querySelector(".detail-rating-full div:first-child span:last-child"); 
+            if (ratingSpan) ratingSpan.innerHTML = `${newRating}/5`; 
+        });
+    });
+    
+    const downloadBtn = body.querySelector(".download-btn-full");
+    if (downloadBtn && linkValid) {
+        downloadBtn.addEventListener("click", async (e) => { 
+            e.stopPropagation(); 
+            const url = downloadBtn.dataset.url; 
+            const id = downloadBtn.dataset.id; 
+            let target = allItems.find(i => i.id === id); 
+            if (target && db && isLinkValid(url)) { 
+                try { 
+                    await db.collection("items").doc(id).update({ downloads: (target.downloads || 0) + 1 }); 
+                    target.downloads++; 
+                    openDetailFullscreen(target); 
+                } catch(e) {} 
+            } 
+            if (url && url !== "#") window.open(url, "_blank"); 
+            else showToast("⚠️ Download link not available!", true); 
+        });
+    }
+    
+    const translateBtn = body.querySelector("#translateBtn");
+    const langSelect = body.querySelector("#languageSelect");
+    const descriptionTextEl = body.querySelector("#descriptionText");
+    if (translateBtn) {
+        translateBtn.addEventListener("click", async () => { 
+            const targetLang = langSelect.value; 
+            if (targetLang === 'en') { 
+                descriptionTextEl.innerHTML = safeEscape(originalDescription); 
+                showToast("✅ Back to English (Original)"); 
+                return; 
+            } 
+            descriptionTextEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Translating...'; 
+            const translated = await translateText(originalDescription, targetLang); 
+            descriptionTextEl.innerHTML = safeEscape(translated); 
+            showToast(`✅ Translated to ${langSelect.options[langSelect.selectedIndex].text}`); 
+        });
+    }
+    
+    // SHARE BUTTON — pakai SLUG
+    const shareBtn = body.querySelector("#shareBtn");
+    if (shareBtn) {
+        shareBtn.addEventListener("click", async () => {
+            const slug = getItemSlug(item);
+            const shareUrl = `${window.location.origin}/shared/${encodeURIComponent(slug)}`;
+            const shareData = {
+                title: item.title,
+                text: `Cek ${item.title} di FaizCraftMC Marketplace!`,
+                url: shareUrl
+            };
+            
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    await navigator.clipboard.writeText(shareUrl);
+                    showToast("✅ " + t.copied);
+                }
+            } catch(e) {
+                if (e.name !== 'AbortError') {
+                    try {
+                        await navigator.clipboard.writeText(shareUrl);
+                        showToast("✅ " + t.copied);
+                    } catch(err) {
+                        showToast("⚠️ " + t.shareFail, true);
+                    }
+                }
+            }
+        });
+    }
+}
+
+async function updateRating(itemId, newRating) { 
+    if (!db) return; 
+    try { 
+        await db.collection("items").doc(itemId).update({ rating: newRating }); 
+        const item = allItems.find(i => i.id === itemId); 
+        if (item) item.rating = newRating; 
+        const msg = currentLanguage === "id" ? `⭐ Rating berhasil diubah menjadi ${newRating}/5!` : `⭐ Rating changed to ${newRating}/5!`; 
+        showToast(msg); 
+        if (currentDetailItem && currentDetailItem.id === itemId) {
+            currentDetailItem.rating = newRating;
+        }
+    } catch(e) { showToast("Failed to save rating!", true); } 
+}
+
+async function translateText(text, targetLang) { 
+    if (!text || targetLang === 'en') return text; 
+    try { 
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`; 
+        const response = await fetch(url); 
+        const data = await response.json(); 
+        return data[0].map(item => item[0]).join(''); 
+    } catch(e) { return text; } 
+}
+
+function stopAllVideos(swiper) { 
+    if (!swiper) return; 
+    const slides = swiper.slides; 
+    slides.forEach(slide => { 
+        const iframe = slide.querySelector('iframe'); 
+        if (iframe) { 
+            const src = iframe.src; 
+            if (src.includes('autoplay=1')) { iframe.src = src.replace('autoplay=1', 'autoplay=0'); } 
+        } 
+    }); 
+}
+
+function playActiveVideo(swiper) { 
+    if (!swiper) return; 
+    const activeSlide = swiper.slides[swiper.activeIndex]; 
+    const iframe = activeSlide ? activeSlide.querySelector('iframe') : null; 
+    if (iframe) { 
+        let src = iframe.src; 
+        if (!src.includes('autoplay=1')) { 
+            src = src.replace('autoplay=0', 'autoplay=1'); 
+            if (!src.includes('autoplay')) { src += (src.includes('?') ? '&autoplay=1' : '?autoplay=1'); } 
+            iframe.src = src; 
+        } 
+    } 
+}
+
+function setupAutoplayControl(swiper, hasVideo) { 
+    if (!swiper) return; 
+    if (swiper.autoplay && swiper.autoplay.running) swiper.autoplay.stop(); 
+    swiper.params.autoplay = false; 
+    stopAllVideos(swiper); 
+    if (hasVideo) { setTimeout(() => playActiveVideo(swiper), 500); } 
+    swiper.on('slideChange', () => { stopAllVideos(swiper); setTimeout(() => playActiveVideo(swiper), 100); }); 
+}
+
+function updateCustomPagination(swiper, container) { 
+    const totalSlides = swiper.slides.length; 
+    const currentIndex = swiper.realIndex; 
+    let paginationContainer = container.querySelector('.detail-swiper-pagination'); 
+    if (!paginationContainer) { 
+        paginationContainer = document.createElement('div'); 
+        paginationContainer.className = 'detail-swiper-pagination'; 
+        container.appendChild(paginationContainer); 
+    } 
+    paginationContainer.innerHTML = ''; 
+    for (let i = 0; i < totalSlides; i++) { 
+        const bullet = document.createElement('div'); 
+        bullet.className = 'custom-pagination-bullet'; 
+        if (i === currentIndex) bullet.classList.add('active'); 
+        bullet.addEventListener('click', () => swiper.slideToLoop(i)); 
+        paginationContainer.appendChild(bullet); 
+    } 
+}
+
+// ============================================================
+// 🔒 INIT — SUPPORT ?item=slug DAN ?id=xxx
+// ============================================================
+
+async function initDetailPage() {
+    // Load language
+    const savedLang = sessionStorage.getItem('detailLanguage');
+    if (savedLang) currentLanguage = savedLang;
+    
+    // Load Firebase config
+    try {
+        const res = await fetch('/api/config');
+        const config = await res.json();
+        
+        firebase.initializeApp(config.firebase);
+        db = firebase.firestore();
+        db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
+        
+        console.log('✅ Firebase connected');
+        
+        const snap = await db.collection("items").get();
+        snap.forEach(doc => allItems.push({ id: doc.id, ...doc.data() }));
+        
+    } catch(e) {
+        console.error('❌ Error:', e);
+    }
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const slugFromUrl = urlParams.get('item');
+    const idFromUrl = urlParams.get('id');
+    
+    // 🔥 PRIORITAS 1: Cari by SLUG (?item=action-stuff)
+    if (slugFromUrl) {
+        const targetSlug = slugify(decodeURIComponent(slugFromUrl));
+        const item = allItems.find(i => getItemSlug(i) === targetSlug);
+        if (item && item.visible !== false) {
+            openDetailFullscreen(item);
+            return;
+        } else {
+            console.warn('⚠️ Slug tidak ditemukan:', slugFromUrl);
+            goBackToMain();
+            return;
+        }
+    }
+    
+    // 🔥 PRIORITAS 2: Cari by ID (?id=aBc123)
+    if (idFromUrl) {
+        const item = allItems.find(i => i.id === idFromUrl);
+        if (item && item.visible !== false) {
+            openDetailFullscreen(item);
+            return;
+        } else {
+            console.warn('⚠️ ID tidak ditemukan:', idFromUrl);
+            goBackToMain();
+            return;
+        }
+    }
+    
+    // 🔥 PRIORITAS 3: Fallback dari sessionStorage (cara lama dari index.html)
+    const itemData = sessionStorage.getItem('detailItem');
+    
+    if (itemData) {
+        try {
+            const item = JSON.parse(itemData);
+            openDetailFullscreen(item);
+        } catch(e) {
+            console.error('Error parsing item:', e);
+            goBackToMain();
+        }
+    } else {
+        goBackToMain();
+    }
+}
+
+// Close button = back to main
+document.getElementById("closeDetailFull").addEventListener("click", goBackToMain);
+
+// Create particles
+for (let i = 0; i < 50; i++) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+    particle.style.width = Math.random() * 3 + "px";
+    particle.style.height = particle.style.width;
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.animationDuration = Math.random() * 10 + 8 + "s";
+    particle.style.animationDelay = Math.random() * 5 + "s";
+    document.getElementById("particles").appendChild(particle);
+}
+
+initDetailPage();
+
+console.log('✅ FaizCraftMC Detail Page Ready!');
+</script>
+</body>
+</html>
