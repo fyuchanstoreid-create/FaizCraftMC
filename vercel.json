@@ -1,9 +1,10 @@
 {
-    "rewrites": [
-        { "source": "/shared/:id", "destination": "/detail.html?item=:id" },
-        { "source": "/api/(.*)", "destination": "/api/$1" },
-        { "source": "/files/(.*)", "destination": "/files/$1" },
-        { "source": "/(.*)", "destination": "/index.html" }
+    "routes": [
+        { "src": "/shared/(.*)", "dest": "/detail.html?item=$1" },
+        { "src": "/detail.html", "dest": "/detail.html" },
+        { "src": "/api/(.*)", "dest": "/api/$1" },
+        { "src": "/files/(.*)", "dest": "/files/$1" },
+        { "src": "/(.*)", "dest": "/index.html" }
     ],
     "headers": [
         {
