@@ -1,9 +1,9 @@
 {
     "rewrites": [
         { "source": "/shared/:id", "destination": "/shared.html?item=:id" },
-        { "source": "/api/(.*)", "destination": "/api/$1" },
-        { "source": "/files/(.*)", "destination": "/files/$1" },
-        { "source": "/(.*)", "destination": "/index.html" }
+        { "source": "/api/:path*", "destination": "/api/:path*" },
+        { "source": "/files/:path*", "destination": "/files/:path*" },
+        { "source": "/:path*", "destination": "/index.html" }
     ],
     "headers": [
         {
