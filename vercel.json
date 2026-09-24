@@ -1,13 +1,10 @@
 {
     "rewrites": [
-        { "source": "/shared/:id", "destination": "/shared.html?item=:id" },
-        { "source": "/api/:path*", "destination": "/api/:path*" },
-        { "source": "/files/:path*", "destination": "/files/:path*" },
-        { "source": "/:path*", "destination": "/index.html" }
+        { "source": "/shared.html", "destination": "/shared.html" },
+        { "source": "/api/(.*)", "destination": "/api/$1" },
+        { "source": "/files/(.*)", "destination": "/files/$1" },
+        { "source": "/(.*)", "destination": "/index.html" }
     ],
-    "headers": [
-        {
-            "source": "/api/(.*)",
             "headers": [
                 { "key": "Access-Control-Allow-Origin", "value": "*" },
                 { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
