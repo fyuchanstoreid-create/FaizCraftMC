@@ -42,11 +42,6 @@ export default function handler(req, res) {
             botToken: "8202830596:AAHmfFHbEvmcaO9w_kbMR6zINacPwDD97FE",
             chatId: "8367322295"
         },
-        admin: {
-            password: "fyuxzar0304834031",
-            secretKey: "F4izCr4ftMC_S3cur3_K3y_2026",
-            version: '2.0'
-        },
         security: {
             allowedDomains: ALLOWED_DOMAINS,
             isAllowed: isAllowed
